@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacob Maynard | Web Design for Manchester NH Small Businesses</title>
+  <link rel="stylesheet" href="./freelance.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/818d0fde56.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="fl-nav">
+    <div class="fl-nav__logo">Jacob Maynard</div>
+    <ul class="fl-nav__links">
+      <li><a href="#work" class="fl-nav__link">Work</a></li>
+      <li><a href="#services" class="fl-nav__link">Services</a></li>
+      <li><a href="#contact" class="fl-nav__link fl-nav__link--cta">Get a free quote</a></li>
+    </ul>
+    <button class="fl-nav__hamburger" id="hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="fl-mobile-menu" id="mobileMenu">
+    <a href="#work" class="fl-mobile-menu__link" onclick="closeMenu()">Work</a>
+    <a href="#services" class="fl-mobile-menu__link" onclick="closeMenu()">Services</a>
+    <a href="#contact" class="fl-mobile-menu__link fl-mobile-menu__link--cta" onclick="closeMenu()">Get a free quote</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="fl-hero">
+    <div class="fl-hero__badge">Based in Manchester, NH</div>
+    <h1 class="fl-hero__headline">
+      Your business<br>deserves a great<br><span class="fl-hero__accent">website.</span>
+    </h1>
+    <p class="fl-hero__sub">
+      I build clean, fast, mobile-friendly websites for local Manchester businesses — so customers can find you, trust you, and call you. Starting at $399.
+    </p>
+    <div class="fl-hero__ctas">
+      <a href="#contact" class="fl-btn fl-btn--primary">Get a free quote</a>
+      <a href="#work" class="fl-btn fl-btn--ghost">See my work</a>
+    </div>
+    <div class="fl-hero__trust">
+      <span class="fl-trust__item">
+        <i class="fa-solid fa-check"></i> No monthly fees
+      </span>
+      <span class="fl-trust__item">
+        <i class="fa-solid fa-check"></i> Ready in 2 weeks
+      </span>
+      <span class="fl-trust__item">
+        <i class="fa-solid fa-check"></i> Looks great on phones
+      </span>
+    </div>
+  </section>
+
+  <!-- LOCAL INDUSTRIES -->
+  <section class="fl-industries">
+    <div class="fl-container">
+      <p class="fl-industries__label">I build sites for businesses like yours</p>
+      <div class="fl-industries__grid">
+        <div class="fl-industry">
+          <i class="fa-solid fa-utensils fl-industry__icon"></i>
+          <span>Restaurants</span>
+        </div>
+        <div class="fl-industry">
+          <i class="fa-solid fa-broom fl-industry__icon"></i>
+          <span>Cleaning Services</span>
+        </div>
+        <div class="fl-industry">
+          <i class="fa-solid fa-wrench fl-industry__icon"></i>
+          <span>Repair Shops</span>
+        </div>
+        <div class="fl-industry">
+          <i class="fa-solid fa-scissors fl-industry__icon"></i>
+          <span>Salons & Barbers</span>
+        </div>
+        <div class="fl-industry">
+          <i class="fa-solid fa-hammer fl-industry__icon"></i>
+          <span>Contractors</span>
+        </div>
+        <div class="fl-industry">
+          <i class="fa-solid fa-heart fl-industry__icon"></i>
+          <span>Nonprofits</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK / PROJECTS -->
+  <section class="fl-work" id="work">
+    <div class="fl-container">
+      <div class="fl-section-header">
+        <h2 class="fl-section-title">Recent <span class="fl-accent">work</span></h2>
+        <p class="fl-section-sub">Every site is custom-built — no templates, no shortcuts.</p>
+      </div>
+
+      <div class="fl-projects">
+
+        <!-- Project 1 -->
+        <article class="fl-project">
+          <div class="fl-project__img-wrap">
+            <img src="./assets/clean-conscience.png" alt="Project screenshot" class="fl-project__img">
+            <div class="fl-project__overlay">
+              <a href="./clean-conscience.png" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+          <div class="fl-project__info">
+            <span class="fl-project__tag">Local Business</span>
+            <h3 class="fl-project__title">Clean Conscience Cleaners</h3>
+            <p class="fl-project__desc"> → A residential cleaning company in Manchester, NH. Built a full site with service listings, reviews, and a working contact form.</p>
+            <div class="fl-project__meta">
+              <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+              <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 - Coming Soon -->
+        <article class="fl-project fl-project--soon">
+          <div class="fl-project__img-wrap fl-project__img-wrap--soon">
+            <div class="fl-project__soon-inner">
+              <p class="fl-project__soon-text">Project coming soon</p>
+            </div>
+          </div>
+          <div class="fl-project__info">
+            <span class="fl-project__tag fl-project__tag--soon">In progress</span>
+            <h3 class="fl-project__title">Manchester NH Business Site</h3>
+            <p class="fl-project__desc">Currently working on a new site for a local business. Check back soon to see the finished result.</p>
+          </div>
+        </article>
+
+        <!-- Project 3 - Coming Soon -->
+        <article class="fl-project fl-project--soon">
+          <div class="fl-project__img-wrap fl-project__img-wrap--soon">
+            <div class="fl-project__soon-inner">
+              <p class="fl-project__soon-text">Project coming soon</p>
+            </div>
+          </div>
+          <div class="fl-project__info">
+            <span class="fl-project__tag fl-project__tag--soon">In progress</span>
+            <h3 class="fl-project__title">Manchester NH Business Site</h3>
+            <p class="fl-project__desc">Another local project in the works. More examples coming as I take on clients in the Manchester area.</p>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES / WHAT YOU GET -->
+  <section class="fl-services" id="services">
+    <div class="fl-container">
+      <div class="fl-section-header">
+        <h2 class="fl-section-title">What you <span class="fl-accent">get</span></h2>
+        <p class="fl-section-sub">Everything your business needs to show up online — nothing you don't.</p>
+      </div>
+
+      <div class="fl-services__grid">
+        <div class="fl-service">
+          <div class="fl-service__icon-wrap">
+            <i class="fa-solid fa-mobile-screen-button"></i>
+          </div>
+          <h3 class="fl-service__title">Looks great on every device</h3>
+          <p class="fl-service__desc">Over 60% of customers search on their phone. Your site will look sharp on phones, tablets, and desktops — automatically.</p>
+        </div>
+        <div class="fl-service">
+          <div class="fl-service__icon-wrap">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h3 class="fl-service__title">Fast loading pages</h3>
+          <p class="fl-service__desc">Slow websites lose customers. I build lean, hand-coded sites that load fast — no bloated builders or page slowdowns.</p>
+        </div>
+        <div class="fl-service">
+          <div class="fl-service__icon-wrap">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <h3 class="fl-service__title">Built to be found on Google</h3>
+          <p class="fl-service__desc">Every site I build is set up with the basics so Google can find and rank it. You show up when customers search for you.</p>
+        </div>
+        <div class="fl-service">
+          <div class="fl-service__icon-wrap">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <h3 class="fl-service__title">Real support, local person</h3>
+          <p class="fl-service__desc">I'm based right here in Manchester. You can actually call or text me — not a ticket system, not an overseas help desk.</p>
+        </div>
+        <div class="fl-service">
+          <div class="fl-service__icon-wrap">
+            <i class="fa-solid fa-calendar-check"></i>
+          </div>
+          <h3 class="fl-service__title">Ready in about 2 weeks</h3>
+          <p class="fl-service__desc">From first conversation to live website, most projects are done in 10–14 days. No waiting months for a freelancer to disappear on you.</p>
+        </div>
+        <div class="fl-service">
+          <div class="fl-service__icon-wrap">
+            <i class="fa-solid fa-dollar-sign"></i>
+          </div>
+          <h3 class="fl-service__title">Flat pricing, no surprises</h3>
+          <p class="fl-service__desc">You know exactly what you're paying before we start. No hidden fees, no monthly subscriptions, no upsells you didn't ask for.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRICING -->
+  <section class="fl-pricing">
+    <div class="fl-container">
+      <div class="fl-section-header">
+        <h2 class="fl-section-title">Simple <span class="fl-accent">pricing</span></h2>
+        <p class="fl-section-sub">One flat price. No monthly fees. No surprises.</p>
+      </div>
+      <div class="fl-pricing__card">
+        <div class="fl-pricing__left">
+          <div class="fl-pricing__amount">$399</div>
+          <div class="fl-pricing__label">Starter website</div>
+        </div>
+        <div class="fl-pricing__divider"></div>
+        <ul class="fl-pricing__list">
+          <li><i class="fa-solid fa-check"></i> Up to 5 pages (Home, About, Services, Contact + 1 more)</li>
+          <li><i class="fa-solid fa-check"></i> Mobile-friendly on all devices</li>
+          <li><i class="fa-solid fa-check"></i> Contact form so customers can reach you</li>
+          <li><i class="fa-solid fa-check"></i> Basic Google setup (SEO fundamentals)</li>
+          <li><i class="fa-solid fa-check"></i> Delivered in ~2 weeks</li>
+          <li><i class="fa-solid fa-check"></i> 30 days of free tweaks after launch</li>
+        </ul>
+      </div>
+      <p class="fl-pricing__note">Need something bigger? <a href="#contact" class="fl-pricing__note-link">Let's talk — I'll give you a custom quote.</a></p>
+    </div>
+  </section>
+
+  <!-- ABOUT / TRUST -->
+  <section class="fl-about">
+    <div class="fl-container fl-about__inner">
+      <figure class="fl-about__img-wrap">
+        <img src="./assets/profile-pic.jpg" alt="Jacob Maynard" class="fl-about__img">
+      </figure>
+      <div class="fl-about__content">
+        <span class="fl-about__eyebrow">Who you're working with</span>
+        <h2 class="fl-about__name">Hey, I'm Jake.</h2>
+        <p class="fl-about__bio">
+          I'm a web developer based right here in Manchester, NH. I've spent years in the restaurant and service industry, so I know what it's like to run a local business — long days, tight margins, and no time to figure out complicated tech.
+        </p>
+        <p class="fl-about__bio">
+          That's why I keep this simple. You tell me what your business does, I build you a clean website that brings in customers. No jargon, no runaround.
+        </p>
+        <div class="fl-about__links">
+          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-about__link" target="_blank">
+            <i class="fa-brands fa-linkedin"></i>
+          </a>
+          <a href="mailto:pulseforgeatmns@gmail.com" class="fl-about__link">
+            <i class="fa-regular fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT CTA -->
+  <section class="fl-contact" id="contact">
+    <div class="fl-container fl-contact__inner">
+      <h2 class="fl-contact__headline">Ready to get your business online?</h2>
+      <p class="fl-contact__sub">It starts with a free 15-minute call. No pressure, no sales pitch — just a straight conversation about what you need.</p>
+      <div class="fl-contact__actions">
+        <a href="mailto:pulseforgeatmns@gmail.com" class="fl-btn fl-btn--primary fl-btn--large">
+          <i class="fa-regular fa-envelope"></i> Send me an email
+        </a>
+        <span class="fl-contact__or">or</span>
+        <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-btn fl-btn--ghost fl-btn--large" target="_blank">
+          Message me on LinkedIn
+        </a>
+      </div>
+      <p class="fl-contact__response">I typically respond within a few hours.</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="fl-footer">
+    <div class="fl-container fl-footer__inner">
+      <div class="fl-footer__top">
+        <img src="./assets/pulseforge_logo_footer_animated.svg" alt="Pulseforge Logo" class="fl-footer__logo">
+      </div>
+      <div class="fl-footer__divider"></div>
+      <div class="fl-footer__bottom">
+        <span class="fl-footer__copy">© 2026 Jacob Maynard · Manchester, NH</span>
+        <div class="fl-footer__socials">
+          <a href="https://github.com/pulseforgeatmns-ops" class="fl-footer__social" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-footer__social" target="_blank">
+            <i class="fab fa-linkedin"></i>
+          </a>
+          <a href="mailto:pulseforgeatmns@gmail.com" class="fl-footer__social">
+            <i class="fa-regular fa-envelope"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+
+    function closeMenu() {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+    }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fl-project, .fl-service, .fl-pricing__card, .fl-about__inner').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+
+</body>
+</html>
