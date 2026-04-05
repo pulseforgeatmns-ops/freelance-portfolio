@@ -1,0 +1,111 @@
+<svg viewBox="0 0 180 60" xmlns="http://www.w3.org/2000/svg" width="180" height="60">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0e1a"/>
+      <stop offset="100%" style="stop-color:#0d1526"/>
+    </linearGradient>
+    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#00e5ff"/>
+      <stop offset="60%" style="stop-color:#00b8d9"/>
+      <stop offset="100%" style="stop-color:#7c3aed"/>
+    </linearGradient>
+
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.5" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="textGlow" x="-10%" y="-40%" width="120%" height="180%">
+      <feGaussianBlur stdDeviation="1.2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="pulseGlowFilter" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <clipPath id="logoClip">
+      <rect x="0" y="0" width="180" height="60"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background -->
+  <rect width="180" height="60" fill="url(#bgGrad)" rx="8"/>
+
+  <!-- Icon: hexagon outline -->
+  <polygon points="30,10 42,17 42,31 30,38 18,31 18,17"
+    fill="none" stroke="url(#pulseGrad)" stroke-width="1.2" opacity="0.7" filter="url(#glow)"/>
+
+  <!-- Pulse waveform -->
+  <polyline
+    points="10,42 18,42 21,35 24,50 27,32 30,46 33,35 36,50 39,32 42,46 45,35 48,42 56,42"
+    fill="none" stroke="url(#pulseGrad)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)"/>
+
+  <!-- Center dot -->
+  <circle cx="30" cy="22" r="2.5" fill="#00e5ff" opacity="1" filter="url(#glow)"/>
+
+  <!-- Divider line -->
+  <line x1="64" y1="12" x2="64" y2="48" stroke="#00e5ff" stroke-width="0.8" opacity="0.3"/>
+
+  <!-- Wordmark -->
+  <text x="73" y="29"
+    font-family="'Courier New', monospace"
+    font-size="15"
+    font-weight="700"
+    letter-spacing="1.5"
+    fill="url(#pulseGrad)"
+    opacity="1"
+    filter="url(#textGlow)">PULSEFORGE</text>
+
+  <!-- Subtitle -->
+  <text x="74" y="43"
+    font-family="'Courier New', monospace"
+    font-size="6.5"
+    font-weight="700"
+    letter-spacing="4"
+    fill="#e8f4f8"
+    opacity="1">AUTOMATIONS</text>
+
+  <!-- Pulse dot that travels left to right with vertical bounce -->
+  <g clip-path="url(#logoClip)" filter="url(#pulseGlowFilter)">
+    <!-- Outer glow ring -->
+    <circle r="6" fill="none" stroke="#00e5ff" stroke-width="1" opacity="0.4">
+      <animateMotion
+        dur="2.8s"
+        repeatCount="indefinite"
+        keyPoints="0;0.15;0.2;0.3;0.35;0.45;0.5;0.6;0.65;0.75;0.8;0.9;1"
+        keyTimes="0;0.15;0.2;0.3;0.35;0.45;0.5;0.6;0.65;0.75;0.8;0.9;1"
+        calcMode="spline"
+        keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+        path="M-10,30 L27,30 L27,15 L45,45 L63,15 L81,45 L99,15 L117,45 L135,15 L153,30 L190,30"/>
+    </circle>
+    <!-- Inner bright core -->
+    <circle r="3" fill="#00e5ff" opacity="0.9">
+      <animateMotion
+        dur="2.8s"
+        repeatCount="indefinite"
+        keyPoints="0;0.15;0.2;0.3;0.35;0.45;0.5;0.6;0.65;0.75;0.8;0.9;1"
+        keyTimes="0;0.15;0.2;0.3;0.35;0.45;0.5;0.6;0.65;0.75;0.8;0.9;1"
+        calcMode="spline"
+        keySplines="0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1;0.4 0 0.6 1"
+        path="M-10,30 L27,30 L27,15 L45,45 L63,15 L81,45 L99,15 L117,45 L135,15 L153,30 L190,30"/>
+    </circle>
+    <!-- Trailing tail -->
+    <circle r="1.5" fill="#7c3aed" opacity="0.6">
+      <animateMotion
+        dur="2.8s"
+        begin="0.05s"
+        repeatCount="indefinite"
+        path="M-10,30 L27,30 L27,15 L45,45 L63,15 L81,45 L99,15 L117,45 L135,15 L153,30 L190,30"/>
+    </circle>
+  </g>
+
+</svg>
