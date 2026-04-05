@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clean Conscience Cleaners | Manchester, NH House Cleaning</title>
+  <meta name="description" content="Professional residential cleaning services in Manchester, NH. Trusted, insured, and locally owned. Book your free estimate today.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="https://kit.fontawesome.com/818d0fde56.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-header" id="site-header">
+    <nav class="nav">
+      <a href="#" class="nav__logo">
+        <span class="nav__logo-mark">CC</span>
+        <span class="nav__logo-text">Clean Conscience Cleaners</span>
+      </a>
+      <ul class="nav__links">
+        <li><a href="#services" class="nav__link">Services</a></li>
+        <li><a href="#why-us" class="nav__link">Why Us</a></li>
+        <li><a href="#reviews" class="nav__link">Reviews</a></li>
+        <li><a href="#contact" class="nav__link nav__link--cta">Get a Free Quote</a></li>
+      </ul>
+      <button class="nav__burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="#services" class="mobile-nav__link" onclick="closeMobile()">Services</a>
+    <a href="#why-us" class="mobile-nav__link" onclick="closeMobile()">Why Us</a>
+    <a href="#reviews" class="mobile-nav__link" onclick="closeMobile()">Reviews</a>
+    <a href="#contact" class="mobile-nav__link mobile-nav__link--cta" onclick="closeMobile()">Get a Free Quote</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero__content">
+      <div class="hero__eyebrow">
+        <span class="hero__dot"></span>
+        Manchester, NH · Serving Southern NH
+      </div>
+      <h1 class="hero__headline">A cleaner home.<br>Without the hassle.</h1>
+      <p class="hero__sub">
+        Clean Conscience Cleaners is a locally owned, fully insured residential cleaning service trusted by Manchester families since 2018. We show up on time, every time.
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Book a free estimate</a>
+        <a href="tel:+16035550192" class="btn btn--outline">
+          <i class="fa-solid fa-phone"></i> (603) 555-0192
+        </a>
+      </div>
+      <div class="hero__badges">
+        <div class="hero__badge">
+          <i class="fa-solid fa-shield-halved"></i>
+          Fully insured
+        </div>
+        <div class="hero__badge">
+          <i class="fa-solid fa-star"></i>
+          5.0 on Google
+        </div>
+        <div class="hero__badge">
+          <i class="fa-solid fa-leaf"></i>
+          Eco-friendly products
+        </div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__card hero__card--main">
+        <div class="hero__card-icon"><i class="fa-solid fa-house"></i></div>
+        <div class="hero__card-text">
+          <strong>Standard Clean</strong>
+          <span>Starting at $120</span>
+        </div>
+      </div>
+      <div class="hero__card hero__card--secondary">
+        <div class="hero__card-icon hero__card-icon--teal"><i class="fa-solid fa-calendar-check"></i></div>
+        <div class="hero__card-text">
+          <strong>Next available</strong>
+          <span>This week</span>
+        </div>
+      </div>
+      <div class="hero__stat-block">
+        <div class="hero__stat">
+          <span class="hero__stat-num">300+</span>
+          <span class="hero__stat-label">Happy clients</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">6 yrs</span>
+          <span class="hero__stat-label">In business</span>
+        </div>
+        <div class="hero__stat-divider"></div>
+        <div class="hero__stat">
+          <span class="hero__stat-num">100%</span>
+          <span class="hero__stat-label">Satisfaction</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST STRIP -->
+  <div class="trust-strip">
+    <div class="container trust-strip__inner">
+      <span class="trust-strip__item"><i class="fa-solid fa-check-circle"></i> Background checked</span>
+      <span class="trust-strip__divider">·</span>
+      <span class="trust-strip__item"><i class="fa-solid fa-check-circle"></i> Bonded & insured</span>
+      <span class="trust-strip__divider">·</span>
+      <span class="trust-strip__item"><i class="fa-solid fa-check-circle"></i> Satisfaction guaranteed</span>
+      <span class="trust-strip__divider">·</span>
+      <span class="trust-strip__item"><i class="fa-solid fa-check-circle"></i> No long-term contracts</span>
+    </div>
+  </div>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">What we offer</span>
+        <h2 class="section-title">Cleaning services for every need</h2>
+        <p class="section-sub">From regular maintenance to deep cleans and move-outs — we handle it all.</p>
+      </div>
+      <div class="services__grid">
+
+        <div class="service-card service-card--featured">
+          <div class="service-card__badge">Most popular</div>
+          <div class="service-card__icon"><i class="fa-solid fa-broom"></i></div>
+          <h3 class="service-card__title">Standard Cleaning</h3>
+          <p class="service-card__desc">Our most popular service. Perfect for regular upkeep — kitchen, bathrooms, bedrooms, living areas, and floors. Scheduled weekly, bi-weekly, or monthly.</p>
+          <div class="service-card__price">From $120</div>
+          <a href="#contact" class="btn btn--primary btn--sm">Book this</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fa-solid fa-sparkles"></i></div>
+          <h3 class="service-card__title">Deep Clean</h3>
+          <p class="service-card__desc">A thorough top-to-bottom clean — inside appliances, baseboards, window sills, and all the spots that get missed in a standard clean.</p>
+          <div class="service-card__price">From $220</div>
+          <a href="#contact" class="btn btn--outline-dark btn--sm">Book this</a>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card__icon"><i class="fa-solid fa-boxes-packing"></i></div>
+          <h3 class="service-card__title">Move-In / Move-Out</h3>
+          <p class="service-card__desc">Moving is stressful enough. We'll leave your old place spotless for the next tenants, or get your new place fresh before you unpack.</p>
+          <div class="service-card__price">From $250</div>
+          <a href="#contact" class="btn btn--outline-dark btn--sm">Book this</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="why-us" id="why-us">
+    <div class="container why-us__inner">
+      <div class="why-us__text">
+        <span class="section-eyebrow">Why choose us</span>
+        <h2 class="section-title section-title--left">We take the work seriously so you don't have to think about it.</h2>
+        <p class="why-us__para">We started Granite State Cleaning because we were tired of cleaning services that were flaky, inconsistent, and hard to reach. So we built something different — a local company that actually shows up, communicates clearly, and does the job right every single time.</p>
+        <ul class="why-us__list">
+          <li class="why-us__item">
+            <div class="why-us__item-icon"><i class="fa-solid fa-clock"></i></div>
+            <div>
+              <strong>We show up on time</strong>
+              <p>No waiting around in a 4-hour window. We confirm the night before and arrive when we say we will.</p>
+            </div>
+          </li>
+          <li class="why-us__item">
+            <div class="why-us__item-icon"><i class="fa-solid fa-user-check"></i></div>
+            <div>
+              <strong>Same cleaner, every visit</strong>
+              <p>No strangers in your home each time. You'll get to know your cleaner and they'll get to know your home.</p>
+            </div>
+          </li>
+          <li class="why-us__item">
+            <div class="why-us__item-icon"><i class="fa-solid fa-leaf"></i></div>
+            <div>
+              <strong>Eco-friendly products</strong>
+              <p>Safe for kids, pets, and the planet. We use non-toxic, biodegradable cleaning products — no harsh chemicals.</p>
+            </div>
+          </li>
+          <li class="why-us__item">
+            <div class="why-us__item-icon"><i class="fa-solid fa-rotate-left"></i></div>
+            <div>
+              <strong>100% satisfaction guarantee</strong>
+              <p>If something isn't right, tell us within 24 hours and we'll come back to fix it. No arguments, no hassle.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="why-us__visual">
+        <div class="why-us__img-block">
+          <div class="why-us__img-placeholder">
+            <i class="fa-solid fa-house-chimney"></i>
+          </div>
+          <div class="why-us__floating-review">
+            <div class="floating-review__stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="floating-review__text">"Best cleaning service in Manchester. They treat your home like their own."</p>
+            <span class="floating-review__name">— Sarah M., Manchester NH</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-it-works">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Simple process</span>
+        <h2 class="section-title">Getting started is easy</h2>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step__num">01</div>
+          <h3 class="step__title">Request a quote</h3>
+          <p class="step__desc">Fill out our short form or give us a call. We'll get back to you within a few hours with a flat price — no surprises.</p>
+        </div>
+        <div class="step__arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step__num">02</div>
+          <h3 class="step__title">We confirm your booking</h3>
+          <p class="step__desc">Pick a date and time that works for you. We'll send a reminder the evening before so you know exactly when to expect us.</p>
+        </div>
+        <div class="step__arrow"><i class="fa-solid fa-arrow-right"></i></div>
+        <div class="step">
+          <div class="step__num">03</div>
+          <h3 class="step__title">Come home to clean</h3>
+          <p class="step__desc">We do the work, you enjoy the results. If anything isn't perfect, we'll make it right — guaranteed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="reviews" id="reviews">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">What clients say</span>
+        <h2 class="section-title">Manchester families trust us</h2>
+        <div class="reviews__rating">
+          <div class="reviews__stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <span class="reviews__score">5.0 out of 5 · 47 Google Reviews</span>
+        </div>
+      </div>
+      <div class="reviews__grid">
+
+        <div class="review-card">
+          <div class="review-card__stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-card__text">"I've tried three different cleaning services over the years and Granite State is by far the best. They're thorough, reliable, and my house has never looked this good."</p>
+          <div class="review-card__author">
+            <div class="review-card__avatar">KL</div>
+            <div>
+              <strong>Karen L.</strong>
+              <span>Manchester, NH</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card__stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-card__text">"Hired them for a move-out clean on short notice and they were incredible. The landlord was impressed and I got my full deposit back. Worth every penny."</p>
+          <div class="review-card__author">
+            <div class="review-card__avatar">TM</div>
+            <div>
+              <strong>Tom M.</strong>
+              <span>Hooksett, NH</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="review-card__stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="review-card__text">"We have two dogs and two kids — our house takes a beating. These guys handle it without batting an eye. So professional and genuinely nice people."</p>
+          <div class="review-card__author">
+            <div class="review-card__avatar">JR</div>
+            <div>
+              <strong>Jessica R.</strong>
+              <span>Bedford, NH</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / QUOTE FORM -->
+  <section class="contact" id="contact">
+    <div class="container contact__inner">
+      <div class="contact__text">
+        <span class="section-eyebrow">Get in touch</span>
+        <h2 class="contact__headline">Get your free estimate today</h2>
+        <p class="contact__sub">No commitment, no pressure. Just a straight answer on price and availability.</p>
+        <div class="contact__details">
+          <a href="tel:+16035550192" class="contact__detail">
+            <i class="fa-solid fa-phone"></i>
+            (603) 555-0192
+          </a>
+          <a href="mailto:hello@gcccleaners.com" class="contact__detail">
+            <i class="fa-regular fa-envelope"></i>
+            hello@cccleaners.com
+          </a>
+          <div class="contact__detail">
+            <i class="fa-solid fa-location-dot"></i>
+            Manchester, NH · Serving all of Southern NH
+          </div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="handleSubmit(event)">
+        <div class="contact-form__row">
+          <div class="contact-form__field">
+            <label for="name">Your name</label>
+            <input type="text" id="name" placeholder="Jane Smith" required>
+          </div>
+          <div class="contact-form__field">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" placeholder="(603) 555-0100" required>
+          </div>
+        </div>
+        <div class="contact-form__field">
+          <label for="email">Email address</label>
+          <input type="email" id="email" placeholder="jane@email.com" required>
+        </div>
+        <div class="contact-form__field">
+          <label for="service">Service needed</label>
+          <select id="service">
+            <option value="">Select a service...</option>
+            <option>Standard Cleaning</option>
+            <option>Deep Clean</option>
+            <option>Move-In / Move-Out</option>
+            <option>Not sure yet</option>
+          </select>
+        </div>
+        <div class="contact-form__field">
+          <label for="message">Anything else? (optional)</label>
+          <textarea id="message" rows="3" placeholder="Home size, pets, any special requests..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Send my request <i class="fa-solid fa-arrow-right"></i></button>
+        <p class="contact-form__note">We respond within a few hours during business hours.</p>
+        <div class="contact-form__success" id="formSuccess">
+          <i class="fa-solid fa-circle-check"></i> Thanks! We'll be in touch shortly.
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <span class="footer__logo-mark">CC</span>
+        <div>
+          <strong class="footer__name">Clean Conscience Cleaners</strong>
+          <span class="footer__tagline">Manchester, NH's trusted home cleaning service</span>
+        </div>
+      </div>
+      <div class="footer__links">
+        <a href="#services">Services</a>
+        <a href="#why-us">Why Us</a>
+        <a href="#reviews">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2026 Clean Conscience Cleaners · Manchester, NH</span>
+        <span class="footer__credit">Site by <a href="../../freelance.html">Jacob Maynard</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Sticky nav shadow
+    const header = document.getElementById('site-header');
+    window.addEventListener('scroll', () => {
+      header.classList.toggle('scrolled', window.scrollY > 20);
+    });
+
+    // Hamburger
+    const burger = document.getElementById('burger');
+    const mobileNav = document.getElementById('mobileNav');
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+    });
+    function closeMobile() {
+      burger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }
+
+    // Scroll reveal
+    const revealEls = document.querySelectorAll('.service-card, .review-card, .step, .why-us__item');
+    const reveal = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('revealed'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => reveal.observe(el));
+
+    // Form
+    function handleSubmit(e) {
+      e.preventDefault();
+      document.getElementById('formSuccess').classList.add('visible');
+      e.target.reset();
+    }
+  </script>
+
+</body>
+</html>

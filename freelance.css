@@ -865,7 +865,7 @@ img {
 ===================== */
 .fl-footer {
   background: #111;
-  padding: 48px 24px;
+  padding: 12 24px;
 }
 
 .fl-footer__inner {
@@ -879,8 +879,8 @@ img {
 }
 
 .fl-footer__logo {
-  width: 60px;
-  height: 60px;
+  width: 200px;
+  height: 200px;
 }
 
 .fl-footer__divider {
