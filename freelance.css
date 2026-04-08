@@ -586,6 +586,10 @@ img {
   color: var(--purple);
 }
 
+.fl-project__info {
+  padding: 0 8px;
+}
+
 /* =====================
    SERVICES
 ===================== */
