@@ -655,6 +655,12 @@ img {
   text-align: left;
 }
 
+.fl-service:last-child {
+  grid-column: 1 / -1;
+  max-width: 380px;
+  margin: 0 auto;
+}
+
 /* =====================
    PRICING
 ===================== */
