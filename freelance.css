@@ -1069,6 +1069,136 @@ img {
   color: var(--white);
 }
 
+/* RETAINER PRICING */
+.fl-retainer {
+  padding: 80px 0;
+  background: #f9f9f9;
+}
+
+.fl-retainer__divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 48px;
+}
+
+.fl-retainer__divider::before,
+.fl-retainer__divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+.fl-retainer__divider-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #6030b1;
+  white-space: nowrap;
+}
+
+.fl-retainer__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.fl-retainer__card {
+  background: #fff;
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 32px;
+  position: relative;
+}
+
+.fl-retainer__card--featured {
+  border: 2px solid #6030b1;
+  transform: translateY(-8px);
+  box-shadow: 0 8px 32px rgba(96, 48, 177, 0.12);
+}
+
+.fl-retainer__badge {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #6030b1;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 4px 16px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+
+.fl-retainer__name {
+  font-family: 'Oswald', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: #242424;
+  margin-bottom: 8px;
+}
+
+.fl-retainer__price {
+  font-family: 'Oswald', sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  color: #6030b1;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.fl-retainer__price span {
+  font-size: 18px;
+  font-weight: 400;
+  color: #888;
+}
+
+.fl-retainer__tagline {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.fl-retainer__list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.fl-retainer__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.4;
+}
+
+.fl-retainer__list li i {
+  color: #6030b1;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.fl-btn--full {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
+
+
 /* =====================
    ANIMATIONS
 ===================== */
@@ -1172,6 +1302,18 @@ img {
     white-space: normal;
     text-align: center;
   }
+
+  .fl-retainer__grid {
+    grid-template-columns: 1fr;
+  }
+  .fl-retainer__card--featured {
+    transform: none;
+  }
+  .fl-retainer__divider-text {
+    white-space: normal;
+    text-align: center;
+  }
+
 }
 
 @media (max-width: 480px) {
