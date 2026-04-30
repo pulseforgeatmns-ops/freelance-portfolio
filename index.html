@@ -454,5 +454,212 @@
 
 <script src="//code.tidio.co/a6flaainwyrncupyz0zemod7jb33tkep.js" async></script>
 
+
+<!-- PHASE 1: REACTIVE ENHANCEMENTS -->
+<style>
+/* Cursor glow */
+.cursor-glow {
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(96,48,177,0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Sticky nav enhancement */
+.fl-nav {
+  transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+.fl-nav.scrolled {
+  box-shadow: 0 4px 24px rgba(96,48,177,0.1);
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(8px);
+}
+
+/* Magnetic button */
+.fl-btn {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+}
+
+/* Tilt cards */
+.fl-project__card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transform-style: preserve-3d;
+}
+
+/* Service cards hover */
+.fl-service {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fl-service:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(96,48,177,0.1);
+}
+
+/* Pricing cards hover */
+.fl-pricing__card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.fl-pricing__card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(96,48,177,0.15);
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background: #6030b1;
+  margin-left: 4px;
+  vertical-align: middle;
+  animation: blink 0.8s infinite;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+</style>
+
+<script>
+// Cursor glow
+const glow = document.createElement('div');
+glow.className = 'cursor-glow';
+document.body.appendChild(glow);
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Sticky nav on scroll
+const nav = document.querySelector('.fl-nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// Scroll reveal - add reveal class to key sections
+const revealTargets = [
+  '.fl-hero__badge',
+  '.fl-hero__sub',
+  '.fl-hero__ctas',
+  '.fl-hero__trust',
+  '.fl-project__card',
+  '.fl-service',
+  '.fl-pricing__card',
+  '.fl-about__img-wrap',
+  '.fl-about__content',
+  '.fl-contact__headline',
+  '.fl-contact__sub',
+  '.fl-contact__actions'
+];
+
+revealTargets.forEach((sel, si) => {
+  document.querySelectorAll(sel).forEach((el, i) => {
+    el.classList.add('reveal');
+    if (i > 0) el.classList.add('reveal-delay-' + Math.min(i, 4));
+  });
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Tilt effect on project cards
+document.querySelectorAll('.fl-project__card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
+    card.style.boxShadow = `${-x * 12}px ${-y * 12}px 32px rgba(96,48,177,0.12)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+});
+
+// Magnetic buttons
+document.querySelectorAll('.fl-btn--primary, .fl-btn--ghost').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
+    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
+
+// Typewriter effect on hero headline
+const headline = document.querySelector('.fl-hero__headline');
+if (headline) {
+  const lines = ['More customers.', 'Less manual work.', 'Guaranteed.'];
+  const colors = ['var(--text)', 'var(--text)', 'var(--purple)'];
+  headline.innerHTML = '';
+  let lineIndex = 0;
+  let charIndex = 0;
+  let currentSpan = null;
+  let cursor = document.createElement('span');
+  cursor.className = 'typewriter-cursor';
+  headline.appendChild(cursor);
+
+  function type() {
+    if (lineIndex >= lines.length) {
+      cursor.remove();
+      return;
+    }
+    if (charIndex === 0) {
+      currentSpan = document.createElement('span');
+      currentSpan.style.color = colors[lineIndex];
+      if (lineIndex === lines.length - 1) currentSpan.className = 'fl-hero__accent';
+      headline.insertBefore(currentSpan, cursor);
+    }
+    currentSpan.textContent += lines[lineIndex][charIndex];
+    charIndex++;
+    if (charIndex >= lines[lineIndex].length) {
+      charIndex = 0;
+      lineIndex++;
+      if (lineIndex < lines.length) {
+        headline.insertBefore(document.createElement('br'), cursor);
+        setTimeout(type, 400);
+      } else {
+        cursor.remove();
+      }
+      return;
+    }
+    setTimeout(type, 45);
+  }
+  setTimeout(type, 600);
+}
+</script>
+
 </body>
 </html>
