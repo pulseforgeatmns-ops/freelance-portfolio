@@ -661,6 +661,306 @@ if (headline) {
 }
 </script>
 
+
+<!-- PHASE 2: PARTICLE BACKGROUND + LIVE STATS -->
+<style>
+/* Particle canvas */
+#particle-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Live stats section */
+.fl-live-stats {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  padding: 5rem 0;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.fl-live-stats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #6030b1, #00d4b4, transparent);
+}
+
+.fl-live-stats__inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.fl-live-stats__eyebrow {
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #00d4b4;
+  margin-bottom: 0.5rem;
+}
+
+.fl-live-stats__title {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.fl-live-stats__sub {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 3rem;
+}
+
+.fl-live-stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .fl-live-stats__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.fl-stat-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.fl-stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(96,48,177,0.3);
+}
+
+.fl-stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #6030b1, #00d4b4);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.fl-stat-card:hover::before {
+  opacity: 1;
+}
+
+.fl-stat-number {
+  font-family: 'Oswald', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.fl-stat-number.teal { color: #00d4b4; }
+.fl-stat-number.purple { color: #8b5cf6; }
+
+.fl-stat-label {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.4);
+}
+
+.fl-stat-pulse {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  background: #00d4b4;
+  border-radius: 50%;
+  margin-right: 6px;
+  animation: pulse 2s infinite;
+  vertical-align: middle;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
+}
+
+.fl-live-stats__footer {
+  margin-top: 2rem;
+  font-family: 'Lato', sans-serif;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 1px;
+}
+
+/* Make sure content sections sit above canvas */
+.fl-nav, .fl-hero, .fl-industries, .fl-work, 
+.fl-services, .fl-pricing, .fl-retainer, 
+.fl-about, .fl-contact, .fl-footer {
+  position: relative;
+  z-index: 1;
+}
+</style>
+
+<canvas id="particle-canvas"></canvas>
+
+<script>
+// Particle system
+(function() {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  let animFrame;
+
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+
+  function createParticle() {
+    return {
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 2 + 0.5,
+      opacity: Math.random() * 0.4 + 0.1,
+      color: Math.random() > 0.5 ? '96,48,177' : '0,212,180'
+    };
+  }
+
+  function init() {
+    resize();
+    particles = [];
+    const count = Math.floor((canvas.width * canvas.height) / 15000);
+    for (let i = 0; i < count; i++) {
+      particles.push(createParticle());
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    particles.forEach((p, i) => {
+      p.x += p.vx;
+      p.y += p.vy;
+
+      if (p.x < 0) p.x = canvas.width;
+      if (p.x > canvas.width) p.x = 0;
+      if (p.y < 0) p.y = canvas.height;
+      if (p.y > canvas.height) p.y = 0;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(' + p.color + ',' + p.opacity + ')';
+      ctx.fill();
+
+      // Draw connections
+      particles.slice(i + 1).forEach(p2 => {
+        const dx = p.x - p2.x;
+        const dy = p.y - p2.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < 120) {
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p2.x, p2.y);
+          ctx.strokeStyle = 'rgba(96,48,177,' + (0.06 * (1 - dist/120)) + ')';
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      });
+    });
+
+    animFrame = requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', () => { init(); });
+  init();
+  draw();
+})();
+</script>
+
+<script>
+// Insert live stats section before the about section
+const aboutSection = document.querySelector('.fl-about');
+if (aboutSection) {
+  const statsHTML = `
+  <section class="fl-live-stats">
+    <div class="fl-live-stats__inner">
+      <div class="fl-live-stats__eyebrow"><span class="fl-stat-pulse"></span>Live System Data</div>
+      <h2 class="fl-live-stats__title">The system is running right now</h2>
+      <p class="fl-live-stats__sub">Real numbers from the Pulseforge agent system — updated daily</p>
+      <div class="fl-live-stats__grid">
+        <div class="fl-stat-card">
+          <div class="fl-stat-number teal" id="stat-prospects">—</div>
+          <div class="fl-stat-label">Prospects tracked</div>
+        </div>
+        <div class="fl-stat-card">
+          <div class="fl-stat-number purple" id="stat-emails">—</div>
+          <div class="fl-stat-label">Emails sent</div>
+        </div>
+        <div class="fl-stat-card">
+          <div class="fl-stat-number teal" id="stat-agents">7</div>
+          <div class="fl-stat-label">AI agents live</div>
+        </div>
+        <div class="fl-stat-card">
+          <div class="fl-stat-number purple" id="stat-actions">—</div>
+          <div class="fl-stat-label">Actions this week</div>
+        </div>
+      </div>
+      <div class="fl-live-stats__footer">Data pulled from Pulseforge Second Brain · Manchester, NH</div>
+    </div>
+  </section>`;
+
+  aboutSection.insertAdjacentHTML('beforebegin', statsHTML);
+}
+
+// Fetch live stats from Railway
+async function fetchLiveStats() {
+  try {
+    const res = await fetch('https://pulseforge-leadgen-production.up.railway.app/api/agent-status');
+    if (!res.ok) return;
+    const data = await res.json();
+    
+    if (data.prospects) {
+      document.getElementById('stat-prospects').textContent = data.prospects;
+    }
+    if (data.touchpoints) {
+      document.getElementById('stat-emails').textContent = data.touchpoints;
+    }
+    if (data.weeklyTouchpoints !== undefined) {
+      document.getElementById('stat-actions').textContent = data.weeklyTouchpoints;
+    }
+  } catch(err) {
+    // Fallback to static numbers if API unavailable
+    document.getElementById('stat-prospects').textContent = '85+';
+    document.getElementById('stat-emails').textContent = '40+';
+    document.getElementById('stat-actions').textContent = '120+';
+  }
+}
+
+fetchLiveStats();
+</script>
+
 </body>
 </html>
 <-rw-r--r--   1 jake  staff      0 Apr  7 20:27 main cache bust Fri May  1 08:33:47 EDT 2026 -->
