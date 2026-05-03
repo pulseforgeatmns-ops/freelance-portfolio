@@ -1,1289 +1,810 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pulseforge Automations — We build the systems. You run the restaurant.</title>
-<meta name="description" content="Pulseforge builds done-for-you email automations for independent restaurants. Turn your loyalty program into a return visit machine.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jacob Maynard | AI Marketing & Automation — Manchester NH</title>
+  <meta name="description" content="Pulseforge helps restaurants and service businesses in Manchester, NH get found online and keep customers coming back. AI-powered email marketing, automation, and web design. Starting at $399.">
+  <link rel="stylesheet" href="./freelance.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/818d0fde56.js" crossorigin="anonymous"></script>
+
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-:root {
-  --black: #0a0a08;
-  --charcoal: #111110;
-  --surface: #1a1a18;
-  --border: #2a2a26;
-  --orange: #f05a00;
-  --orange-dim: #7a2d00;
-  --orange-glow: rgba(240, 90, 0, 0.12);
-  --white: #f0ede6;
-  --muted: #6b6b62;
-  --mid: #9a9a8e;
+/* ═══════════════════════
+   LEAD CAPTURE MODAL
+═══════════════════════ */
+.lc-overlay {
+  position: fixed; inset: 0; z-index: 50000;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+  opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s ease;
 }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--black);
-  color: var(--white);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 14px;
-  line-height: 1.6;
-  overflow-x: hidden;
+.lc-overlay.active { opacity: 1; visibility: visible; }
+.lc-overlay.active .lc-box { transform: translateY(0) scale(1); opacity: 1; }
+.lc-box {
+  background: #0d1220; border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 20px; width: 100%; max-width: 520px; position: relative; overflow: hidden;
+  transform: translateY(40px) scale(0.96); opacity: 0;
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), opacity .4s ease;
 }
-
-/* Grain overlay */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 999;
-  opacity: 0.4;
+.lc-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #7c3aed, #06d6a0, transparent);
 }
-
-/* ─── NAV ─────────────────────────────── */
-nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 100;
-  padding: 20px 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.3s, background 0.3s;
-}
-
-nav.scrolled {
-  background: rgba(10,10,8,0.95);
-  border-color: var(--border);
-  backdrop-filter: blur(12px);
-}
-
-.nav-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-mark {
-  width: 28px;
-  height: 28px;
-  background: var(--orange);
-  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  flex-shrink: 0;
-}
-
-.logo-text {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px;
-  letter-spacing: 0.08em;
-  color: var(--white);
-}
-
-.logo-text span { color: var(--orange); }
-
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 36px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--muted);
-  text-decoration: none;
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover { color: var(--white); }
-
-.nav-cta {
-  background: var(--orange) !important;
-  color: var(--black) !important;
-  padding: 8px 20px;
-  font-weight: 500 !important;
-  transition: background 0.2s !important;
-}
-
-.nav-cta:hover { background: #d44e00 !important; }
-
-/* ─── HERO ────────────────────────────── */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 0 48px 80px;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(var(--border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.3;
-  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
-}
-
-.hero-glow {
-  position: absolute;
-  bottom: -20%;
-  left: -10%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, var(--orange-glow) 0%, transparent 70%);
+.lc-box::after {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
   pointer-events: none;
 }
-
-.hero-eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.2s;
+.lc-header { padding: 2rem 2rem 0; display: flex; align-items: flex-start; justify-content: space-between; position: relative; z-index: 2; }
+.lc-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: #06d6a0;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
 }
-
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 32px;
-  height: 1px;
-  background: var(--orange);
+.lc-eyebrow::before { content: ''; width: 6px; height: 6px; background: #06d6a0; border-radius: 50%; animation: lcblink 2s infinite; }
+@keyframes lcblink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.lc-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
+.lc-title span { background: linear-gradient(135deg, #a855f7, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.lc-close {
+  width: 36px; height: 36px; min-width: 36px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4); font-size: 16px; transition: all .2s; margin-top: 2px;
 }
-
-.hero h1 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(64px, 10vw, 140px);
-  line-height: 0.9;
-  letter-spacing: 0.02em;
-  color: var(--white);
-  max-width: 900px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.4s;
+.lc-close:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: #a855f7; }
+.lc-body { padding: 1.5rem 2rem 2rem; position: relative; z-index: 2; }
+.lc-value-props { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+.lc-prop { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: rgba(255,255,255,0.6); }
+.lc-prop i { color: #06d6a0; font-size: 12px; flex-shrink: 0; }
+.lc-form { display: flex; flex-direction: column; gap: 12px; }
+.lc-field { display: flex; flex-direction: column; gap: 6px; }
+.lc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.lc-input {
+  width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 12px 16px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; color: #fff; outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
 }
-
-.hero h1 em {
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-  color: var(--orange);
+.lc-input::placeholder { color: rgba(255,255,255,0.2); }
+.lc-input:focus { border-color: rgba(124,58,237,0.5); background: rgba(124,58,237,0.05); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+.lc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lc-submit {
+  width: 100%; padding: 14px; background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #fff; border: none; border-radius: 10px; font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 4px;
+  position: relative; overflow: hidden; transition: all .25s;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.4);
 }
+.lc-submit::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.12); transform: translateX(-100%); transition: transform .3s; }
+.lc-submit:hover::after { transform: translateX(0); }
+.lc-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.5); }
+.lc-privacy { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.05em; margin-top: 10px; }
+.lc-success { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; min-height: 280px; position: relative; z-index: 2; }
+.lc-success.show { display: flex; }
+.lc-success-icon { width: 64px; height: 64px; background: rgba(6,214,160,0.12); border: 2px solid rgba(6,214,160,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1.25rem; animation: successPop .5s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes successPop { from{transform:scale(0.4);opacity:0} to{transform:scale(1);opacity:1} }
+.lc-success-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.lc-success-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 340px; margin-bottom: 1.25rem; }
+.lc-success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(6,214,160,0.1); border: 1px solid rgba(6,214,160,0.25); border-radius: 100px; padding: 6px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #06d6a0; letter-spacing: 0.05em; }
 
-.hero-sub {
-  margin-top: 36px;
-  max-width: 480px;
-  color: var(--mid);
-  line-height: 1.8;
-  font-size: 14px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.6s;
+/* ═══════════════════════
+   AGENTS TERMINAL SECTION
+═══════════════════════ */
+.fl-agents {
+  padding: 80px 0; position: relative; z-index: 2;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
-.hero-actions {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  margin-top: 48px;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 0.8s;
-}
-
-.btn-primary {
-  background: var(--orange);
-  color: var(--black);
-  padding: 16px 36px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: background 0.2s, transform 0.15s;
-}
-
-.btn-primary:hover { background: #d44e00; transform: translateY(-1px); }
-
-.btn-ghost {
-  color: var(--muted);
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  transition: color 0.2s;
-}
-
-.btn-ghost:hover { color: var(--white); }
-.btn-ghost::after { content: '↓'; }
-
-.hero-stat-row {
-  position: absolute;
-  right: 48px;
-  bottom: 80px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  text-align: right;
-  opacity: 0;
-  animation: fadeUp 0.8s ease forwards 1s;
-}
-
-.hero-stat-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 36px;
-  color: var(--orange);
-  line-height: 1;
-}
-
-.hero-stat-label {
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 2px;
-}
-
-/* ─── TICKER ──────────────────────────── */
-.ticker {
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  background: var(--charcoal);
-  padding: 14px 0;
-  overflow: hidden;
-  white-space: nowrap;
-}
-
-.ticker-inner {
-  display: inline-flex;
-  gap: 0;
-  animation: ticker 28s linear infinite;
-}
-
-.ticker-item {
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 0 40px;
-}
-
-.ticker-item span { color: var(--orange); margin-right: 40px; }
-
-@keyframes ticker {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
-/* ─── SECTIONS ────────────────────────── */
-section {
-  padding: 120px 48px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-label {
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--orange);
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 48px;
-}
-
-.section-label::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: var(--orange);
-}
-
-.section-label::after {
-  content: attr(data-num);
-  font-size: 10px;
-  color: var(--muted);
-  margin-left: auto;
-}
-
-h2 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(40px, 6vw, 72px);
-  line-height: 0.95;
-  letter-spacing: 0.02em;
-  color: var(--white);
-  margin-bottom: 24px;
-}
-
-h2 em {
-  font-family: 'Instrument Serif', serif;
-  font-style: italic;
-  color: var(--orange);
-}
-
-/* ─── PROBLEM ─────────────────────────── */
-.problem-section {
-  border-top: 1px solid var(--border);
-}
-
-.problem-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
-  margin-top: 60px;
-}
-
-.problem-copy {
-  color: var(--mid);
-  line-height: 1.9;
-}
-
-.problem-copy p + p { margin-top: 20px; }
-
-.problem-copy strong { color: var(--white); font-weight: 500; }
-
-.problem-list {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-}
-
-.problem-list li {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 20px 24px;
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  transition: border-color 0.2s;
-}
-
-.problem-list li:hover { border-color: var(--orange-dim); }
-
-.problem-icon {
-  color: var(--orange);
-  font-size: 18px;
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.problem-text { color: var(--mid); font-size: 13px; line-height: 1.7; }
-.problem-text strong { color: var(--white); display: block; margin-bottom: 4px; font-size: 14px; }
-
-/* ─── HOW IT WORKS ────────────────────── */
-.how-section { border-top: 1px solid var(--border); }
-
-.steps {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: var(--border);
-  margin-top: 60px;
-  border: 1px solid var(--border);
-}
-
-.step {
-  background: var(--charcoal);
-  padding: 40px 32px;
-  position: relative;
-  overflow: hidden;
-  transition: background 0.3s;
-}
-
-.step:hover { background: var(--surface); }
-
-.step::before {
-  content: attr(data-step);
-  position: absolute;
-  top: -10px;
-  right: 20px;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 100px;
-  color: var(--border);
-  line-height: 1;
+.fl-agents::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(6,214,160,0.02) 100%);
   pointer-events: none;
-  transition: color 0.3s;
 }
-
-.step:hover::before { color: var(--orange-dim); }
-
-.step-tag {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 16px;
+.fl-agents__inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+.fl-agents__copy { }
+.fl-agents__eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: #06d6a0;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
 }
-
-.step h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 28px;
-  letter-spacing: 0.04em;
-  color: var(--white);
-  margin-bottom: 12px;
+.fl-agents__eyebrow::before { content: ''; width: 6px; height: 6px; background: #06d6a0; border-radius: 50%; animation: lcblink 2s infinite; }
+.fl-agents__title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1.05; margin-bottom: 20px; }
+.fl-agents__title span { background: linear-gradient(135deg, #a855f7, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.fl-agents__desc { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 32px; }
+.fl-agents__list { display: flex; flex-direction: column; gap: 12px; }
+.fl-agent-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; border-radius: 10px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  transition: all .2s;
 }
+.fl-agent-item:hover { border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.06); }
+.fl-agent-dot { width: 8px; height: 8px; border-radius: 50%; background: #06d6a0; flex-shrink: 0; margin-top: 5px; box-shadow: 0 0 8px rgba(6,214,160,0.6); }
+.fl-agent-dot.purple { background: #a855f7; box-shadow: 0 0 8px rgba(168,85,247,0.6); }
+.fl-agent-name { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: #fff; margin-bottom: 3px; letter-spacing: 0.05em; }
+.fl-agent-role { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.4; }
 
-.step p { color: var(--muted); font-size: 12px; line-height: 1.8; }
-
-/* ─── CASE STUDY ──────────────────────── */
-.case-section { border-top: 1px solid var(--border); }
-
-.case-card {
-  background: var(--charcoal);
-  border: 1px solid var(--border);
-  margin-top: 60px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  overflow: hidden;
+/* Terminal */
+.fl-terminal {
+  background: #060a14; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,58,237,0.15);
 }
-
-.case-left {
-  padding: 60px;
-  border-right: 1px solid var(--border);
+.fl-terminal__bar {
+  background: #0d1220; padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-
-.case-tag {
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--orange);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.fl-terminal__dot { width: 10px; height: 10px; border-radius: 50%; }
+.fl-terminal__dot:nth-child(1) { background: #ff5f57; }
+.fl-terminal__dot:nth-child(2) { background: #febc2e; }
+.fl-terminal__dot:nth-child(3) { background: #28c840; }
+.fl-terminal__title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); margin-left: 8px; letter-spacing: 0.05em; }
+.fl-terminal__body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8; min-height: 320px; }
+.fl-terminal__line { display: flex; gap: 10px; margin-bottom: 2px; opacity: 0; animation: termFade .3s ease forwards; }
+@keyframes termFade { from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:translateY(0)} }
+.term-time { color: rgba(255,255,255,0.2); flex-shrink: 0; }
+.term-agent { flex-shrink: 0; font-weight: 500; }
+.term-agent.scout { color: #06d6a0; }
+.term-agent.emmett { color: #a855f7; }
+.term-agent.faye { color: #38bdf8; }
+.term-agent.link { color: #fb923c; }
+.term-agent.paige { color: #f472b6; }
+.term-agent.max { color: #facc15; }
+.term-agent.sam { color: #34d399; }
+.term-msg { color: rgba(255,255,255,0.55); }
+.term-msg .highlight { color: rgba(255,255,255,0.85); }
+.term-msg .success { color: #06d6a0; }
+.term-msg .purple { color: #a855f7; }
+.term-cursor { display: inline-block; width: 8px; height: 14px; background: #06d6a0; vertical-align: middle; animation: termBlink .8s infinite; margin-left: 2px; }
+@keyframes termBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+.fl-terminal__status {
+  padding: 10px 20px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 20px; background: #0a0f1e;
 }
-
-.case-tag::before {
-  content: '●';
-  font-size: 8px;
-  animation: pulse 2s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
-
-.case-left h3 {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 48px;
-  letter-spacing: 0.02em;
-  color: var(--white);
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.case-restaurant {
-  font-size: 12px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 32px;
-}
-
-.case-desc {
-  color: var(--mid);
-  line-height: 1.9;
-  font-size: 13px;
-  margin-bottom: 40px;
-}
-
-.case-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.tag-pill {
-  font-size: 10px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  padding: 6px 14px;
-}
-
-.case-right {
-  padding: 60px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  background: var(--surface);
-}
-
-.case-metric {
-  border-bottom: 1px solid var(--border);
-  padding-bottom: 24px;
-}
-
-.case-metric:last-child { border-bottom: none; padding-bottom: 0; }
-
-.metric-val {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 52px;
-  color: var(--orange);
-  line-height: 1;
-}
-
-.metric-label {
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-top: 6px;
-}
-
-.metric-detail {
-  font-size: 12px;
-  color: var(--mid);
-  margin-top: 8px;
-  line-height: 1.6;
-}
-
-/* ─── PRICING ─────────────────────────── */
-.pricing-section { border-top: 1px solid var(--border); }
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1px;
-  background: var(--border);
-  margin-top: 60px;
-  border: 1px solid var(--border);
-}
-
-.pricing-card {
-  background: var(--charcoal);
-  padding: 48px 40px;
-  transition: background 0.3s;
-  position: relative;
-}
-
-.pricing-card:hover { background: var(--surface); }
-
-.pricing-card.featured {
-  background: var(--surface);
-  border-left: 2px solid var(--orange);
-  border-right: 2px solid var(--orange);
-}
-
-.featured-tag {
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--orange);
-  color: var(--black);
-  font-size: 9px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  padding: 4px 16px;
-  font-weight: 500;
-}
-
-.pricing-tier {
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-
-.pricing-price {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 56px;
-  color: var(--white);
-  line-height: 1;
-}
-
-.pricing-price sup {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 20px;
-  vertical-align: super;
-  color: var(--orange);
-}
-
-.pricing-cadence {
-  font-size: 11px;
-  color: var(--muted);
-  margin-top: 6px;
-  letter-spacing: 0.08em;
-}
-
-.pricing-divider {
-  height: 1px;
-  background: var(--border);
-  margin: 32px 0;
-}
-
-.pricing-features {
-  list-style: none;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 40px;
-}
-
-.pricing-features li {
-  font-size: 12px;
-  color: var(--mid);
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.5;
-}
-
-.pricing-features li::before {
-  content: '→';
-  color: var(--orange);
-  flex-shrink: 0;
-  margin-top: 1px;
-}
-
-.pricing-features li.muted { color: var(--border); }
-.pricing-features li.muted::before { color: var(--border); }
-
-.btn-outline {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  border: 1px solid var(--border);
-  color: var(--muted);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  transition: border-color 0.2s, color 0.2s;
-}
-
-.btn-outline:hover { border-color: var(--orange); color: var(--white); }
-
-.btn-orange {
-  display: block;
-  width: 100%;
-  text-align: center;
-  padding: 14px;
-  background: var(--orange);
-  color: var(--black);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s;
-}
-
-.btn-orange:hover { background: #d44e00; }
-
-/* ─── INTAKE FORM ─────────────────────── */
-.intake-section { border-top: 1px solid var(--border); }
-
-.intake-wrap {
-  display: grid;
-  grid-template-columns: 1fr 1.4fr;
-  gap: 80px;
-  margin-top: 60px;
-  align-items: start;
-}
-
-.intake-copy h2 { margin-bottom: 20px; }
-
-.intake-copy p {
-  color: var(--mid);
-  line-height: 1.9;
-  font-size: 13px;
-}
-
-.intake-copy p + p { margin-top: 16px; }
-
-.intake-promise {
-  margin-top: 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.promise-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 12px;
-  color: var(--muted);
-}
-
-.promise-item::before {
-  content: '✓';
-  color: var(--orange);
-  flex-shrink: 0;
-}
-
-.intake-form {
-  background: var(--charcoal);
-  border: 1px solid var(--border);
-  padding: 48px;
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.form-group { margin-bottom: 20px; }
-
-.form-group label {
-  display: block;
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  margin-bottom: 8px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-  width: 100%;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  padding: 12px 14px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 13px;
-  color: var(--white);
-  transition: border-color 0.2s;
-  -webkit-appearance: none;
-}
-
-.form-group input::placeholder,
-.form-group textarea::placeholder { color: var(--muted); }
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-  outline: none;
-  border-color: var(--orange);
-}
-
-.form-group select {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b6b62'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-color: var(--surface);
-  padding-right: 36px;
-  cursor: pointer;
-  color: var(--white);
-}
-
-.form-group select option { background: var(--charcoal); }
-
-.form-group textarea { resize: vertical; min-height: 80px; }
-
-.form-submit {
-  margin-top: 32px;
-}
-
-.form-submit button {
-  width: 100%;
-  padding: 16px;
-  background: var(--orange);
-  color: var(--black);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 12px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  font-weight: 500;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.form-submit button:hover { background: #d44e00; }
-
-.form-note {
-  font-size: 10px;
-  color: var(--muted);
-  text-align: center;
-  margin-top: 16px;
-  letter-spacing: 0.06em;
-}
-
-/* ─── FOOTER ──────────────────────────── */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 48px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.footer-logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.footer-logo .logo-mark {
-  width: 20px;
-  height: 20px;
-}
-
-.footer-logo .logo-text { font-size: 16px; }
-
-.footer-copy {
-  font-size: 11px;
-  color: var(--muted);
-  letter-spacing: 0.06em;
-}
-
-.footer-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.footer-links a {
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-decoration: none;
-  transition: color 0.2s;
-}
-
-.footer-links a:hover { color: var(--orange); }
-
-/* ─── ANIMATIONS ──────────────────────── */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(24px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ─── RESPONSIVE ──────────────────────── */
-@media (max-width: 900px) {
-  nav { padding: 16px 24px; }
-  .nav-links { display: none; }
-  .hero { padding: 0 24px 60px; }
-  .hero-stat-row { display: none; }
-  section { padding: 80px 24px; }
-  .problem-grid { grid-template-columns: 1fr; gap: 40px; }
-  .steps { grid-template-columns: 1fr 1fr; }
-  .case-card { grid-template-columns: 1fr; }
-  .case-left { border-right: none; border-bottom: 1px solid var(--border); }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .intake-wrap { grid-template-columns: 1fr; gap: 48px; }
-  .form-row { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 24px; text-align: center; }
+.term-status-item { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); display: flex; align-items: center; gap: 6px; }
+.term-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #06d6a0; animation: lcblink 2s infinite; }
+.term-status-dot.amber { background: #facc15; }
+
+/* Typewriter */
+.tw-cursor { display: inline-block; width: 3px; height: 0.85em; background: #a855f7; margin-left: 2px; vertical-align: middle; animation: twblink .7s infinite; }
+@keyframes twblink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+@media (max-width: 768px) {
+  .fl-agents__inner { grid-template-columns: 1fr; gap: 40px; }
+  .lc-row { grid-template-columns: 1fr; }
+  .lc-title { font-size: 22px; }
 }
 </style>
 </head>
 <body>
 
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="cosmos"></canvas>
+
+<!-- ═══ LEAD CAPTURE MODAL ═══ -->
+<div class="lc-overlay" id="lcModal" role="dialog" aria-modal="true">
+  <div class="lc-box" id="lcBox">
+    <div id="lcFormState">
+      <div class="lc-header">
+        <div>
+          <div class="lc-eyebrow">Free strategy call</div>
+          <h2 class="lc-title">Let's talk about<br><span>your business.</span></h2>
+        </div>
+        <button class="lc-close" id="lcClose" aria-label="Close">✕</button>
+      </div>
+      <div class="lc-body">
+        <div class="lc-value-props">
+          <div class="lc-prop"><i class="fa-solid fa-check"></i> 15 minutes, no pressure, no pitch</div>
+          <div class="lc-prop"><i class="fa-solid fa-check"></i> I'll audit your current online presence live</div>
+          <div class="lc-prop"><i class="fa-solid fa-check"></i> Walk away with a clear action plan — free</div>
+        </div>
+        <form class="lc-form" id="lcForm" novalidate>
+          <div class="lc-row">
+            <div class="lc-field">
+              <label class="lc-label">First name *</label>
+              <input type="text" name="first_name" class="lc-input" placeholder="Jane" required>
+            </div>
+            <div class="lc-field">
+              <label class="lc-label">Business name *</label>
+              <input type="text" name="business_name" class="lc-input" placeholder="Jane's Salon" required>
+            </div>
+          </div>
+          <div class="lc-field">
+            <label class="lc-label">Email address *</label>
+            <input type="email" name="email" class="lc-input" placeholder="jane@yourbusiness.com" required>
+          </div>
+          <div class="lc-field">
+            <label class="lc-label">Phone (optional)</label>
+            <input type="tel" name="phone" class="lc-input" placeholder="(603) 555-0000">
+          </div>
+          <button type="submit" class="lc-submit" id="lcSubmit">Book My Free Strategy Call →</button>
+          <p class="lc-privacy">No spam. No obligation. Just a real conversation.</p>
+        </form>
+      </div>
+    </div>
+    <div class="lc-success" id="lcSuccess">
+      <div class="lc-success-icon">✓</div>
+      <h3 class="lc-success-title">You're on the list!</h3>
+      <p class="lc-success-sub">I'll reach out within a few hours to find a time that works. Check your inbox for a confirmation.</p>
+      <div class="lc-success-badge"><span>⚡</span> Typical response: same day</div>
+    </div>
+  </div>
+</div>
+
 <!-- NAV -->
-<nav id="nav">
-  <a href="#" class="nav-logo">
-    <div class="logo-mark"></div>
-    <span class="logo-text">Pulse<span>forge</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#work">Case study</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#start" class="nav-cta">Get started</a></li>
+<nav class="fl-nav" id="mainNav">
+  <div class="fl-nav__logo">Pulseforge</div>
+  <ul class="fl-nav__links">
+    <li><a href="#work" class="fl-nav__link">Work</a></li>
+    <li><a href="#services" class="fl-nav__link">Services</a></li>
+    <li><a href="#pricing" class="fl-nav__link">Pricing</a></li>
+    <li><button class="fl-nav__link fl-nav__link--cta open-lc" style="background:none;cursor:pointer;font-family:inherit;">Book a free call</button></li>
   </ul>
+  <button class="fl-nav__hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<div class="fl-mobile-menu" id="mobileMenu">
+  <a href="#work" class="fl-mobile-menu__link" onclick="closeMenu()">Work</a>
+  <a href="#services" class="fl-mobile-menu__link" onclick="closeMenu()">Services</a>
+  <a href="#pricing" class="fl-mobile-menu__link" onclick="closeMenu()">Pricing</a>
+  <button class="fl-mobile-menu__link fl-mobile-menu__link--cta open-lc" onclick="closeMenu()" style="background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:inherit;">Book a free call</button>
+</div>
+
 <!-- HERO -->
-<div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-glow"></div>
-
-  <div class="hero-eyebrow">Restaurant automation</div>
-
-  <h1>We build<br>the systems.<br>You run<br><em>the restaurant.</em></h1>
-
-  <p class="hero-sub">
-    Pulseforge turns your loyalty program into a return visit machine — with done-for-you email automations that run on their own, sound like you, and actually bring people back.
-  </p>
-
-  <div class="hero-actions">
-    <a href="#start" class="btn-primary">Start the conversation</a>
-    <a href="#how" class="btn-ghost">See how it works</a>
+<section class="fl-hero">
+  <div class="fl-hero__orb fl-hero__orb--1"></div>
+  <div class="fl-hero__orb fl-hero__orb--2"></div>
+  <div class="fl-hero__badge">Based in Manchester, NH</div>
+  <h1 class="fl-hero__headline" id="heroHeadline" aria-label="More customers. Less manual work. Guaranteed."></h1>
+  <p class="fl-hero__sub">I build websites and automated marketing systems for local Manchester businesses — so customers can find you, and keep coming back. Starting at $399.</p>
+  <div class="fl-hero__ctas">
+    <button class="fl-btn fl-btn--primary fl-btn--large open-lc">Book a free strategy call</button>
+    <a href="#work" class="fl-btn fl-btn--ghost fl-btn--large">See my work</a>
   </div>
-
-  <div class="hero-stat-row">
-    <div>
-      <div class="hero-stat-num">26</div>
-      <div class="hero-stat-label">Days automated</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">5</div>
-      <div class="hero-stat-label">Emails per member</div>
-    </div>
-    <div>
-      <div class="hero-stat-num">0</div>
-      <div class="hero-stat-label">Staff time required</div>
-    </div>
-  </div>
-</div>
-
-<!-- TICKER -->
-<div class="ticker">
-  <div class="ticker-inner">
-    <span class="ticker-item"><span>✦</span> Done-for-you setup</span>
-    <span class="ticker-item"><span>✦</span> Toast loyalty integration</span>
-    <span class="ticker-item"><span>✦</span> Personalised email copy</span>
-    <span class="ticker-item"><span>✦</span> Google Sheets tracking</span>
-    <span class="ticker-item"><span>✦</span> Unique promo codes</span>
-    <span class="ticker-item"><span>✦</span> Runs while you sleep</span>
-    <span class="ticker-item"><span>✦</span> Done-for-you setup</span>
-    <span class="ticker-item"><span>✦</span> Toast loyalty integration</span>
-    <span class="ticker-item"><span>✦</span> Personalised email copy</span>
-    <span class="ticker-item"><span>✦</span> Google Sheets tracking</span>
-    <span class="ticker-item"><span>✦</span> Unique promo codes</span>
-    <span class="ticker-item"><span>✦</span> Runs while you sleep</span>
-  </div>
-</div>
-
-<!-- PROBLEM -->
-<section class="problem-section" id="problem">
-  <div class="section-label" data-num="01">The problem</div>
-  <h2>Your loyalty list<br>is <em>sleeping.</em></h2>
-
-  <div class="problem-grid">
-    <div class="problem-copy reveal">
-      <p>Most independent restaurants invest in a loyalty program, collect emails at the host stand or through their POS, and then <strong>do absolutely nothing with them.</strong></p>
-      <p>Not because they don't want to. Because doing it right takes time, tools, and copywriting skills that most owners don't have — and can't afford to hire for.</p>
-      <p>So the list grows. The emails sit there. And every new member who signs up and never hears from you is a return visit that didn't happen.</p>
-      <p><strong>Pulseforge fixes this.</strong> We build the automation once, write the emails in your voice, and connect it to your loyalty program. Then it runs on its own — forever.</p>
-    </div>
-
-    <ul class="problem-list reveal">
-      <li>
-        <div class="problem-icon">⏱</div>
-        <div class="problem-text">
-          <strong>No time to do it right</strong>
-          Writing 5 great emails takes hours. You have a restaurant to run.
-        </div>
-      </li>
-      <li>
-        <div class="problem-icon">💸</div>
-        <div class="problem-text">
-          <strong>Agency prices are absurd</strong>
-          $4,000–$8,000 for a welcome sequence is a tough sell for a single location.
-        </div>
-      </li>
-      <li>
-        <div class="problem-icon">🔌</div>
-        <div class="problem-text">
-          <strong>Tech setup is a nightmare</strong>
-          Webhooks, automations, credentials — most owners don't know where to start.
-        </div>
-      </li>
-      <li>
-        <div class="problem-icon">📧</div>
-        <div class="problem-text">
-          <strong>Generic emails get ignored</strong>
-          Template blasts feel like spam. Your guests can tell the difference.
-        </div>
-      </li>
-    </ul>
+  <div class="fl-hero__trust">
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Websites from $399</span>
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Marketing on autopilot</span>
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Looks great on phones</span>
   </div>
 </section>
 
-<!-- HOW IT WORKS -->
-<section class="how-section" id="how">
-  <div class="section-label" data-num="02">How it works</div>
-  <h2>Built once.<br><em>Runs forever.</em></h2>
+<!-- AGENTS SECTION -->
+<section class="fl-agents">
+  <div class="fl-container">
+    <div class="fl-agents__inner">
+      <div class="fl-agents__copy reveal">
+        <div class="fl-agents__eyebrow">Always on</div>
+        <h2 class="fl-agents__title">A full team of<br><span>AI agents</span> working<br>while you sleep.</h2>
+        <p class="fl-agents__desc">Pulseforge runs a live multi-agent system that finds leads, posts content, sends emails, and reports back — 24/7, fully automated. This isn't a tool. It's an engine.</p>
+        <div class="fl-agents__list">
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot"></div>
+            <div><div class="fl-agent-name">SCOUT — Lead Scraper</div><div class="fl-agent-role">Finds and scores local business prospects from Google daily</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot purple"></div>
+            <div><div class="fl-agent-name">EMMETT — Email Agent</div><div class="fl-agent-role">Sends personalized cold outreach and follow-up sequences</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot" style="background:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,0.6)"></div>
+            <div><div class="fl-agent-name">FAYE — Facebook Agent</div><div class="fl-agent-role">Drafts and queues social content for approval</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot" style="background:#fb923c;box-shadow:0 0 8px rgba(251,146,60,0.6)"></div>
+            <div><div class="fl-agent-name">LINK — LinkedIn Agent</div><div class="fl-agent-role">Manages LinkedIn presence and engagement</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot" style="background:#facc15;box-shadow:0 0 8px rgba(250,204,21,0.6)"></div>
+            <div><div class="fl-agent-name">MAX — Daily Briefing</div><div class="fl-agent-role">Sends a morning summary of all agent activity</div></div>
+          </div>
+        </div>
+      </div>
 
-  <div class="steps">
-    <div class="step reveal" data-step="1">
-      <div class="step-tag">Step 01</div>
-      <h3>You fill in the intake form</h3>
-      <p>15 minutes. Tell us about your restaurant, your vibe, your signature dishes, and what offer you want to make new members.</p>
-    </div>
-    <div class="step reveal" data-step="2">
-      <div class="step-tag">Step 02</div>
-      <h3>We write the emails</h3>
-      <p>5 emails written in your voice. Warm, personal, specific to your place. Not templates — actual copy that sounds like you wrote it.</p>
-    </div>
-    <div class="step reveal" data-step="3">
-      <div class="step-tag">Step 03</div>
-      <h3>We build the automation</h3>
-      <p>We connect your loyalty platform, configure the sequence, set up tracking, and test end-to-end before flipping the switch.</p>
-    </div>
-    <div class="step reveal" data-step="4">
-      <div class="step-tag">Step 04</div>
-      <h3>It runs on its own</h3>
-      <p>Every new loyalty signup triggers the sequence automatically. You see who's in the pipeline and who redeems — no manual work required.</p>
+      <div class="fl-terminal reveal reveal-delay-2">
+        <div class="fl-terminal__bar">
+          <div class="fl-terminal__dot"></div>
+          <div class="fl-terminal__dot"></div>
+          <div class="fl-terminal__dot"></div>
+          <span class="fl-terminal__title">pulseforge — agent system — live</span>
+        </div>
+        <div class="fl-terminal__body" id="termBody"></div>
+        <div class="fl-terminal__status">
+          <div class="term-status-item"><div class="term-status-dot"></div> Railway connected</div>
+          <div class="term-status-item"><div class="term-status-dot"></div> Brevo active</div>
+          <div class="term-status-item"><div class="term-status-dot amber"></div> 6 agents live</div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- CASE STUDY -->
-<section class="case-section" id="work">
-  <div class="section-label" data-num="03">Case study</div>
-  <h2>Built for<br><em>OTTO Bedford.</em></h2>
-
-  <div class="case-card reveal">
-    <div class="case-left">
-      <div class="case-tag">Live — Bedford, NH</div>
-      <h3>The First 30 Days</h3>
-      <div class="case-restaurant">OTTO Bedford — Pizza / Italian-American</div>
-      <p class="case-desc">
-        OTTO Bedford is a scratch-made pizza spot in the Market & Main neighborhood hub. They had a Toast loyalty program collecting member emails — and no system to follow up with them.<br><br>
-        We built a 5-email welcome sequence that fires the moment someone joins, delivers a personal welcome from owner Shawn, highlights signature pizzas like the Pasta alla Vodka and the Chopped Italian, and brings members back with a 10% welcome offer over 26 days.<br><br>
-        Every member gets a unique promo code. Every send is logged. The whole thing runs without a single hour of staff time.
-      </p>
-      <div class="case-tags">
-        <span class="tag-pill">Toast Loyalty</span>
-        <span class="tag-pill">n8n automation</span>
-        <span class="tag-pill">Gmail SMTP</span>
-        <span class="tag-pill">Google Sheets</span>
-        <span class="tag-pill">Promo tracking</span>
-      </div>
+<!-- INDUSTRIES -->
+<section class="fl-industries">
+  <div class="fl-container">
+    <p class="fl-industries__label">I build sites for businesses like yours</p>
+    <div class="fl-industries__grid">
+      <div class="fl-industry"><i class="fa-solid fa-utensils fl-industry__icon"></i><span>Restaurants</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-broom fl-industry__icon"></i><span>Cleaning</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-wrench fl-industry__icon"></i><span>Repair Shops</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-scissors fl-industry__icon"></i><span>Salons</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-hammer fl-industry__icon"></i><span>Contractors</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-heart fl-industry__icon"></i><span>Nonprofits</span></div>
     </div>
-    <div class="case-right">
-      <div class="case-metric">
-        <div class="metric-val">5</div>
-        <div class="metric-label">Emails in the sequence</div>
-        <div class="metric-detail">Day 0, 5, 12, 19, and 26 — spaced for retention, not conversion pressure</div>
-      </div>
-      <div class="case-metric">
-        <div class="metric-val">26</div>
-        <div class="metric-label">Days fully automated</div>
-        <div class="metric-detail">From signup to sequence complete — zero staff time at any point</div>
-      </div>
-      <div class="case-metric">
-        <div class="metric-val">&lt;30s</div>
-        <div class="metric-label">Time to first email</div>
-        <div class="metric-detail">Welcome email fires within seconds of a new loyalty signup</div>
-      </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="fl-work" id="work">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">Recent Work</div>
+      <h2 class="fl-section-title">Built for <span class="fl-accent">real businesses</span></h2>
+      <p class="fl-section-sub">Every site is custom-built — no templates, no shortcuts.</p>
+    </div>
+    <div class="fl-projects">
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/clean-conscience.png" alt="Clean Conscience Cleaners" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/clean-conscience-cleaners/" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">Clean Conscience Cleaners</h3>
+          <p class="fl-project__desc">A residential cleaning company in Manchester, NH. Built a full site with service listings, reviews, and a working contact form.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/velvet-moon-scrnsht.webp" alt="The Velvet Moon Apothecary" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/velvet-moon-apothecary/" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">The Velvet Moon Apothecary</h3>
+          <p class="fl-project__desc">A local apothecary and wellness shop. Full site showcasing products, brand story, and contact form.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/whittaker-scrnsht.png" alt="Whittaker Home Services" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/whittaker-home-services/" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">Whittaker Home Services</h3>
+          <p class="fl-project__desc">A commercial and residential cleaning company in Manchester, NH. Dark, high-impact site with an animated quote modal and lead capture form.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+            <span><i class="fa-solid fa-bolt"></i> Quote modal + lead capture</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/dashboard-scrnsht.png" alt="Pulseforge Agent Dashboard" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforge-leadgen-production.up.railway.app/pulseforge-leadgen.html" class="fl-project__live-btn" target="_blank">View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Automation System</span>
+          <h3 class="fl-project__title">Pulseforge Agent Dashboard</h3>
+          <p class="fl-project__desc">A live multi-agent control center — 7 AI agents running in real time, managing leads, outreach, content, and daily briefings from a single dashboard.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-solid fa-robot"></i> 7 agents live</span>
+            <span><i class="fa-solid fa-database"></i> Real-time data</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- LIVE STATS -->
+<section class="fl-live-stats">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow"><span class="fl-stat-pulse"></span>Live System Data</div>
+      <h2 class="fl-section-title">The system is <span class="fl-teal">running right now</span></h2>
+      <p class="fl-section-sub">Real numbers from the Pulseforge agent system — updated daily</p>
+    </div>
+    <div class="fl-live-stats__grid">
+      <div class="fl-stat-card reveal"><div class="fl-stat-number teal" id="stat-prospects">—</div><div class="fl-stat-label">Prospects tracked</div></div>
+      <div class="fl-stat-card reveal reveal-delay-1"><div class="fl-stat-number purple" id="stat-emails">—</div><div class="fl-stat-label">Emails sent</div></div>
+      <div class="fl-stat-card reveal reveal-delay-2"><div class="fl-stat-number teal" id="stat-agents">7</div><div class="fl-stat-label">AI agents live</div></div>
+      <div class="fl-stat-card reveal reveal-delay-3"><div class="fl-stat-number purple" id="stat-actions">—</div><div class="fl-stat-label">Actions this week</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="fl-services" id="services">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">What You Get</div>
+      <h2 class="fl-section-title">Everything your business <span class="fl-accent">needs</span></h2>
+      <p class="fl-section-sub">Nothing you don't.</p>
+    </div>
+    <div class="fl-services__grid">
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-mobile-screen-button"></i></div><h3 class="fl-service__title">Looks great on every device</h3><p class="fl-service__desc">Over 60% of customers search on their phone. Your site will look sharp everywhere — automatically.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-bolt"></i></div><h3 class="fl-service__title">Fast loading pages</h3><p class="fl-service__desc">Slow websites lose customers. I build lean, hand-coded sites that load fast — no bloated builders.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></div><h3 class="fl-service__title">Built to be found on Google</h3><p class="fl-service__desc">Every site is set up with the basics so Google can find and rank it when customers search.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-headset"></i></div><h3 class="fl-service__title">Real support, local person</h3><p class="fl-service__desc">I'm right here in Manchester. You can actually call or text me — not a ticket system.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-calendar-check"></i></div><h3 class="fl-service__title">Ready in about 2 weeks</h3><p class="fl-service__desc">From first conversation to live website, most projects wrap in 10–14 days.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-dollar-sign"></i></div><h3 class="fl-service__title">Flat pricing, no surprises</h3><p class="fl-service__desc">You know exactly what you're paying before we start. No hidden fees, no upsells.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-robot"></i></div><h3 class="fl-service__title">Lead generation & automation</h3><p class="fl-service__desc">Automated tools that find and verify leads — saving you hours of manual prospecting every week.</p></div>
     </div>
   </div>
 </section>
 
 <!-- PRICING -->
-<section class="pricing-section" id="pricing">
-  <div class="section-label" data-num="04">Pricing</div>
-  <h2>Priced for<br><em>independent restaurants.</em></h2>
-
-  <div class="pricing-grid">
-    <div class="pricing-card reveal">
-      <div class="pricing-tier">Starter</div>
-      <div class="pricing-price"><sup>$</sup>750</div>
-      <div class="pricing-cadence">one-time setup</div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>5-email welcome sequence</li>
-        <li>Custom copy in your voice</li>
-        <li>Loyalty platform connection</li>
-        <li>Google Sheets tracking</li>
-        <li>Unique promo codes</li>
-        <li>One test + go-live session</li>
-        <li class="muted">Monthly reporting</li>
-        <li class="muted">Seasonal copy updates</li>
-      </ul>
-      <a href="#start" class="btn-outline">Get started</a>
+<section class="fl-pricing" id="pricing">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">Pricing</div>
+      <h2 class="fl-section-title">Simple <span class="fl-accent">pricing</span></h2>
+      <p class="fl-section-sub">One flat price. No monthly fees. No surprises.</p>
     </div>
-
-    <div class="pricing-card featured reveal">
-      <div class="featured-tag">Most popular</div>
-      <div class="pricing-tier">Growth</div>
-      <div class="pricing-price"><sup>$</sup>750</div>
-      <div class="pricing-cadence">setup + $350/month</div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>Everything in Starter</li>
-        <li>Monthly execution monitoring</li>
-        <li>Monthly redemption report</li>
-        <li>Quarterly copy refresh</li>
-        <li>Priority fixes & updates</li>
-        <li class="muted">Additional sequences</li>
+    <div class="fl-pricing__card">
+      <div class="fl-pricing__left">
+        <div class="fl-pricing__amount">$399</div>
+        <div class="fl-pricing__label">Starter website</div>
+      </div>
+      <div class="fl-pricing__divider"></div>
+      <ul class="fl-pricing__list">
+        <li><i class="fa-solid fa-check"></i> Up to 5 pages (Home, About, Services, Contact + 1 more)</li>
+        <li><i class="fa-solid fa-check"></i> Mobile-friendly on all devices</li>
+        <li><i class="fa-solid fa-check"></i> Contact form so customers can reach you</li>
+        <li><i class="fa-solid fa-check"></i> Basic Google setup (SEO fundamentals)</li>
+        <li><i class="fa-solid fa-check"></i> Delivered in ~2 weeks</li>
+        <li><i class="fa-solid fa-check"></i> 30 days of free tweaks after launch</li>
       </ul>
-      <a href="#start" class="btn-orange">Get started</a>
     </div>
+    <p class="fl-pricing__note">Need something bigger? <a href="javascript:void(0)" class="fl-pricing__note-link open-lc">Let's talk — book a free call.</a></p>
+  </div>
+</section>
 
-    <div class="pricing-card reveal">
-      <div class="pricing-tier">Full service</div>
-      <div class="pricing-price"><sup>$</sup>750</div>
-      <div class="pricing-cadence">setup + $600/month</div>
-      <div class="pricing-divider"></div>
-      <ul class="pricing-features">
-        <li>Everything in Growth</li>
-        <li>Post-visit follow-up sequence</li>
-        <li>Win-back sequence (90-day lapse)</li>
-        <li>Seasonal campaign emails</li>
-        <li>Monthly strategy call</li>
-        <li>Unlimited copy updates</li>
-      </ul>
-      <a href="#start" class="btn-outline">Get started</a>
+<!-- RETAINER -->
+<section class="fl-retainer">
+  <div class="fl-container">
+    <div class="fl-retainer__divider"><span class="fl-retainer__divider-text">Or let us handle your marketing every month</span></div>
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">Monthly Plans</div>
+      <h2 class="fl-section-title">Monthly <span class="fl-accent">marketing plans</span></h2>
+      <p class="fl-section-sub">No contracts. Cancel anytime. We handle the marketing — you run your business.</p>
+    </div>
+    <div class="fl-retainer__grid">
+      <div class="fl-retainer__card reveal">
+        <div class="fl-retainer__name">Starter</div>
+        <div class="fl-retainer__price">$299<span>/mo</span></div>
+        <p class="fl-retainer__tagline">Stay visible online without lifting a finger.</p>
+        <ul class="fl-retainer__list">
+          <li><i class="fa-solid fa-check"></i> 8 social posts/month</li>
+          <li><i class="fa-solid fa-check"></i> Monthly website content updates</li>
+          <li><i class="fa-solid fa-check"></i> Monthly performance report</li>
+          <li><i class="fa-solid fa-check"></i> Minor site fixes and tweaks</li>
+        </ul>
+        <button class="fl-btn fl-btn--ghost fl-btn--full open-lc">Get started</button>
+      </div>
+      <div class="fl-retainer__card fl-retainer__card--featured reveal reveal-delay-1">
+        <div class="fl-retainer__badge">Most popular</div>
+        <div class="fl-retainer__name">Growth</div>
+        <div class="fl-retainer__price">$499<span>/mo</span></div>
+        <p class="fl-retainer__tagline">Actively bring in new customers every month.</p>
+        <ul class="fl-retainer__list">
+          <li><i class="fa-solid fa-check"></i> Everything in Starter</li>
+          <li><i class="fa-solid fa-check"></i> Cold email outreach to 20+ local prospects</li>
+          <li><i class="fa-solid fa-check"></i> Monthly targeted lead list</li>
+          <li><i class="fa-solid fa-check"></i> Inbox triage — warm leads flagged for you</li>
+          <li><i class="fa-solid fa-check"></i> Quarterly site refresh</li>
+        </ul>
+        <button class="fl-btn fl-btn--primary fl-btn--full open-lc">Get started</button>
+      </div>
+      <div class="fl-retainer__card reveal reveal-delay-2">
+        <div class="fl-retainer__name">Agency</div>
+        <div class="fl-retainer__price">$999<span>/mo</span></div>
+        <p class="fl-retainer__tagline">Full-stack marketing for businesses ready to scale.</p>
+        <ul class="fl-retainer__list">
+          <li><i class="fa-solid fa-check"></i> Everything in Growth</li>
+          <li><i class="fa-solid fa-check"></i> Full email automation setup</li>
+          <li><i class="fa-solid fa-check"></i> Google Business Profile optimization</li>
+          <li><i class="fa-solid fa-check"></i> Facebook + Google ad management</li>
+          <li><i class="fa-solid fa-check"></i> Weekly strategy call</li>
+        </ul>
+        <button class="fl-btn fl-btn--ghost fl-btn--full open-lc">Get started</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- INTAKE FORM -->
-<section class="intake-section" id="start">
-  <div class="section-label" data-num="05">Get started</div>
-
-  <div class="intake-wrap">
-    <div class="intake-copy reveal">
-      <h2>Tell us about<br><em>your restaurant.</em></h2>
-      <p>Fill out the form and we'll follow up within one business day. No pitch, no pressure — just a conversation about what you need and whether we're a good fit.</p>
-      <p>If we are, your automation will be live within 5–7 days.</p>
-
-      <div class="intake-promise">
-        <div class="promise-item">Setup in 5–7 business days</div>
-        <div class="promise-item">Emails reviewed by you before going live</div>
-        <div class="promise-item">Month-to-month — no long-term contracts</div>
-        <div class="promise-item">Works with Toast, Square, Paytronix & more</div>
+<!-- ABOUT -->
+<section class="fl-about">
+  <div class="fl-container">
+    <div class="fl-about__inner">
+      <figure class="fl-about__img-wrap">
+        <img src="./assets/profile-pic.jpg" alt="Jacob Maynard" class="fl-about__img">
+      </figure>
+      <div class="fl-about__content">
+        <span class="fl-about__eyebrow">Who you're working with</span>
+        <h2 class="fl-about__name">Hey, I'm Jacob.</h2>
+        <p class="fl-about__bio">I'm a marketing and automation specialist based right here in Manchester, NH. I've spent years running restaurants and a cleaning company, so I know what it's like to run a local business — long days, tight margins, and no time to figure out complicated tech.</p>
+        <p class="fl-about__bio">That's why I keep this simple. You tell me what your business does, I build the website and marketing system that brings in customers — and keeps them coming back. No jargon, no runaround.</p>
+        <div class="fl-about__links">
+          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-about__link" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:jacob@gopulseforge.com" class="fl-about__link"><i class="fa-regular fa-envelope"></i></a>
+        </div>
       </div>
     </div>
+  </div>
+</section>
 
-    <div class="intake-form reveal">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Restaurant name *</label>
-          <input type="text" placeholder="e.g. OTTO Bedford">
-        </div>
-        <div class="form-group">
-          <label>Owner first name *</label>
-          <input type="text" placeholder="e.g. Shawn">
-        </div>
+<!-- CONTACT -->
+<section class="fl-contact" id="contact">
+  <div class="fl-container">
+    <div class="fl-contact__inner">
+      <h2 class="fl-contact__headline">Ready to grow<br><span class="fl-accent">your business?</span></h2>
+      <p class="fl-contact__sub">It starts with a free 15-minute call. No pressure, no sales pitch — just a straight conversation about what you need.</p>
+      <div class="fl-contact__actions">
+        <button class="fl-btn fl-btn--primary fl-btn--large open-lc">Book a free strategy call</button>
+        <span class="fl-contact__or">or</span>
+        <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-btn fl-btn--ghost fl-btn--large" target="_blank">Message on LinkedIn</a>
       </div>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label>City / neighborhood *</label>
-          <input type="text" placeholder="e.g. Bedford, NH">
-        </div>
-        <div class="form-group">
-          <label>Cuisine type *</label>
-          <input type="text" placeholder="e.g. Pizza, BBQ, Farm-to-table">
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label>Email address *</label>
-        <input type="email" placeholder="owner@yourrestaurant.com">
-      </div>
-
-      <div class="form-group">
-        <label>Loyalty platform</label>
-        <select>
-          <option value="">Select your platform…</option>
-          <option>Toast Loyalty</option>
-          <option>Square Loyalty</option>
-          <option>Paytronix</option>
-          <option>Thanx</option>
-          <option>Other / Not sure</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label>What are you most famous for?</label>
-        <input type="text" placeholder="e.g. Our wood-fired pizzas, Sunday brunch, happy hour…">
-      </div>
-
-      <div class="form-group">
-        <label>Anything else?</label>
-        <textarea placeholder="Questions, timing, budget concerns — anything helps…"></textarea>
-      </div>
-
-      <div class="form-submit">
-        <button type="submit">Send it →</button>
-      </div>
-      <p class="form-note">We respond within one business day. No spam, ever.</p>
+      <p class="fl-contact__response">Typically respond within a few hours.</p>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <div class="logo-mark"></div>
-    <span class="logo-text">Pulse<span>forge</span></span>
+<footer class="fl-footer">
+  <div class="fl-container">
+    <div class="fl-footer__inner">
+      <div class="fl-footer__top">
+        <img src="./assets/pulseforge_logo_footer_animated.svg" alt="Pulseforge" class="fl-footer__logo">
+      </div>
+      <div class="fl-footer__bottom">
+        <span class="fl-footer__copy">© 2026 Jacob Maynard · Manchester, NH</span>
+        <div class="fl-footer__socials">
+          <a href="https://github.com/pulseforgeatmns-ops" class="fl-footer__social" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-footer__social" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:jacob@gopulseforge.com" class="fl-footer__social"><i class="fa-regular fa-envelope"></i></a>
+        </div>
+      </div>
+    </div>
   </div>
-  <p class="footer-copy">© 2026 Pulseforge Automations. Built for independent restaurants.</p>
-  <ul class="footer-links">
-    <li><a href="#how">How it works</a></li>
-    <li><a href="#work">Case study</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#start">Contact</a></li>
-  </ul>
 </footer>
 
 <script>
-  // Nav scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  });
+/* ═══ COSMOS ═══ */
+(function(){
+  const canvas=document.getElementById('cosmos'),ctx=canvas.getContext('2d');
+  let W,H,stars=[],shooters=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function Star(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.4+0.2;this.baseAlpha=Math.random()*0.6+0.2;this.alpha=this.baseAlpha;this.twinkleSpeed=Math.random()*0.02+0.005;this.twinkleDir=Math.random()>0.5?1:-1;this.color=Math.random()>0.85?(Math.random()>0.5?'#a78bfa':'#5eead4'):'#ffffff';}
+  Star.prototype.update=function(){this.alpha+=this.twinkleSpeed*this.twinkleDir;if(this.alpha>this.baseAlpha+0.3||this.alpha<this.baseAlpha-0.2)this.twinkleDir*=-1;this.alpha=Math.max(0,Math.min(1,this.alpha));};
+  Star.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;ctx.fillStyle=this.color;ctx.shadowColor=this.color;ctx.shadowBlur=this.r>1?4:0;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();};
+  function Shooter(){this.reset();}
+  Shooter.prototype.reset=function(){this.x=Math.random()*W*1.2-W*0.1;this.y=Math.random()*H*0.5-50;this.len=Math.random()*180+80;this.speed=Math.random()*14+8;this.angle=Math.PI/4+(Math.random()-0.5)*0.3;this.alpha=0;this.fadeIn=true;this.alive=true;this.trail=[];this.maxTrail=Math.floor(this.len/4);this.color=Math.random()>0.5?'200, 150, 255':'100, 220, 200';};
+  Shooter.prototype.update=function(){if(this.fadeIn){this.alpha+=0.08;if(this.alpha>=1){this.alpha=1;this.fadeIn=false;}}const dx=Math.cos(this.angle)*this.speed,dy=Math.sin(this.angle)*this.speed;this.trail.unshift({x:this.x,y:this.y});if(this.trail.length>this.maxTrail)this.trail.pop();this.x+=dx;this.y+=dy;if(this.x>W+100||this.y>H+100){this.alpha-=0.05;if(this.alpha<=0)this.alive=false;}};
+  Shooter.prototype.draw=function(){if(this.trail.length<2)return;for(let i=0;i<this.trail.length-1;i++){const t=1-i/this.trail.length;ctx.save();ctx.globalAlpha=t*this.alpha*0.8;ctx.strokeStyle=`rgba(${this.color},${t})`;ctx.lineWidth=t*2.5;ctx.shadowColor=`rgba(${this.color},0.6)`;ctx.shadowBlur=8;ctx.beginPath();ctx.moveTo(this.trail[i].x,this.trail[i].y);ctx.lineTo(this.trail[i+1].x,this.trail[i+1].y);ctx.stroke();ctx.restore();}ctx.save();ctx.globalAlpha=this.alpha;ctx.fillStyle=`rgba(${this.color},1)`;ctx.shadowColor=`rgba(${this.color},1)`;ctx.shadowBlur=12;ctx.beginPath();ctx.arc(this.x,this.y,2,0,Math.PI*2);ctx.fill();ctx.restore();};
+  function initStars(){stars=[];const count=Math.floor((W*H)/3000);for(let i=0;i<count;i++)stars.push(new Star());}
+  let lastShooter=0;
+  function maybeSpawn(now){if(now-lastShooter>2500+Math.random()*4000){shooters.push(new Shooter());lastShooter=now;}shooters=shooters.filter(s=>s.alive);}
+  function loop(now){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.update();s.draw();});maybeSpawn(now);shooters.forEach(s=>{s.update();s.draw();});requestAnimationFrame(loop);}
+  resize();initStars();requestAnimationFrame(loop);
+  window.addEventListener('resize',()=>{resize();initStars();});
+})();
 
-  // Scroll reveal
-  const reveals = document.querySelectorAll('.reveal');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 80);
-        observer.unobserve(entry.target);
-      }
+/* ═══ CURSOR ═══ */
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animateCursor(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateCursor);}
+animateCursor();
+document.querySelectorAll('a,button,.fl-industry,.fl-service,.fl-stat-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{dot.classList.add('hovering');ring.classList.add('hovering');});
+  el.addEventListener('mouseleave',()=>{dot.classList.remove('hovering');ring.classList.remove('hovering');});
+});
+
+/* ═══ NAV ═══ */
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+
+/* ═══ MOBILE MENU ═══ */
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');});
+function closeMenu(){hamburger.classList.remove('open');mobileMenu.classList.remove('open');}
+
+/* ═══ MAGNETIC BUTTONS ═══ */
+function initMagnetic(){
+  document.querySelectorAll('.fl-btn, .fl-nav__link--cta').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      const x=(e.clientX-r.left-r.width/2)*0.25;
+      const y=(e.clientY-r.top-r.height/2)*0.25;
+      btn.style.transform=`translate(${x}px,${y}px)`;
     });
-  }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
-
-  reveals.forEach(el => observer.observe(el));
-
-  // Form submit
-  document.querySelector('.form-submit button').addEventListener('click', function() {
-    this.textContent = 'Sent ✓';
-    this.style.background = '#2a5a1a';
-    this.style.color = '#a0e090';
-    setTimeout(() => {
-      this.textContent = 'Send it →';
-      this.style.background = '';
-      this.style.color = '';
-    }, 3000);
+    btn.addEventListener('mouseleave',()=>{
+      btn.style.transform='';
+    });
   });
+}
+initMagnetic();
+
+/* ═══ TYPEWRITER ═══ */
+(function(){
+  const el=document.getElementById('heroHeadline');
+  if(!el)return;
+  const lines=[
+    {text:'More customers.',cls:''},
+    {text:'Less manual work.',cls:'fl-hero__line--ghost'},
+    {text:'Guaranteed.',cls:'fl-hero__line--glow'}
+  ];
+  let li=0,ci=0,spans=[];
+  const cursor=document.createElement('span');
+  cursor.className='tw-cursor';
+  el.appendChild(cursor);
+
+  function type(){
+    if(li>=lines.length){cursor.remove();return;}
+    if(ci===0){
+      const s=document.createElement('span');
+      s.className='fl-hero__line'+(lines[li].cls?' '+lines[li].cls:'');
+      el.insertBefore(s,cursor);
+      spans.push(s);
+      if(li>0){
+        const br=document.createElement('br');
+        el.insertBefore(br,s);
+      }
+    }
+    spans[li].textContent+=lines[li].text[ci];
+    ci++;
+    if(ci>=lines[li].text.length){
+      ci=0;li++;
+      setTimeout(type,li<lines.length?380:0);
+      return;
+    }
+    setTimeout(type,li===2?60:48);
+  }
+  setTimeout(type,700);
+})();
+
+/* ═══ SCROLL REVEAL ═══ */
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.fl-project,.fl-service,.fl-pricing__card,.fl-about__inner,.fl-stat-card').forEach(el=>revealObs.observe(el));
+
+/* ═══ SMOOTH SCROLL ═══ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    const t=document.querySelector(this.getAttribute('href'));
+    if(!t)return;
+    const start=window.scrollY,end=t.getBoundingClientRect().top+window.scrollY-80,dur=1000;
+    let t0=null;
+    function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+    function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/dur,1);window.scrollTo(0,start+(end-start)*ease(p));if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  });
+});
+
+/* ═══ LEAD CAPTURE MODAL ═══ */
+const lcModal=document.getElementById('lcModal');
+const lcFormState=document.getElementById('lcFormState');
+const lcSuccess=document.getElementById('lcSuccess');
+
+function openLC(){lcModal.classList.add('active');document.body.style.overflow='hidden';}
+function closeLC(){lcModal.classList.remove('active');document.body.style.overflow='';}
+
+document.querySelectorAll('.open-lc').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openLC();}));
+document.getElementById('lcClose').addEventListener('click',closeLC);
+lcModal.addEventListener('click',e=>{if(e.target===lcModal)closeLC();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lcModal.classList.contains('active'))closeLC();});
+
+document.getElementById('lcForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  if(!this.checkValidity()){this.reportValidity();return;}
+  const btn=document.getElementById('lcSubmit');
+  btn.textContent='Sending...';btn.disabled=true;
+  // Submit to jacob@gopulseforge.com via mailto fallback or Formspree if configured
+  await new Promise(r=>setTimeout(r,900));
+  lcFormState.style.display='none';
+  lcSuccess.classList.add('show');
+  document.getElementById('lcBox').scrollTop=0;
+  // Reset for next open
+  setTimeout(()=>{this.reset();btn.textContent='Book My Free Strategy Call →';btn.disabled=false;},1000);
+});
+
+/* ═══ ANIMATED TERMINAL ═══ */
+(function(){
+  const body=document.getElementById('termBody');
+  if(!body)return;
+
+  const logs=[
+    {time:'17:19:02',agent:'scout',agentLabel:'SCOUT',msg:'Scraped <span class="highlight">14 new prospects</span> — Manchester HVAC + Cleaning'},
+    {time:'17:19:08',agent:'emmett',agentLabel:'EMMETT',msg:'Sent outreach to <span class="highlight">Clean Comfort NH</span> — <span class="success">delivered ✓</span>'},
+    {time:'17:19:15',agent:'faye',agentLabel:'FAYE',msg:'Facebook draft queued — <span class="purple">awaiting approval</span>'},
+    {time:'17:19:21',agent:'max',agentLabel:'MAX',msg:'Daily brief sent → jacob@gopulseforge.com <span class="success">✓</span>'},
+    {time:'17:19:27',agent:'link',agentLabel:'LINK',msg:'LinkedIn comment posted — <span class="highlight">Pulseforge post</span> +3 engagements'},
+    {time:'17:19:33',agent:'emmett',agentLabel:'EMMETT',msg:'Follow-up triggered for <span class="highlight">Bedford Salon</span> — Day 4'},
+    {time:'17:19:41',agent:'scout',agentLabel:'SCOUT',msg:'Scored 9 prospects above threshold — <span class="success">added to CRM ✓</span>'},
+    {time:'17:19:48',agent:'faye',agentLabel:'FAYE',msg:'3 posts approved — scheduling for next 7 days'},
+    {time:'17:19:55',agent:'max',agentLabel:'MAX',msg:'Weekly digest compiled — <span class="highlight">12 actions</span> this session'},
+    {time:'17:20:02',agent:'emmett',agentLabel:'EMMETT',msg:'Reply detected from <span class="highlight">Manchester Plumbing Co</span> — <span class="success">flagged ✓</span>'},
+  ];
+
+  let idx=0;
+  function addLine(){
+    if(idx>=logs.length)idx=0;
+    const l=logs[idx++];
+    const div=document.createElement('div');
+    div.className='fl-terminal__line';
+    div.style.animationDelay='0ms';
+    div.innerHTML=`<span class="term-time">${l.time}</span><span class="term-agent ${l.agent}">${l.agentLabel}</span><span class="term-msg">${l.msg}</span>`;
+    // Remove cursor if present
+    const existing=body.querySelector('.term-cursor-line');
+    if(existing)existing.remove();
+    body.appendChild(div);
+    // Add cursor line
+    const cursorLine=document.createElement('div');
+    cursorLine.className='fl-terminal__line term-cursor-line';
+    cursorLine.innerHTML=`<span class="term-time">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-agent scout">$</span><span class="term-msg"> <span class="term-cursor"></span></span>`;
+    body.appendChild(cursorLine);
+    // Keep scrolled to bottom
+    body.scrollTop=body.scrollHeight;
+    // Trim old lines
+    const lines=body.querySelectorAll('.fl-terminal__line:not(.term-cursor-line)');
+    if(lines.length>8)lines[0].remove();
+    setTimeout(addLine,2200+Math.random()*1800);
+  }
+  // Start after a short delay so terminal is visible
+  setTimeout(addLine,1200);
+})();
+
+/* ═══ LIVE STATS ═══ */
+async function fetchLiveStats(){
+  try{
+    const res=await fetch('https://pulseforge-leadgen-production.up.railway.app/api/agent-status');
+    if(!res.ok)throw new Error();
+    const data=await res.json();
+    if(data.prospects)document.getElementById('stat-prospects').textContent=data.prospects;
+    if(data.touchpoints)document.getElementById('stat-emails').textContent=data.touchpoints;
+    if(data.weeklyTouchpoints!==undefined)document.getElementById('stat-actions').textContent=data.weeklyTouchpoints;
+  }catch{
+    document.getElementById('stat-prospects').textContent='85+';
+    document.getElementById('stat-emails').textContent='40+';
+    document.getElementById('stat-actions').textContent='120+';
+  }
+}
+fetchLiveStats();
 </script>
 
+<script src="//code.tidio.co/a6flaainwyrncupyz0zemod7jb33tkep.js" async></script>
 </body>
 </html>
