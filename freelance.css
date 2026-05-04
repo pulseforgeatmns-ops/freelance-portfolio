@@ -26,7 +26,7 @@
   --font-mono: 'JetBrains Mono', monospace;
 }
 
-html { scroll-behavior: smooth; scroll-padding-top: 80px; font-size: 16px; }
+html { scroll-behavior: smooth; scroll-padding-top: 80px; font-size: 16px; overflow-x: hidden; }
 
 body {
   font-family: var(--font-body);
@@ -229,7 +229,7 @@ body::before {
 
 .fl-hero__headline {
   font-family: var(--font-display);
-  font-size: clamp(52px, 9vw, 96px);
+  font-size: clamp(2rem, 8vw, 6rem);
   font-weight: 800; line-height: 1;
   letter-spacing: -2px; margin-bottom: 28px;
   animation: fadeUp .8s .2s both;
@@ -752,8 +752,8 @@ body::before {
   .fl-nav { padding: 0 20px; }
   .fl-nav__hamburger { display: flex; }
   .fl-mobile-menu { display: flex; }
-  .fl-hero { padding: 100px 24px 60px; }
-  .fl-hero__headline { letter-spacing: -1px; }
+  .fl-hero { padding: 100px 24px 60px; overflow-x: hidden; }
+  .fl-hero__headline { font-size: clamp(1.9rem, 9vw, 3.5rem); letter-spacing: -1px; }
   .fl-project { grid-template-columns: 1fr; gap: 28px; }
   .fl-project:nth-child(even) .fl-project__img-wrap { order: 0; }
   .fl-project:nth-child(even) .fl-project__info { order: 0; }
@@ -774,6 +774,8 @@ body::before {
 
 @media (max-width: 480px) {
   .fl-services__grid { grid-template-columns: 1fr; }
+  .fl-hero { padding: 90px 16px 48px; }
+  .fl-hero__headline { font-size: clamp(1.75rem, 9vw, 2.5rem); letter-spacing: -0.5px; }
   .fl-hero__ctas { flex-direction: column; align-items: center; }
   .fl-btn--large { font-size: 16px; padding: 14px 28px; width: 100%; justify-content: center; }
   .fl-live-stats__grid { grid-template-columns: 1fr 1fr; }
