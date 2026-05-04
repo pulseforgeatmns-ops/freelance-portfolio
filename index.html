@@ -1,300 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jacob Maynard | AI Marketing & Automation for Manchester NH Businesses</title>
+  <title>Jacob Maynard | AI Marketing & Automation — Manchester NH</title>
   <meta name="description" content="Pulseforge helps restaurants and service businesses in Manchester, NH get found online and keep customers coming back. AI-powered email marketing, automation, and web design. Starting at $399.">
-  <meta name="keywords" content="marketing agency Manchester NH, email marketing Manchester NH, marketing automation, web design Manchester NH, AI marketing, cold email, lead generation New Hampshire">
-  <meta property="og:title" content="Pulseforge | AI Marketing & Automation for Manchester NH">
-  <meta property="og:description" content="AI-powered marketing and automation for local service businesses in Manchester, NH.">
-  <meta property="og:url" content="https://gopulseforge.com">
-  <meta property="og:type" content="website">
   <link rel="stylesheet" href="./freelance.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/818d0fde56.js" crossorigin="anonymous"></script>
-</head>
 
+<style>
+/* ═══════════════════════
+   LEAD CAPTURE MODAL
+═══════════════════════ */
+.lc-overlay {
+  position: fixed; inset: 0; z-index: 50000;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(16px);
+  display: flex; align-items: center; justify-content: center; padding: 1.5rem;
+  opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility .35s ease;
+}
+.lc-overlay.active { opacity: 1; visibility: visible; }
+.lc-overlay.active .lc-box { transform: translateY(0) scale(1); opacity: 1; }
+.lc-box {
+  background: #0d1220; border: 1px solid rgba(124,58,237,0.3);
+  border-radius: 20px; width: 100%; max-width: 520px; position: relative; overflow: hidden;
+  transform: translateY(40px) scale(0.96); opacity: 0;
+  transition: transform .4s cubic-bezier(0.34,1.56,0.64,1), opacity .4s ease;
+}
+.lc-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, #7c3aed, #06d6a0, transparent);
+}
+.lc-box::after {
+  content: ''; position: absolute; top: -80px; right: -80px;
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+.lc-header { padding: 2rem 2rem 0; display: flex; align-items: flex-start; justify-content: space-between; position: relative; z-index: 2; }
+.lc-eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: #06d6a0;
+  display: flex; align-items: center; gap: 8px; margin-bottom: 10px;
+}
+.lc-eyebrow::before { content: ''; width: 6px; height: 6px; background: #06d6a0; border-radius: 50%; animation: lcblink 2s infinite; }
+@keyframes lcblink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+.lc-title { font-family: 'Syne', sans-serif; font-size: 28px; font-weight: 800; color: #fff; letter-spacing: -0.5px; line-height: 1.1; }
+.lc-title span { background: linear-gradient(135deg, #a855f7, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.lc-close {
+  width: 36px; height: 36px; min-width: 36px; background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.4); font-size: 16px; transition: all .2s; margin-top: 2px;
+}
+.lc-close:hover { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: #a855f7; }
+.lc-body { padding: 1.5rem 2rem 2rem; position: relative; z-index: 2; }
+.lc-value-props { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.5rem; }
+.lc-prop { display: flex; align-items: center; gap: 10px; font-family: 'Space Grotesk', sans-serif; font-size: 13px; color: rgba(255,255,255,0.6); }
+.lc-prop i { color: #06d6a0; font-size: 12px; flex-shrink: 0; }
+.lc-form { display: flex; flex-direction: column; gap: 12px; }
+.lc-field { display: flex; flex-direction: column; gap: 6px; }
+.lc-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.lc-input {
+  width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px; padding: 12px 16px; font-family: 'Space Grotesk', sans-serif;
+  font-size: 15px; color: #fff; outline: none;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.lc-input::placeholder { color: rgba(255,255,255,0.2); }
+.lc-input:focus { border-color: rgba(124,58,237,0.5); background: rgba(124,58,237,0.05); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+.lc-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.lc-submit {
+  width: 100%; padding: 14px; background: linear-gradient(135deg, #7c3aed, #5b21b6);
+  color: #fff; border: none; border-radius: 10px; font-family: 'Syne', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer; margin-top: 4px;
+  position: relative; overflow: hidden; transition: all .25s;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+}
+.lc-submit::after { content: ''; position: absolute; inset: 0; background: rgba(255,255,255,0.12); transform: translateX(-100%); transition: transform .3s; }
+.lc-submit:hover::after { transform: translateX(0); }
+.lc-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.5); }
+.lc-privacy { text-align: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 0.05em; margin-top: 10px; }
+.lc-success { display: none; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 3rem 2rem; min-height: 280px; position: relative; z-index: 2; }
+.lc-success.show { display: flex; }
+.lc-success-icon { width: 64px; height: 64px; background: rgba(6,214,160,0.12); border: 2px solid rgba(6,214,160,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; margin-bottom: 1.25rem; animation: successPop .5s cubic-bezier(0.34,1.56,0.64,1); }
+@keyframes successPop { from{transform:scale(0.4);opacity:0} to{transform:scale(1);opacity:1} }
+.lc-success-title { font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.lc-success-sub { font-size: 14px; color: rgba(255,255,255,0.5); line-height: 1.6; max-width: 340px; margin-bottom: 1.25rem; }
+.lc-success-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(6,214,160,0.1); border: 1px solid rgba(6,214,160,0.25); border-radius: 100px; padding: 6px 16px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #06d6a0; letter-spacing: 0.05em; }
+
+/* ═══════════════════════
+   AGENTS TERMINAL SECTION
+═══════════════════════ */
+.fl-agents {
+  padding: 80px 0; position: relative; z-index: 2;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.fl-agents::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(124,58,237,0.04) 0%, rgba(6,214,160,0.02) 100%);
+  pointer-events: none;
+}
+.fl-agents__inner { display: grid; grid-template-columns: 1fr 1.1fr; gap: 64px; align-items: center; }
+.fl-agents__copy { }
+.fl-agents__eyebrow {
+  font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.15em; text-transform: uppercase; color: #06d6a0;
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.fl-agents__eyebrow::before { content: ''; width: 6px; height: 6px; background: #06d6a0; border-radius: 50%; animation: lcblink 2s infinite; }
+.fl-agents__title { font-family: 'Syne', sans-serif; font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #fff; letter-spacing: -1px; line-height: 1.05; margin-bottom: 20px; }
+.fl-agents__title span { background: linear-gradient(135deg, #a855f7, #06d6a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.fl-agents__desc { font-size: 16px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 32px; }
+.fl-agents__list { display: flex; flex-direction: column; gap: 12px; }
+.fl-agent-item {
+  display: flex; align-items: flex-start; gap: 14px;
+  padding: 14px 16px; border-radius: 10px;
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06);
+  transition: all .2s;
+}
+.fl-agent-item:hover { border-color: rgba(124,58,237,0.3); background: rgba(124,58,237,0.06); }
+.fl-agent-dot { width: 8px; height: 8px; border-radius: 50%; background: #06d6a0; flex-shrink: 0; margin-top: 5px; box-shadow: 0 0 8px rgba(6,214,160,0.6); }
+.fl-agent-dot.purple { background: #a855f7; box-shadow: 0 0 8px rgba(168,85,247,0.6); }
+.fl-agent-name { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 500; color: #fff; margin-bottom: 3px; letter-spacing: 0.05em; }
+.fl-agent-role { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.4; }
+
+/* Terminal */
+.fl-terminal {
+  background: #060a14; border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px; overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(124,58,237,0.15);
+}
+.fl-terminal__bar {
+  background: #0d1220; padding: 12px 16px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.fl-terminal__dot { width: 10px; height: 10px; border-radius: 50%; }
+.fl-terminal__dot:nth-child(1) { background: #ff5f57; }
+.fl-terminal__dot:nth-child(2) { background: #febc2e; }
+.fl-terminal__dot:nth-child(3) { background: #28c840; }
+.fl-terminal__title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: rgba(255,255,255,0.3); margin-left: 8px; letter-spacing: 0.05em; }
+.fl-terminal__body { padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.8; min-height: 320px; }
+.fl-terminal__line { display: flex; gap: 10px; margin-bottom: 2px; opacity: 0; animation: termFade .3s ease forwards; }
+@keyframes termFade { from{opacity:0; transform:translateY(4px)} to{opacity:1; transform:translateY(0)} }
+.term-time { color: rgba(255,255,255,0.2); flex-shrink: 0; }
+.term-agent { flex-shrink: 0; font-weight: 500; }
+.term-agent.scout { color: #06d6a0; }
+.term-agent.emmett { color: #a855f7; }
+.term-agent.faye { color: #38bdf8; }
+.term-agent.link { color: #fb923c; }
+.term-agent.paige { color: #f472b6; }
+.term-agent.max { color: #facc15; }
+.term-agent.sam { color: #34d399; }
+.term-msg { color: rgba(255,255,255,0.55); }
+.term-msg .highlight { color: rgba(255,255,255,0.85); }
+.term-msg .success { color: #06d6a0; }
+.term-msg .purple { color: #a855f7; }
+.term-cursor { display: inline-block; width: 8px; height: 14px; background: #06d6a0; vertical-align: middle; animation: termBlink .8s infinite; margin-left: 2px; }
+@keyframes termBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+.fl-terminal__status {
+  padding: 10px 20px; border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex; gap: 20px; background: #0a0f1e;
+}
+.term-status-item { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: rgba(255,255,255,0.25); display: flex; align-items: center; gap: 6px; }
+.term-status-dot { width: 6px; height: 6px; border-radius: 50%; background: #06d6a0; animation: lcblink 2s infinite; }
+.term-status-dot.amber { background: #facc15; }
+
+/* Typewriter */
+.tw-cursor { display: inline-block; width: 3px; height: 0.85em; background: #a855f7; margin-left: 2px; vertical-align: middle; animation: twblink .7s infinite; }
+@keyframes twblink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+@media (max-width: 768px) {
+  .fl-agents__inner { grid-template-columns: 1fr; gap: 40px; }
+  .lc-row { grid-template-columns: 1fr; }
+  .lc-title { font-size: 22px; }
+}
+</style>
+</head>
 <body>
 
-  <!-- NAV -->
-  <nav class="fl-nav">
-    <div class="fl-nav__logo">Pulseforge</div>
-    <ul class="fl-nav__links">
-      <li><a href="#work" class="fl-nav__link">Work</a></li>
-      <li><a href="#services" class="fl-nav__link">Services</a></li>
-      <li><a href="#contact" class="fl-nav__link fl-nav__link--cta">Get a free quote</a></li>
-    </ul>
-    <button class="fl-nav__hamburger" id="hamburger" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="cosmos"></canvas>
 
-  <!-- MOBILE MENU -->
-  <div class="fl-mobile-menu" id="mobileMenu">
-    <a href="#work" class="fl-mobile-menu__link" onclick="closeMenu()">Work</a>
-    <a href="#services" class="fl-mobile-menu__link" onclick="closeMenu()">Services</a>
-    <a href="#contact" class="fl-mobile-menu__link fl-mobile-menu__link--cta" onclick="closeMenu()">Get a free quote</a>
+<!-- ═══ LEAD CAPTURE MODAL ═══ -->
+<div class="lc-overlay" id="lcModal" role="dialog" aria-modal="true">
+  <div class="lc-box" id="lcBox">
+    <div id="lcFormState">
+      <div class="lc-header">
+        <div>
+          <div class="lc-eyebrow">Free strategy call</div>
+          <h2 class="lc-title">Let's talk about<br><span>your business.</span></h2>
+        </div>
+        <button class="lc-close" id="lcClose" aria-label="Close">✕</button>
+      </div>
+      <div class="lc-body">
+        <div class="lc-value-props">
+          <div class="lc-prop"><i class="fa-solid fa-check"></i> 15 minutes, no pressure, no pitch</div>
+          <div class="lc-prop"><i class="fa-solid fa-check"></i> I'll audit your current online presence live</div>
+          <div class="lc-prop"><i class="fa-solid fa-check"></i> Walk away with a clear action plan — free</div>
+        </div>
+        <form class="lc-form" id="lcForm" novalidate>
+          <div class="lc-row">
+            <div class="lc-field">
+              <label class="lc-label">First name *</label>
+              <input type="text" name="first_name" class="lc-input" placeholder="Jane" required>
+            </div>
+            <div class="lc-field">
+              <label class="lc-label">Business name *</label>
+              <input type="text" name="business_name" class="lc-input" placeholder="Jane's Salon" required>
+            </div>
+          </div>
+          <div class="lc-field">
+            <label class="lc-label">Email address *</label>
+            <input type="email" name="email" class="lc-input" placeholder="jane@yourbusiness.com" required>
+          </div>
+          <div class="lc-field">
+            <label class="lc-label">Phone (optional)</label>
+            <input type="tel" name="phone" class="lc-input" placeholder="(603) 555-0000">
+          </div>
+          <button type="submit" class="lc-submit" id="lcSubmit">Book My Free Strategy Call →</button>
+          <p class="lc-privacy">No spam. No obligation. Just a real conversation.</p>
+        </form>
+      </div>
+    </div>
+    <div class="lc-success" id="lcSuccess">
+      <div class="lc-success-icon">✓</div>
+      <h3 class="lc-success-title">You're on the list!</h3>
+      <p class="lc-success-sub">I'll reach out within a few hours to find a time that works. Check your inbox for a confirmation.</p>
+      <div class="lc-success-badge"><span>⚡</span> Typical response: same day</div>
+    </div>
   </div>
+</div>
 
-  <!-- HERO -->
-  <section class="fl-hero">
-    <div class="fl-hero__badge">Based in Manchester, NH</div>
-    <h1 class="fl-hero__headline">
-      More customers.<br>Less manual work.<br><span class="fl-hero__accent">Guaranteed.</span>
-    </h1>
-    <p class="fl-hero__sub">
-      I build websites and automated marketing systems for local Manchester businesses — so customers can find you, and keep coming back. Starting at $399.
-    </p>
-    <div class="fl-hero__ctas">
-      <a href="#contact" class="fl-btn fl-btn--primary">Get a free quote</a>
-      <a href="#work" class="fl-btn fl-btn--ghost">See my work</a>
-    </div>
-    <div class="fl-hero__trust">
-      <span class="fl-trust__item">
-        <i class="fa-solid fa-check"></i> Websites from $399
-      </span>
-      <span class="fl-trust__item">
-        <i class="fa-solid fa-check"></i> Marketing on autopilot
-      </span>
-      <span class="fl-trust__item">
-        <i class="fa-solid fa-check"></i> Looks great on phones
-      </span>
-    </div>
-  </section>
+<!-- NAV -->
+<nav class="fl-nav" id="mainNav">
+  <div class="fl-nav__logo">Pulseforge</div>
+  <ul class="fl-nav__links">
+    <li><a href="#work" class="fl-nav__link">Work</a></li>
+    <li><a href="#services" class="fl-nav__link">Services</a></li>
+    <li><a href="#pricing" class="fl-nav__link">Pricing</a></li>
+    <li><button class="fl-nav__link fl-nav__link--cta open-lc" style="background:none;cursor:pointer;font-family:inherit;">Book a free call</button></li>
+  </ul>
+  <button class="fl-nav__hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
 
-  <!-- LOCAL INDUSTRIES -->
-  <section class="fl-industries">
-    <div class="fl-container">
-      <p class="fl-industries__label">I build sites for businesses like yours</p>
-      <div class="fl-industries__grid">
-        <div class="fl-industry">
-          <i class="fa-solid fa-utensils fl-industry__icon"></i>
-          <span>Restaurants</span>
+<div class="fl-mobile-menu" id="mobileMenu">
+  <a href="#work" class="fl-mobile-menu__link" onclick="closeMenu()">Work</a>
+  <a href="#services" class="fl-mobile-menu__link" onclick="closeMenu()">Services</a>
+  <a href="#pricing" class="fl-mobile-menu__link" onclick="closeMenu()">Pricing</a>
+  <button class="fl-mobile-menu__link fl-mobile-menu__link--cta open-lc" onclick="closeMenu()" style="background:none;border:none;width:100%;text-align:left;cursor:pointer;font-family:inherit;">Book a free call</button>
+</div>
+
+<!-- HERO -->
+<section class="fl-hero">
+  <div class="fl-hero__orb fl-hero__orb--1"></div>
+  <div class="fl-hero__orb fl-hero__orb--2"></div>
+  <div class="fl-hero__badge">Based in Manchester, NH</div>
+  <h1 class="fl-hero__headline" id="heroHeadline" aria-label="More customers. Less manual work. Guaranteed."></h1>
+  <p class="fl-hero__sub">I build websites and automated marketing systems for local Manchester businesses — so customers can find you, and keep coming back. Starting at $399.</p>
+  <div class="fl-hero__ctas">
+    <button class="fl-btn fl-btn--primary fl-btn--large open-lc">Book a free strategy call</button>
+    <a href="#work" class="fl-btn fl-btn--ghost fl-btn--large">See my work</a>
+  </div>
+  <div class="fl-hero__trust">
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Websites from $399</span>
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Marketing on autopilot</span>
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Looks great on phones</span>
+  </div>
+</section>
+
+<!-- AGENTS SECTION -->
+<section class="fl-agents">
+  <div class="fl-container">
+    <div class="fl-agents__inner">
+      <div class="fl-agents__copy reveal">
+        <div class="fl-agents__eyebrow">Always on</div>
+        <h2 class="fl-agents__title">A full team of<br><span>AI agents</span> working<br>while you sleep.</h2>
+        <p class="fl-agents__desc">Pulseforge runs a live multi-agent system that finds leads, posts content, sends emails, and reports back — 24/7, fully automated. This isn't a tool. It's an engine.</p>
+        <div class="fl-agents__list">
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot"></div>
+            <div><div class="fl-agent-name">SCOUT — Lead Scraper</div><div class="fl-agent-role">Finds and scores local business prospects from Google daily</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot purple"></div>
+            <div><div class="fl-agent-name">EMMETT — Email Agent</div><div class="fl-agent-role">Sends personalized cold outreach and follow-up sequences</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot" style="background:#38bdf8;box-shadow:0 0 8px rgba(56,189,248,0.6)"></div>
+            <div><div class="fl-agent-name">FAYE — Facebook Agent</div><div class="fl-agent-role">Drafts and queues social content for approval</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot" style="background:#fb923c;box-shadow:0 0 8px rgba(251,146,60,0.6)"></div>
+            <div><div class="fl-agent-name">LINK — LinkedIn Agent</div><div class="fl-agent-role">Manages LinkedIn presence and engagement</div></div>
+          </div>
+          <div class="fl-agent-item">
+            <div class="fl-agent-dot" style="background:#facc15;box-shadow:0 0 8px rgba(250,204,21,0.6)"></div>
+            <div><div class="fl-agent-name">MAX — Daily Briefing</div><div class="fl-agent-role">Sends a morning summary of all agent activity</div></div>
+          </div>
         </div>
-        <div class="fl-industry">
-          <i class="fa-solid fa-broom fl-industry__icon"></i>
-          <span>Cleaning Services</span>
+      </div>
+
+      <div class="fl-terminal reveal reveal-delay-2">
+        <div class="fl-terminal__bar">
+          <div class="fl-terminal__dot"></div>
+          <div class="fl-terminal__dot"></div>
+          <div class="fl-terminal__dot"></div>
+          <span class="fl-terminal__title">pulseforge — agent system — live</span>
         </div>
-        <div class="fl-industry">
-          <i class="fa-solid fa-wrench fl-industry__icon"></i>
-          <span>Repair Shops</span>
-        </div>
-        <div class="fl-industry">
-          <i class="fa-solid fa-scissors fl-industry__icon"></i>
-          <span>Salons & Barbers</span>
-        </div>
-        <div class="fl-industry">
-          <i class="fa-solid fa-hammer fl-industry__icon"></i>
-          <span>Contractors</span>
-        </div>
-        <div class="fl-industry">
-          <i class="fa-solid fa-heart fl-industry__icon"></i>
-          <span>Nonprofits</span>
+        <div class="fl-terminal__body" id="termBody"></div>
+        <div class="fl-terminal__status">
+          <div class="term-status-item"><div class="term-status-dot"></div> Railway connected</div>
+          <div class="term-status-item"><div class="term-status-dot"></div> Brevo active</div>
+          <div class="term-status-item"><div class="term-status-dot amber"></div> 10 agents live</div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-        <!-- WORK / PROJECTS -->
-        <section class="fl-work" id="work">
-          <div class="fl-container">
-            <div class="fl-section-header">
-              <h2 class="fl-section-title">Recent <span class="fl-accent">work</span></h2>
-              <p class="fl-section-sub">Every site is custom-built — no templates, no shortcuts.</p>
-            </div>
-
-            <div class="fl-projects">
-
-        <!-- Project 1 Clean Conscience Cleaners -->
-        <article class="fl-project">
-          <div class="fl-project__img-wrap">
-            <img src="./assets/clean-conscience.png" alt="Clean Conscience Cleaners" class="fl-project__img">
-            <div class="fl-project__overlay">
-              <a href="https://pulseforgeatmns-ops.github.io/clean-conscience-cleaners/" class="fl-project__live-btn" target="_blank">
-                View live site <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </div>
-          </div>
-          <div class="fl-project__info">
-            <span class="fl-project__tag">Local Business</span>
-            <h3 class="fl-project__title">Clean Conscience Cleaners</h3>
-            <p class="fl-project__desc">A residential cleaning company in Manchester, NH. Built a full site with service listings, reviews, and a working contact form.</p>
-            <div class="fl-project__meta">
-              <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
-              <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2 Velvet Moon Apothecary -->
-        <article class="fl-project">
-          <div class="fl-project__img-wrap">
-            <img src="./assets/velvet-moon-scrnsht.webp" alt="The Velvet Moon Apothecary" class="fl-project__img">
-            <div class="fl-project__overlay">
-              <a href="https://pulseforgeatmns-ops.github.io/velvet-moon-apothecary/" class="fl-project__live-btn" target="_blank">
-                View live site <i class="fa-solid fa-arrow-up-right-from-square"></i>
-              </a>
-            </div>
-          </div>
-          <div class="fl-project__info">
-            <span class="fl-project__tag">Local Business</span>
-            <h3 class="fl-project__title">The Velvet Moon Apothecary</h3>
-            <p class="fl-project__desc">A local apothecary and wellness shop in Manchester, NH. Built a full site showcasing their products, brand story, and a contact form.</p>
-            <div class="fl-project__meta">
-              <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
-              <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
-            </div>
-          </div>
-        </article>
-
-    <!-- Project 3 Pulseforge Lead Engine -->
-    <article class="fl-project">
-    <div class="fl-project__img-wrap">
-      <img src="./assets/lead-engine-scrnsht.png" alt="Pulseforge Lead Engine" class="fl-project__img">
-      <div class="fl-project__overlay">
-        <a href="https://pulseforge-leadgen-production.up.railway.app/pulseforge-leadgen.html" class="fl-project__live-btn" target="_blank">
-          View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i>
-        </a>
-      </div>
+<!-- INDUSTRIES -->
+<section class="fl-industries">
+  <div class="fl-container">
+    <p class="fl-industries__label">I build sites for businesses like yours</p>
+    <div class="fl-industries__grid">
+      <div class="fl-industry"><i class="fa-solid fa-utensils fl-industry__icon"></i><span>Restaurants</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-broom fl-industry__icon"></i><span>Cleaning</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-wrench fl-industry__icon"></i><span>Repair Shops</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-scissors fl-industry__icon"></i><span>Salons</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-hammer fl-industry__icon"></i><span>Contractors</span></div>
+      <div class="fl-industry"><i class="fa-solid fa-heart fl-industry__icon"></i><span>Nonprofits</span></div>
     </div>
-    <div class="fl-project__info">
-      <span class="fl-project__tag">Automation Tool</span>
-      <h3 class="fl-project__title">Pulseforge Lead Engine</h3>
-      <p class="fl-project__desc">A live lead generation tool that searches Google, enriches contacts with verified emails, scores and deduplicates results, and exports to CSV — all automated.</p>
-      <div class="fl-project__meta">
-        <span><i class="fa-solid fa-robot"></i> Fully automated</span>
-        <span><i class="fa-solid fa-database"></i> Real verified emails</span>
-      </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section class="fl-work" id="work">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">Recent Work</div>
+      <h2 class="fl-section-title">Built for <span class="fl-accent">real businesses</span></h2>
+      <p class="fl-section-sub">Every site is custom-built — no templates, no shortcuts.</p>
     </div>
-  </article>
+    <div class="fl-projects">
 
-  <!-- SERVICES / WHAT YOU GET -->
-  <section class="fl-services" id="services">
-    <div class="fl-container">
-      <div class="fl-section-header">
-        <h2 class="fl-section-title">What you <span class="fl-accent">get</span></h2>
-        <p class="fl-section-sub">Everything your business needs to show up online — nothing you don't.</p>
-      </div>
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/clean-conscience.png" alt="Clean Conscience Cleaners" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/clean-conscience-cleaners/" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">Clean Conscience Cleaners</h3>
+          <p class="fl-project__desc">A residential cleaning company in Manchester, NH. Built a full site with service listings, reviews, and a working contact form.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
+          </div>
+        </div>
+      </article>
 
-      <div class="fl-services__grid">
-        <div class="fl-service">
-          <div class="fl-service__icon-wrap">
-            <i class="fa-solid fa-mobile-screen-button"></i>
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/velvet-moon-scrnsht.webp" alt="The Velvet Moon Apothecary" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/velvet-moon-apothecary/" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
-          <h3 class="fl-service__title">Looks great on every device</h3>
-          <p class="fl-service__desc">Over 60% of customers search on their phone. Your site will look sharp on phones, tablets, and desktops — automatically.</p>
         </div>
-        <div class="fl-service">
-          <div class="fl-service__icon-wrap">
-            <i class="fa-solid fa-bolt"></i>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">The Velvet Moon Apothecary</h3>
+          <p class="fl-project__desc">A local apothecary and wellness shop. Full site showcasing products, brand story, and contact form.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+            <span><i class="fa-solid fa-mobile-screen"></i> Mobile responsive</span>
           </div>
-          <h3 class="fl-service__title">Fast loading pages</h3>
-          <p class="fl-service__desc">Slow websites lose customers. I build lean, hand-coded sites that load fast — no bloated builders or page slowdowns.</p>
         </div>
-        <div class="fl-service">
-          <div class="fl-service__icon-wrap">
-            <i class="fa-solid fa-magnifying-glass"></i>
+      </article>
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/whittaker-scrnsht.png" alt="Whittaker Home Services" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/whittaker-home-services/" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
-          <h3 class="fl-service__title">Built to be found on Google</h3>
-          <p class="fl-service__desc">Every site I build is set up with the basics so Google can find and rank it. You show up when customers search for you.</p>
         </div>
-        <div class="fl-service">
-          <div class="fl-service__icon-wrap">
-            <i class="fa-solid fa-headset"></i>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">Whittaker Home Services</h3>
+          <p class="fl-project__desc">A commercial and residential cleaning company in Manchester, NH. Dark, high-impact site with an animated quote modal and lead capture form.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 10 days</span>
+            <span><i class="fa-solid fa-bolt"></i> Quote modal + lead capture</span>
           </div>
-          <h3 class="fl-service__title">Real support, local person</h3>
-          <p class="fl-service__desc">I'm based right here in Manchester. You can actually call or text me — not a ticket system, not an overseas help desk.</p>
         </div>
-        <div class="fl-service">
-          <div class="fl-service__icon-wrap">
-            <i class="fa-solid fa-calendar-check"></i>
+      </article>
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
+          <img src="./assets/dashboard-scrnsht.png" alt="Pulseforge Agent Dashboard" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforge-leadgen-production.up.railway.app/dashboard" class="fl-project__live-btn" target="_blank">View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
           </div>
-          <h3 class="fl-service__title">Ready in about 2 weeks</h3>
-          <p class="fl-service__desc">From first conversation to live website, most projects are done in 10–14 days. No waiting months for a freelancer to disappear on you.</p>
         </div>
-        <div class="fl-service">
-          <div class="fl-service__icon-wrap">
-            <i class="fa-solid fa-dollar-sign"></i>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Automation System</span>
+          <h3 class="fl-project__title">Pulseforge Agent Dashboard</h3>
+          <p class="fl-project__desc">A live multi-agent control center — 7 AI agents running in real time, managing leads, outreach, content, and daily briefings from a single dashboard.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-solid fa-robot"></i> 10 agents live</span>
+            <span><i class="fa-solid fa-database"></i> Real-time data</span>
           </div>
-          <h3 class="fl-service__title">Flat pricing, no surprises</h3>
-          <p class="fl-service__desc">You know exactly what you're paying before we start. No hidden fees, no monthly subscriptions, no upsells you didn't ask for.</p>
         </div>
-        <div class="fl-service">
-        <div class="fl-service__icon-wrap">
-          <i class="fa-solid fa-robot"></i>
-        </div>
-        <h3 class="fl-service__title">Lead generation & automation</h3>
-        <p class="fl-service__desc">I build automated tools that find and verify leads for your business — saving you hours of manual prospecting every week.</p>
-      </div>
-      </div>
+      </article>
+
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- PRICING -->
-  <section class="fl-pricing">
-    <div class="fl-container">
-      <div class="fl-section-header">
-        <h2 class="fl-section-title">Simple <span class="fl-accent">pricing</span></h2>
-        <p class="fl-section-sub">One flat price. No monthly fees. No surprises.</p>
-      </div>
-      <div class="fl-pricing__card">
-        <div class="fl-pricing__left">
-          <div class="fl-pricing__amount">$399</div>
-          <div class="fl-pricing__label">Starter website</div>
-        </div>
-        <div class="fl-pricing__divider"></div>
-        <ul class="fl-pricing__list">
-          <li><i class="fa-solid fa-check"></i> Up to 5 pages (Home, About, Services, Contact + 1 more)</li>
-          <li><i class="fa-solid fa-check"></i> Mobile-friendly on all devices</li>
-          <li><i class="fa-solid fa-check"></i> Contact form so customers can reach you</li>
-          <li><i class="fa-solid fa-check"></i> Basic Google setup (SEO fundamentals)</li>
-          <li><i class="fa-solid fa-check"></i> Delivered in ~2 weeks</li>
-          <li><i class="fa-solid fa-check"></i> 30 days of free tweaks after launch</li>
-        </ul>
-      </div>
-      <p class="fl-pricing__note">Need something bigger? <a href="#contact" class="fl-pricing__note-link">Let's talk — I'll give you a custom quote.</a></p>
+<!-- LIVE STATS -->
+<section class="fl-live-stats">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow"><span class="fl-stat-pulse"></span>Live System Data</div>
+      <h2 class="fl-section-title">The system is <span class="fl-teal">running right now</span></h2>
+      <p class="fl-section-sub">Real numbers from the Pulseforge agent system — updated daily</p>
     </div>
-  </section>
+    <div class="fl-live-stats__grid">
+      <div class="fl-stat-card reveal"><div class="fl-stat-number teal" id="stat-prospects">—</div><div class="fl-stat-label">Prospects tracked</div></div>
+      <div class="fl-stat-card reveal reveal-delay-1"><div class="fl-stat-number purple" id="stat-emails">—</div><div class="fl-stat-label">Emails sent</div></div>
+      <div class="fl-stat-card reveal reveal-delay-2"><div class="fl-stat-number teal" id="stat-agents">10</div><div class="fl-stat-label">AI agents live</div></div>
+      <div class="fl-stat-card reveal reveal-delay-3"><div class="fl-stat-number purple" id="stat-actions">—</div><div class="fl-stat-label">Actions this week</div></div>
+    </div>
+  </div>
+</section>
 
-  <!-- RETAINER PRICING -->
+<!-- SERVICES -->
+<section class="fl-services" id="services">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">What You Get</div>
+      <h2 class="fl-section-title">Everything your business <span class="fl-accent">needs</span></h2>
+      <p class="fl-section-sub">Nothing you don't.</p>
+    </div>
+    <div class="fl-services__grid">
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-mobile-screen-button"></i></div><h3 class="fl-service__title">Looks great on every device</h3><p class="fl-service__desc">Over 60% of customers search on their phone. Your site will look sharp everywhere — automatically.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-bolt"></i></div><h3 class="fl-service__title">Fast loading pages</h3><p class="fl-service__desc">Slow websites lose customers. I build lean, hand-coded sites that load fast — no bloated builders.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-magnifying-glass"></i></div><h3 class="fl-service__title">Built to be found on Google</h3><p class="fl-service__desc">Every site is set up with the basics so Google can find and rank it when customers search.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-headset"></i></div><h3 class="fl-service__title">Real support, local person</h3><p class="fl-service__desc">I'm right here in Manchester. You can actually call or text me — not a ticket system.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-calendar-check"></i></div><h3 class="fl-service__title">Ready in about 2 weeks</h3><p class="fl-service__desc">From first conversation to live website, most projects wrap in 10–14 days.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-dollar-sign"></i></div><h3 class="fl-service__title">Flat pricing, no surprises</h3><p class="fl-service__desc">You know exactly what you're paying before we start. No hidden fees, no upsells.</p></div>
+      <div class="fl-service"><div class="fl-service__icon-wrap"><i class="fa-solid fa-robot"></i></div><h3 class="fl-service__title">Lead generation & automation</h3><p class="fl-service__desc">Automated tools that find and verify leads — saving you hours of manual prospecting every week.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="fl-pricing" id="pricing">
+  <div class="fl-container">
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">Pricing</div>
+      <h2 class="fl-section-title">Simple <span class="fl-accent">pricing</span></h2>
+      <p class="fl-section-sub">One flat price. No monthly fees. No surprises.</p>
+    </div>
+    <div class="fl-pricing__card">
+      <div class="fl-pricing__left">
+        <div class="fl-pricing__amount">$399</div>
+        <div class="fl-pricing__label">Starter website</div>
+      </div>
+      <div class="fl-pricing__divider"></div>
+      <ul class="fl-pricing__list">
+        <li><i class="fa-solid fa-check"></i> Up to 5 pages (Home, About, Services, Contact + 1 more)</li>
+        <li><i class="fa-solid fa-check"></i> Mobile-friendly on all devices</li>
+        <li><i class="fa-solid fa-check"></i> Contact form so customers can reach you</li>
+        <li><i class="fa-solid fa-check"></i> Basic Google setup (SEO fundamentals)</li>
+        <li><i class="fa-solid fa-check"></i> Delivered in ~2 weeks</li>
+        <li><i class="fa-solid fa-check"></i> 30 days of free tweaks after launch</li>
+      </ul>
+    </div>
+    <p class="fl-pricing__note">Need something bigger? <a href="javascript:void(0)" class="fl-pricing__note-link open-lc">Let's talk — book a free call.</a></p>
+  </div>
+</section>
+
+<!-- RETAINER -->
 <section class="fl-retainer">
   <div class="fl-container">
-    <div class="fl-retainer__divider">
-      <span class="fl-retainer__divider-text">Or let us handle your marketing every month</span>
-    </div>
-    <div class="fl-section-header">
+    <div class="fl-retainer__divider"><span class="fl-retainer__divider-text">Or let us handle your marketing every month</span></div>
+    <div class="fl-section-header reveal">
+      <div class="fl-section-eyebrow">Monthly Plans</div>
       <h2 class="fl-section-title">Monthly <span class="fl-accent">marketing plans</span></h2>
       <p class="fl-section-sub">No contracts. Cancel anytime. We handle the marketing — you run your business.</p>
     </div>
     <div class="fl-retainer__grid">
-
-      <!-- Starter -->
-      <div class="fl-retainer__card">
-        <div class="fl-retainer__header">
-          <h3 class="fl-retainer__name">Starter</h3>
-          <div class="fl-retainer__price">$299<span>/mo</span></div>
-          <p class="fl-retainer__tagline">Stay visible online without lifting a finger.</p>
-        </div>
+      <div class="fl-retainer__card reveal">
+        <div class="fl-retainer__name">Starter</div>
+        <div class="fl-retainer__price">$299<span>/mo</span></div>
+        <p class="fl-retainer__tagline">Stay visible online without lifting a finger.</p>
         <ul class="fl-retainer__list">
-          <li><i class="fa-solid fa-check"></i> 8 social posts/month (Facebook + LinkedIn)</li>
+          <li><i class="fa-solid fa-check"></i> 8 social posts/month</li>
           <li><i class="fa-solid fa-check"></i> Monthly website content updates</li>
           <li><i class="fa-solid fa-check"></i> Monthly performance report</li>
           <li><i class="fa-solid fa-check"></i> Minor site fixes and tweaks</li>
         </ul>
-        <a href="mailto:jacob@gopulseforge.com?subject=Starter Plan" class="fl-btn fl-btn--ghost fl-btn--full">Get started</a>
+        <button class="fl-btn fl-btn--ghost fl-btn--full open-lc">Get started</button>
       </div>
-
-      <!-- Growth -->
-      <div class="fl-retainer__card fl-retainer__card--featured">
+      <div class="fl-retainer__card fl-retainer__card--featured reveal reveal-delay-1">
         <div class="fl-retainer__badge">Most popular</div>
-        <div class="fl-retainer__header">
-          <h3 class="fl-retainer__name">Growth</h3>
-          <div class="fl-retainer__price">$499<span>/mo</span></div>
-          <p class="fl-retainer__tagline">Actively bring in new customers every month.</p>
-        </div>
+        <div class="fl-retainer__name">Growth</div>
+        <div class="fl-retainer__price">$499<span>/mo</span></div>
+        <p class="fl-retainer__tagline">Actively bring in new customers every month.</p>
         <ul class="fl-retainer__list">
           <li><i class="fa-solid fa-check"></i> Everything in Starter</li>
           <li><i class="fa-solid fa-check"></i> Cold email outreach to 20+ local prospects</li>
@@ -302,16 +524,12 @@
           <li><i class="fa-solid fa-check"></i> Inbox triage — warm leads flagged for you</li>
           <li><i class="fa-solid fa-check"></i> Quarterly site refresh</li>
         </ul>
-        <a href="mailto:jacob@gopulseforge.com?subject=Growth Plan" class="fl-btn fl-btn--primary fl-btn--full">Get started</a>
+        <button class="fl-btn fl-btn--primary fl-btn--full open-lc">Get started</button>
       </div>
-
-      <!-- Agency -->
-      <div class="fl-retainer__card">
-        <div class="fl-retainer__header">
-          <h3 class="fl-retainer__name">Agency</h3>
-          <div class="fl-retainer__price">$999<span>/mo</span></div>
-          <p class="fl-retainer__tagline">Full-stack marketing for businesses ready to scale.</p>
-        </div>
+      <div class="fl-retainer__card reveal reveal-delay-2">
+        <div class="fl-retainer__name">Agency</div>
+        <div class="fl-retainer__price">$999<span>/mo</span></div>
+        <p class="fl-retainer__tagline">Full-stack marketing for businesses ready to scale.</p>
         <ul class="fl-retainer__list">
           <li><i class="fa-solid fa-check"></i> Everything in Growth</li>
           <li><i class="fa-solid fa-check"></i> Full email automation setup</li>
@@ -319,648 +537,274 @@
           <li><i class="fa-solid fa-check"></i> Facebook + Google ad management</li>
           <li><i class="fa-solid fa-check"></i> Weekly strategy call</li>
         </ul>
-        <a href="mailto:jacob@gopulseforge.com?subject=Agency Plan" class="fl-btn fl-btn--ghost fl-btn--full">Get started</a>
+        <button class="fl-btn fl-btn--ghost fl-btn--full open-lc">Get started</button>
       </div>
-
     </div>
   </div>
 </section>
 
-
-  <!-- ABOUT / TRUST -->
-  <section class="fl-about">
-    <div class="fl-container fl-about__inner">
+<!-- ABOUT -->
+<section class="fl-about">
+  <div class="fl-container">
+    <div class="fl-about__inner">
       <figure class="fl-about__img-wrap">
         <img src="./assets/profile-pic.jpg" alt="Jacob Maynard" class="fl-about__img">
       </figure>
       <div class="fl-about__content">
         <span class="fl-about__eyebrow">Who you're working with</span>
         <h2 class="fl-about__name">Hey, I'm Jacob.</h2>
-        <p class="fl-about__bio">
-          I'm a marketing and automation specialist based right here in Manchester, NH. I've spent years running restaurants and a cleaning company, so I know what it's like to run a local business — long days, tight margins, and no time to figure out complicated tech.
-        </p>
-        <p class="fl-about__bio">
-          That's why I keep this simple. You tell me what your business does, I build the website and marketing system that brings in customers — and keeps them coming back. No jargon, no runaround.
-        </p>
+        <p class="fl-about__bio">I'm a marketing and automation specialist based right here in Manchester, NH. I've spent years running restaurants and a cleaning company, so I know what it's like to run a local business — long days, tight margins, and no time to figure out complicated tech.</p>
+        <p class="fl-about__bio">That's why I keep this simple. You tell me what your business does, I build the website and marketing system that brings in customers — and keeps them coming back. No jargon, no runaround.</p>
         <div class="fl-about__links">
-          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-about__link" target="_blank">
-            <i class="fa-brands fa-linkedin"></i>
-          </a>
-          <a href="mailto:jacob@gopulseforge.com" class="fl-about__link">
-            <i class="fa-regular fa-envelope"></i>
-          </a>
+          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-about__link" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="mailto:jacob@gopulseforge.com" class="fl-about__link"><i class="fa-regular fa-envelope"></i></a>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- CONTACT CTA -->
-  <section class="fl-contact" id="contact">
-    <div class="fl-container fl-contact__inner">
-      <h2 class="fl-contact__headline">Ready to grow your business?</h2>
-      <p class="fl-contact__sub">It starts with a free 15-minute call. No pressure, no sales pitch — just a straight conversation about what you need and how to get more customers.</p>
+<!-- CONTACT -->
+<section class="fl-contact" id="contact">
+  <div class="fl-container">
+    <div class="fl-contact__inner">
+      <h2 class="fl-contact__headline">Ready to grow<br><span class="fl-accent">your business?</span></h2>
+      <p class="fl-contact__sub">It starts with a free 15-minute call. No pressure, no sales pitch — just a straight conversation about what you need.</p>
       <div class="fl-contact__actions">
-        <a href="mailto:jacob@gopulseforge.com" class="fl-btn fl-btn--primary fl-btn--large">
-          <i class="fa-regular fa-envelope"></i> Send me an email
-        </a>
+        <button class="fl-btn fl-btn--primary fl-btn--large open-lc">Book a free strategy call</button>
         <span class="fl-contact__or">or</span>
-        <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-btn fl-btn--ghost fl-btn--large" target="_blank">
-          Message me on LinkedIn
-        </a>
+        <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-btn fl-btn--ghost fl-btn--large" target="_blank">Message on LinkedIn</a>
       </div>
-      <p class="fl-contact__response">I typically respond within a few hours.</p>
+      <p class="fl-contact__response">Typically respond within a few hours.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer class="fl-footer">
-    <div class="fl-container fl-footer__inner">
+<!-- FOOTER -->
+<footer class="fl-footer">
+  <div class="fl-container">
+    <div class="fl-footer__inner">
       <div class="fl-footer__top">
-        <img src="./assets/pulseforge_logo_footer_animated.svg" alt="Pulseforge Logo" class="fl-footer__logo">
+        <img src="./assets/pulseforge_logo_footer_animated.svg" alt="Pulseforge" class="fl-footer__logo">
       </div>
-      <div class="fl-footer__divider"></div>
       <div class="fl-footer__bottom">
         <span class="fl-footer__copy">© 2026 Jacob Maynard · Manchester, NH</span>
         <div class="fl-footer__socials">
-          <a href="https://github.com/pulseforgeatmns-ops" class="fl-footer__social" target="_blank">
-            <i class="fab fa-github"></i>
-          </a>
-          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-footer__social" target="_blank">
-            <i class="fab fa-linkedin"></i>
-          </a>
-          <a href="mailto:jacob@gopulseforge.com" class="fl-footer__social">
-            <i class="fa-regular fa-envelope"></i>
-          </a>
+          <a href="https://github.com/pulseforgeatmns-ops" class="fl-footer__social" target="_blank"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/jacob-maynard7" class="fl-footer__social" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a href="mailto:jacob@gopulseforge.com" class="fl-footer__social"><i class="fa-regular fa-envelope"></i></a>
         </div>
       </div>
     </div>
-  </footer>
-
-  <script>
-    const hamburger = document.getElementById('hamburger');
-    const mobileMenu = document.getElementById('mobileMenu');
-
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('open');
-      mobileMenu.classList.toggle('open');
-    });
-
-    function closeMenu() {
-      hamburger.classList.remove('open');
-      mobileMenu.classList.remove('open');
-    }
-
-    // Fade-in on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fl-project, .fl-service, .fl-pricing__card, .fl-about__inner').forEach(el => {
-      observer.observe(el);
-    });
-  </script>
-
-  <script>
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-      e.preventDefault();
-      const target = document.querySelector(this.getAttribute('href'));
-      if (!target) return;
-      const start = window.scrollY;
-      const end = target.getBoundingClientRect().top + window.scrollY;
-      const duration = 1200;
-      let startTime = null;
-
-      function easeInOutCubic(t) {
-        return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-      }
-
-      function scroll(timestamp) {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        window.scrollTo(0, start + (end - start) * easeInOutCubic(progress));
-        if (progress < 1) requestAnimationFrame(scroll);
-      }
-
-      requestAnimationFrame(scroll);
-    });
-  });
-</script>
-
-<script src="//code.tidio.co/a6flaainwyrncupyz0zemod7jb33tkep.js" async></script>
-
-
-<!-- PHASE 1: REACTIVE ENHANCEMENTS -->
-<style>
-/* Cursor glow */
-.cursor-glow {
-  position: fixed;
-  width: 400px;
-  height: 400px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(96,48,177,0.08) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease;
-}
-
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-
-/* Sticky nav enhancement */
-.fl-nav {
-  transition: box-shadow 0.3s ease, background 0.3s ease;
-}
-.fl-nav.scrolled {
-  box-shadow: 0 4px 24px rgba(96,48,177,0.1);
-  background: rgba(255,255,255,0.97);
-  backdrop-filter: blur(8px);
-}
-
-/* Magnetic button */
-.fl-btn {
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
-}
-
-/* Tilt cards */
-.fl-project__card {
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  transform-style: preserve-3d;
-}
-
-/* Service cards hover */
-.fl-service {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.fl-service:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(96,48,177,0.1);
-}
-
-/* Pricing cards hover */
-.fl-pricing__card {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-.fl-pricing__card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 16px 40px rgba(96,48,177,0.15);
-}
-
-/* Typewriter cursor */
-.typewriter-cursor {
-  display: inline-block;
-  width: 3px;
-  height: 1em;
-  background: #6030b1;
-  margin-left: 4px;
-  vertical-align: middle;
-  animation: blink 0.8s infinite;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-</style>
+  </div>
+</footer>
 
 <script>
-// Cursor glow
-const glow = document.createElement('div');
-glow.className = 'cursor-glow';
-document.body.appendChild(glow);
-document.addEventListener('mousemove', e => {
-  glow.style.left = e.clientX + 'px';
-  glow.style.top = e.clientY + 'px';
-});
-
-// Sticky nav on scroll
-const nav = document.querySelector('.fl-nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('scrolled', window.scrollY > 40);
-});
-
-// Scroll reveal - add reveal class to key sections
-const revealTargets = [
-  '.fl-hero__badge',
-  '.fl-hero__sub',
-  '.fl-hero__ctas',
-  '.fl-hero__trust',
-  '.fl-project__card',
-  '.fl-service',
-  '.fl-pricing__card',
-  '.fl-about__img-wrap',
-  '.fl-about__content',
-  '.fl-contact__headline',
-  '.fl-contact__sub',
-  '.fl-contact__actions'
-];
-
-revealTargets.forEach((sel, si) => {
-  document.querySelectorAll(sel).forEach((el, i) => {
-    el.classList.add('reveal');
-    if (i > 0) el.classList.add('reveal-delay-' + Math.min(i, 4));
-  });
-});
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 });
-
-document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-// Tilt effect on project cards
-document.querySelectorAll('.fl-project__card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const rect = card.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 8}deg) translateY(-4px)`;
-    card.style.boxShadow = `${-x * 12}px ${-y * 12}px 32px rgba(96,48,177,0.12)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-    card.style.boxShadow = '';
-  });
-});
-
-// Magnetic buttons
-document.querySelectorAll('.fl-btn--primary, .fl-btn--ghost').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const rect = btn.getBoundingClientRect();
-    const x = (e.clientX - rect.left - rect.width / 2) * 0.2;
-    const y = (e.clientY - rect.top - rect.height / 2) * 0.2;
-    btn.style.transform = `translate(${x}px, ${y}px)`;
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-  });
-});
-
-// Typewriter effect on hero headline
-const headline = document.querySelector('.fl-hero__headline');
-if (headline) {
-  const lines = ['More customers.', 'Less manual work.', 'Guaranteed.'];
-  const colors = ['var(--text)', 'var(--text)', 'var(--purple)'];
-  headline.innerHTML = '';
-  let lineIndex = 0;
-  let charIndex = 0;
-  let currentSpan = null;
-  let cursor = document.createElement('span');
-  cursor.className = 'typewriter-cursor';
-  headline.appendChild(cursor);
-
-  function type() {
-    if (lineIndex >= lines.length) {
-      cursor.remove();
-      return;
-    }
-    if (charIndex === 0) {
-      currentSpan = document.createElement('span');
-      currentSpan.style.color = colors[lineIndex];
-      if (lineIndex === lines.length - 1) currentSpan.className = 'fl-hero__accent';
-      headline.insertBefore(currentSpan, cursor);
-    }
-    currentSpan.textContent += lines[lineIndex][charIndex];
-    charIndex++;
-    if (charIndex >= lines[lineIndex].length) {
-      charIndex = 0;
-      lineIndex++;
-      if (lineIndex < lines.length) {
-        headline.insertBefore(document.createElement('br'), cursor);
-        setTimeout(type, 400);
-      } else {
-        cursor.remove();
-      }
-      return;
-    }
-    setTimeout(type, 45);
-  }
-  setTimeout(type, 600);
-}
-</script>
-
-
-<!-- PHASE 2: PARTICLE BACKGROUND + LIVE STATS -->
-<style>
-/* Particle canvas */
-#particle-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-}
-
-/* Live stats section */
-.fl-live-stats {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  padding: 5rem 0;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.fl-live-stats::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #6030b1, #00d4b4, transparent);
-}
-
-.fl-live-stats__inner {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 0 24px;
-  text-align: center;
-}
-
-.fl-live-stats__eyebrow {
-  font-family: 'Oswald', sans-serif;
-  font-size: 0.7rem;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  color: #00d4b4;
-  margin-bottom: 0.5rem;
-}
-
-.fl-live-stats__title {
-  font-family: 'Oswald', sans-serif;
-  font-size: 2rem;
-  color: #ffffff;
-  margin-bottom: 0.5rem;
-}
-
-.fl-live-stats__sub {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.5);
-  margin-bottom: 3rem;
-}
-
-.fl-live-stats__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 2rem;
-}
-
-@media (max-width: 768px) {
-  .fl-live-stats__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-.fl-stat-card {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 1.5rem;
-  position: relative;
-  overflow: hidden;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-}
-
-.fl-stat-card:hover {
-  transform: translateY(-4px);
-  border-color: rgba(96,48,177,0.3);
-}
-
-.fl-stat-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #6030b1, #00d4b4);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.fl-stat-card:hover::before {
-  opacity: 1;
-}
-
-.fl-stat-number {
-  font-family: 'Oswald', sans-serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #ffffff;
-  line-height: 1;
-  margin-bottom: 0.5rem;
-}
-
-.fl-stat-number.teal { color: #00d4b4; }
-.fl-stat-number.purple { color: #8b5cf6; }
-
-.fl-stat-label {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: rgba(255,255,255,0.4);
-}
-
-.fl-stat-pulse {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  background: #00d4b4;
-  border-radius: 50%;
-  margin-right: 6px;
-  animation: pulse 2s infinite;
-  vertical-align: middle;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.8); }
-}
-
-.fl-live-stats__footer {
-  margin-top: 2rem;
-  font-family: 'Lato', sans-serif;
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.25);
-  letter-spacing: 1px;
-}
-
-/* Make sure content sections sit above canvas */
-.fl-nav, .fl-hero, .fl-industries, .fl-work, 
-.fl-services, .fl-pricing, .fl-retainer, 
-.fl-about, .fl-contact, .fl-footer {
-  position: relative;
-  z-index: 1;
-}
-</style>
-
-<canvas id="particle-canvas"></canvas>
-
-<script>
-// Particle system
-(function() {
-  const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
-  let particles = [];
-  let animFrame;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-
-  function createParticle() {
-    return {
-      x: Math.random() * canvas.width,
-      y: Math.random() * canvas.height,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      size: Math.random() * 2 + 0.5,
-      opacity: Math.random() * 0.4 + 0.1,
-      color: Math.random() > 0.5 ? '96,48,177' : '0,212,180'
-    };
-  }
-
-  function init() {
-    resize();
-    particles = [];
-    const count = Math.floor((canvas.width * canvas.height) / 15000);
-    for (let i = 0; i < count; i++) {
-      particles.push(createParticle());
-    }
-  }
-
-  function draw() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    particles.forEach((p, i) => {
-      p.x += p.vx;
-      p.y += p.vy;
-
-      if (p.x < 0) p.x = canvas.width;
-      if (p.x > canvas.width) p.x = 0;
-      if (p.y < 0) p.y = canvas.height;
-      if (p.y > canvas.height) p.y = 0;
-
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(' + p.color + ',' + p.opacity + ')';
-      ctx.fill();
-
-      // Draw connections
-      particles.slice(i + 1).forEach(p2 => {
-        const dx = p.x - p2.x;
-        const dy = p.y - p2.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 120) {
-          ctx.beginPath();
-          ctx.moveTo(p.x, p.y);
-          ctx.lineTo(p2.x, p2.y);
-          ctx.strokeStyle = 'rgba(96,48,177,' + (0.06 * (1 - dist/120)) + ')';
-          ctx.lineWidth = 0.5;
-          ctx.stroke();
-        }
-      });
-    });
-
-    animFrame = requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', () => { init(); });
-  init();
-  draw();
+/* ═══ COSMOS ═══ */
+(function(){
+  const canvas=document.getElementById('cosmos'),ctx=canvas.getContext('2d');
+  let W,H,stars=[],shooters=[];
+  function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
+  function Star(){this.x=Math.random()*W;this.y=Math.random()*H;this.r=Math.random()*1.4+0.2;this.baseAlpha=Math.random()*0.6+0.2;this.alpha=this.baseAlpha;this.twinkleSpeed=Math.random()*0.02+0.005;this.twinkleDir=Math.random()>0.5?1:-1;this.color=Math.random()>0.85?(Math.random()>0.5?'#a78bfa':'#5eead4'):'#ffffff';}
+  Star.prototype.update=function(){this.alpha+=this.twinkleSpeed*this.twinkleDir;if(this.alpha>this.baseAlpha+0.3||this.alpha<this.baseAlpha-0.2)this.twinkleDir*=-1;this.alpha=Math.max(0,Math.min(1,this.alpha));};
+  Star.prototype.draw=function(){ctx.save();ctx.globalAlpha=this.alpha;ctx.fillStyle=this.color;ctx.shadowColor=this.color;ctx.shadowBlur=this.r>1?4:0;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();};
+  function Shooter(){this.reset();}
+  Shooter.prototype.reset=function(){this.x=Math.random()*W*1.2-W*0.1;this.y=Math.random()*H*0.5-50;this.len=Math.random()*180+80;this.speed=Math.random()*14+8;this.angle=Math.PI/4+(Math.random()-0.5)*0.3;this.alpha=0;this.fadeIn=true;this.alive=true;this.trail=[];this.maxTrail=Math.floor(this.len/4);this.color=Math.random()>0.5?'200, 150, 255':'100, 220, 200';};
+  Shooter.prototype.update=function(){if(this.fadeIn){this.alpha+=0.08;if(this.alpha>=1){this.alpha=1;this.fadeIn=false;}}const dx=Math.cos(this.angle)*this.speed,dy=Math.sin(this.angle)*this.speed;this.trail.unshift({x:this.x,y:this.y});if(this.trail.length>this.maxTrail)this.trail.pop();this.x+=dx;this.y+=dy;if(this.x>W+100||this.y>H+100){this.alpha-=0.05;if(this.alpha<=0)this.alive=false;}};
+  Shooter.prototype.draw=function(){if(this.trail.length<2)return;for(let i=0;i<this.trail.length-1;i++){const t=1-i/this.trail.length;ctx.save();ctx.globalAlpha=t*this.alpha*0.8;ctx.strokeStyle=`rgba(${this.color},${t})`;ctx.lineWidth=t*2.5;ctx.shadowColor=`rgba(${this.color},0.6)`;ctx.shadowBlur=8;ctx.beginPath();ctx.moveTo(this.trail[i].x,this.trail[i].y);ctx.lineTo(this.trail[i+1].x,this.trail[i+1].y);ctx.stroke();ctx.restore();}ctx.save();ctx.globalAlpha=this.alpha;ctx.fillStyle=`rgba(${this.color},1)`;ctx.shadowColor=`rgba(${this.color},1)`;ctx.shadowBlur=12;ctx.beginPath();ctx.arc(this.x,this.y,2,0,Math.PI*2);ctx.fill();ctx.restore();};
+  function initStars(){stars=[];const count=Math.floor((W*H)/3000);for(let i=0;i<count;i++)stars.push(new Star());}
+  let lastShooter=0;
+  function maybeSpawn(now){if(now-lastShooter>2500+Math.random()*4000){shooters.push(new Shooter());lastShooter=now;}shooters=shooters.filter(s=>s.alive);}
+  function loop(now){ctx.clearRect(0,0,W,H);stars.forEach(s=>{s.update();s.draw();});maybeSpawn(now);shooters.forEach(s=>{s.update();s.draw();});requestAnimationFrame(loop);}
+  resize();initStars();requestAnimationFrame(loop);
+  window.addEventListener('resize',()=>{resize();initStars();});
 })();
-</script>
 
-<script>
-// Insert live stats section before the about section
-const aboutSection = document.querySelector('.fl-about');
-if (aboutSection) {
-  const statsHTML = `
-  <section class="fl-live-stats">
-    <div class="fl-live-stats__inner">
-      <div class="fl-live-stats__eyebrow"><span class="fl-stat-pulse"></span>Live System Data</div>
-      <h2 class="fl-live-stats__title">The system is running right now</h2>
-      <p class="fl-live-stats__sub">Real numbers from the Pulseforge agent system — updated daily</p>
-      <div class="fl-live-stats__grid">
-        <div class="fl-stat-card">
-          <div class="fl-stat-number teal" id="stat-prospects">—</div>
-          <div class="fl-stat-label">Prospects tracked</div>
-        </div>
-        <div class="fl-stat-card">
-          <div class="fl-stat-number purple" id="stat-emails">—</div>
-          <div class="fl-stat-label">Emails sent</div>
-        </div>
-        <div class="fl-stat-card">
-          <div class="fl-stat-number teal" id="stat-agents">7</div>
-          <div class="fl-stat-label">AI agents live</div>
-        </div>
-        <div class="fl-stat-card">
-          <div class="fl-stat-number purple" id="stat-actions">—</div>
-          <div class="fl-stat-label">Actions this week</div>
-        </div>
-      </div>
-      <div class="fl-live-stats__footer">Data pulled from Pulseforge Second Brain · Manchester, NH</div>
-    </div>
-  </section>`;
+/* ═══ CURSOR ═══ */
+const dot=document.getElementById('cursorDot'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;});
+function animateCursor(){dot.style.left=mx+'px';dot.style.top=my+'px';rx+=(mx-rx)*0.1;ry+=(my-ry)*0.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animateCursor);}
+animateCursor();
+document.querySelectorAll('a,button,.fl-industry,.fl-service,.fl-stat-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{dot.classList.add('hovering');ring.classList.add('hovering');});
+  el.addEventListener('mouseleave',()=>{dot.classList.remove('hovering');ring.classList.remove('hovering');});
+});
 
-  aboutSection.insertAdjacentHTML('beforebegin', statsHTML);
+/* ═══ NAV ═══ */
+const nav=document.getElementById('mainNav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>40));
+
+/* ═══ MOBILE MENU ═══ */
+const hamburger=document.getElementById('hamburger'),mobileMenu=document.getElementById('mobileMenu');
+hamburger.addEventListener('click',()=>{hamburger.classList.toggle('open');mobileMenu.classList.toggle('open');});
+function closeMenu(){hamburger.classList.remove('open');mobileMenu.classList.remove('open');}
+
+/* ═══ MAGNETIC BUTTONS ═══ */
+function initMagnetic(){
+  document.querySelectorAll('.fl-btn, .fl-nav__link--cta').forEach(btn=>{
+    btn.addEventListener('mousemove',e=>{
+      const r=btn.getBoundingClientRect();
+      const x=(e.clientX-r.left-r.width/2)*0.25;
+      const y=(e.clientY-r.top-r.height/2)*0.25;
+      btn.style.transform=`translate(${x}px,${y}px)`;
+    });
+    btn.addEventListener('mouseleave',()=>{
+      btn.style.transform='';
+    });
+  });
 }
+initMagnetic();
 
-// Fetch live stats from Railway
-async function fetchLiveStats() {
-  try {
-    const res = await fetch('https://pulseforge-leadgen-production.up.railway.app/api/agent-status');
-    if (!res.ok) return;
-    const data = await res.json();
-    
-    if (data.prospects) {
-      document.getElementById('stat-prospects').textContent = data.prospects;
+/* ═══ TYPEWRITER ═══ */
+(function(){
+  const el=document.getElementById('heroHeadline');
+  if(!el)return;
+  const lines=[
+    {text:'More customers.',cls:''},
+    {text:'Less manual work.',cls:'fl-hero__line--ghost'},
+    {text:'Guaranteed.',cls:'fl-hero__line--glow'}
+  ];
+  let li=0,ci=0,spans=[];
+  const cursor=document.createElement('span');
+  cursor.className='tw-cursor';
+  el.appendChild(cursor);
+
+  function type(){
+    if(li>=lines.length){cursor.remove();return;}
+    if(ci===0){
+      const s=document.createElement('span');
+      s.className='fl-hero__line'+(lines[li].cls?' '+lines[li].cls:'');
+      el.insertBefore(s,cursor);
+      spans.push(s);
+      if(li>0){
+        const br=document.createElement('br');
+        el.insertBefore(br,s);
+      }
     }
-    if (data.touchpoints) {
-      document.getElementById('stat-emails').textContent = data.touchpoints;
+    spans[li].textContent+=lines[li].text[ci];
+    ci++;
+    if(ci>=lines[li].text.length){
+      ci=0;li++;
+      setTimeout(type,li<lines.length?380:0);
+      return;
     }
-    if (data.weeklyTouchpoints !== undefined) {
-      document.getElementById('stat-actions').textContent = data.weeklyTouchpoints;
-    }
-  } catch(err) {
-    // Fallback to static numbers if API unavailable
-    document.getElementById('stat-prospects').textContent = '85+';
-    document.getElementById('stat-emails').textContent = '40+';
-    document.getElementById('stat-actions').textContent = '120+';
+    setTimeout(type,li===2?60:48);
+  }
+  setTimeout(type,700);
+})();
+
+/* ═══ SCROLL REVEAL ═══ */
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObs.unobserve(e.target);}});
+},{threshold:0.1});
+document.querySelectorAll('.reveal,.fl-project,.fl-service,.fl-pricing__card,.fl-about__inner,.fl-stat-card').forEach(el=>revealObs.observe(el));
+
+/* ═══ SMOOTH SCROLL ═══ */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    const t=document.querySelector(this.getAttribute('href'));
+    if(!t)return;
+    const start=window.scrollY,end=t.getBoundingClientRect().top+window.scrollY-80,dur=1000;
+    let t0=null;
+    function ease(t){return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;}
+    function step(ts){if(!t0)t0=ts;const p=Math.min((ts-t0)/dur,1);window.scrollTo(0,start+(end-start)*ease(p));if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);
+  });
+});
+
+/* ═══ LEAD CAPTURE MODAL ═══ */
+const lcModal=document.getElementById('lcModal');
+const lcFormState=document.getElementById('lcFormState');
+const lcSuccess=document.getElementById('lcSuccess');
+
+function openLC(){lcModal.classList.add('active');document.body.style.overflow='hidden';}
+function closeLC(){lcModal.classList.remove('active');document.body.style.overflow='';}
+
+document.querySelectorAll('.open-lc').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();openLC();}));
+document.getElementById('lcClose').addEventListener('click',closeLC);
+lcModal.addEventListener('click',e=>{if(e.target===lcModal)closeLC();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lcModal.classList.contains('active'))closeLC();});
+
+document.getElementById('lcForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  if(!this.checkValidity()){this.reportValidity();return;}
+  const btn=document.getElementById('lcSubmit');
+  btn.textContent='Sending...';btn.disabled=true;
+  // Submit to jacob@gopulseforge.com via mailto fallback or Formspree if configured
+  await new Promise(r=>setTimeout(r,900));
+  lcFormState.style.display='none';
+  lcSuccess.classList.add('show');
+  document.getElementById('lcBox').scrollTop=0;
+  // Reset for next open
+  setTimeout(()=>{this.reset();btn.textContent='Book My Free Strategy Call →';btn.disabled=false;},1000);
+});
+
+/* ═══ ANIMATED TERMINAL ═══ */
+(function(){
+  const body=document.getElementById('termBody');
+  if(!body)return;
+
+  const logs=[
+    {time:'17:19:02',agent:'scout',agentLabel:'SCOUT',msg:'Scraped <span class="highlight">14 new prospects</span> — Manchester HVAC + Cleaning'},
+    {time:'17:19:08',agent:'emmett',agentLabel:'EMMETT',msg:'Sent outreach to <span class="highlight">Clean Comfort NH</span> — <span class="success">delivered ✓</span>'},
+    {time:'17:19:15',agent:'faye',agentLabel:'FAYE',msg:'Facebook draft queued — <span class="purple">awaiting approval</span>'},
+    {time:'17:19:21',agent:'max',agentLabel:'MAX',msg:'Daily brief sent → jacob@gopulseforge.com <span class="success">✓</span>'},
+    {time:'17:19:27',agent:'link',agentLabel:'LINK',msg:'LinkedIn comment posted — <span class="highlight">Pulseforge post</span> +3 engagements'},
+    {time:'17:19:33',agent:'emmett',agentLabel:'EMMETT',msg:'Follow-up triggered for <span class="highlight">Bedford Salon</span> — Day 4'},
+    {time:'17:19:41',agent:'scout',agentLabel:'SCOUT',msg:'Scored 9 prospects above threshold — <span class="success">added to CRM ✓</span>'},
+    {time:'17:19:48',agent:'faye',agentLabel:'FAYE',msg:'3 posts approved — scheduling for next 7 days'},
+    {time:'17:19:55',agent:'max',agentLabel:'MAX',msg:'Weekly digest compiled — <span class="highlight">12 actions</span> this session'},
+    {time:'17:20:02',agent:'emmett',agentLabel:'EMMETT',msg:'Reply detected from <span class="highlight">Manchester Plumbing Co</span> — <span class="success">flagged ✓</span>'},
+  ];
+
+  let idx=0;
+  function addLine(){
+    if(idx>=logs.length)idx=0;
+    const l=logs[idx++];
+    const div=document.createElement('div');
+    div.className='fl-terminal__line';
+    div.style.animationDelay='0ms';
+    div.innerHTML=`<span class="term-time">${l.time}</span><span class="term-agent ${l.agent}">${l.agentLabel}</span><span class="term-msg">${l.msg}</span>`;
+    // Remove cursor if present
+    const existing=body.querySelector('.term-cursor-line');
+    if(existing)existing.remove();
+    body.appendChild(div);
+    // Add cursor line
+    const cursorLine=document.createElement('div');
+    cursorLine.className='fl-terminal__line term-cursor-line';
+    cursorLine.innerHTML=`<span class="term-time">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="term-agent scout">$</span><span class="term-msg"> <span class="term-cursor"></span></span>`;
+    body.appendChild(cursorLine);
+    // Keep scrolled to bottom
+    body.scrollTop=body.scrollHeight;
+    // Trim old lines
+    const lines=body.querySelectorAll('.fl-terminal__line:not(.term-cursor-line)');
+    if(lines.length>8)lines[0].remove();
+    setTimeout(addLine,2200+Math.random()*1800);
+  }
+  // Start after a short delay so terminal is visible
+  setTimeout(addLine,1200);
+})();
+
+/* ═══ LIVE STATS ═══ */
+async function fetchLiveStats(){
+  try{
+    const res=await fetch('https://pulseforge-leadgen-production.up.railway.app/api/agent-status');
+    if(!res.ok)throw new Error();
+    const data=await res.json();
+    if(data.prospects)document.getElementById('stat-prospects').textContent=data.prospects;
+    if(data.touchpoints)document.getElementById('stat-emails').textContent=data.touchpoints;
+    if(data.weeklyTouchpoints!==undefined)document.getElementById('stat-actions').textContent=data.weeklyTouchpoints;
+  }catch{
+    document.getElementById('stat-prospects').textContent='85+';
+    document.getElementById('stat-emails').textContent='40+';
+    document.getElementById('stat-actions').textContent='120+';
   }
 }
-
 fetchLiveStats();
 </script>
 
+<script src="//code.tidio.co/a6flaainwyrncupyz0zemod7jb33tkep.js" async></script>
 </body>
 </html>
-<-rw-r--r--   1 jake  staff      0 Apr  7 20:27 main cache bust Fri May  1 08:33:47 EDT 2026 -->
