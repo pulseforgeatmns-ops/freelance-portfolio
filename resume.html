@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jacob Maynard — Resume</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --purple: #6030b1;
+    --purple-light: #7c4fd4;
+    --purple-faint: #6030b115;
+    --dark: #242424;
+    --mid: #3a3a3a;
+    --muted: #6b6b6b;
+    --border: #e2e2e2;
+    --bg: #fafaf8;
+    --white: #ffffff;
+    --accent-line: 3px solid var(--purple);
+  }
+  html { font-size: 16px; }
+  body { font-family: 'Lato', sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  .page { max-width: 900px; margin: 0 auto; background: var(--white); box-shadow: 0 0 60px rgba(0,0,0,0.08); }
+
+  header {
+    display: grid; grid-template-columns: 1fr auto; align-items: end;
+    gap: 2rem; padding: 56px 56px 40px; border-bottom: var(--accent-line);
+    position: relative; overflow: hidden;
+  }
+  header::before { content: ''; position: absolute; top: 0; left: 0; width: 6px; height: 100%; background: var(--purple); }
+  header::after { content: ''; position: absolute; top: -60px; right: -60px; width: 220px; height: 220px; border-radius: 50%; background: var(--purple-faint); pointer-events: none; }
+
+  .header-name { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; letter-spacing: -1px; line-height: 1; color: var(--dark); }
+  .header-title { font-size: 1rem; font-weight: 300; color: var(--purple); letter-spacing: 2px; text-transform: uppercase; margin-top: 8px; }
+  .header-contact { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+  .contact-item { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--muted); text-decoration: none; }
+  .contact-item:hover { color: var(--purple); }
+  .contact-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--purple); flex-shrink: 0; }
+
+  main { padding: 48px 56px; }
+  .section { margin-bottom: 44px; }
+  .section-title {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--purple); margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  .summary { font-size: 1rem; line-height: 1.8; color: var(--mid); font-weight: 300; border-left: 3px solid var(--purple); padding-left: 20px; }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 24px; }
+  .stat-card { background: var(--purple-faint); border: 1px solid rgba(96,48,177,0.1); border-radius: 8px; padding: 16px; text-align: center; }
+  .stat-number { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--purple); line-height: 1; }
+  .stat-label { font-size: 0.72rem; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 1px; }
+
+  .exp-entry { margin-bottom: 32px; }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 4px; }
+  .exp-title { font-size: 1rem; font-weight: 700; color: var(--dark); }
+  .exp-company { font-size: 0.88rem; color: var(--purple); font-weight: 400; margin-top: 2px; }
+  .exp-date { font-size: 0.78rem; color: var(--muted); white-space: nowrap; margin-top: 4px; }
+  .exp-bullets { margin-top: 10px; padding-left: 0; list-style: none; }
+  .exp-bullets li { font-size: 0.88rem; color: var(--mid); line-height: 1.7; padding-left: 16px; position: relative; margin-bottom: 4px; }
+  .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--purple); font-size: 0.75rem; top: 3px; }
+
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .skill-group-title { font-size: 0.78rem; font-weight: 700; color: var(--dark); margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-tag { font-size: 0.75rem; background: var(--bg); border: 1px solid var(--border); color: var(--mid); padding: 4px 10px; border-radius: 4px; }
+
+  .project-entry { display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+  .project-entry:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .project-name { font-size: 0.95rem; font-weight: 700; color: var(--dark); }
+  .project-desc { font-size: 0.85rem; color: var(--mid); margin-top: 4px; line-height: 1.6; }
+  .project-link { font-size: 0.78rem; color: var(--purple); text-decoration: none; white-space: nowrap; font-weight: 700; }
+  .project-link:hover { text-decoration: underline; }
+
+  .edu-entry { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+  .edu-name { font-size: 0.95rem; font-weight: 700; color: var(--dark); }
+  .edu-detail { font-size: 0.82rem; color: var(--muted); margin-top: 2px; }
+  .edu-date { font-size: 0.78rem; color: var(--muted); white-space: nowrap; }
+
+  footer { background: var(--dark); color: rgba(255,255,255,0.4); padding: 20px 56px; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase; }
+  footer a { color: var(--purple-light); text-decoration: none; }
+  footer a:hover { color: var(--white); }
+
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; max-width: 100%; }
+    header, main { padding: 32px 40px; }
+    footer { padding: 16px 40px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div>
+      <div class="header-name">Jacob Maynard</div>
+      <div class="header-title">Founder · Automation Engineer · Marketing Ops</div>
+    </div>
+    <div class="header-contact">
+      <a href="mailto:jacob@gopulseforge.com" class="contact-item"><span class="contact-dot"></span>jacob@gopulseforge.com</a>
+      <a href="https://gopulseforge.com" target="_blank" class="contact-item"><span class="contact-dot"></span>gopulseforge.com</a>
+      <a href="https://linkedin.com/in/jacob-maynard7/" target="_blank" class="contact-item"><span class="contact-dot"></span>linkedin.com/in/jacob-maynard7</a>
+      <span class="contact-item"><span class="contact-dot"></span>Manchester, NH</span>
+    </div>
+  </header>
+
+  <main>
+
+    <div class="section">
+      <div class="section-title">Profile</div>
+      <p class="summary">Founder of Pulseforge — an AI marketing and automation agency built for local small businesses. I design and deploy end-to-end outreach systems: cold email infrastructure, multi-agent AI pipelines, lead generation engines, and client-facing web builds. Over a decade of operations experience running restaurants and a cleaning company gives me a ground-level understanding of the businesses I serve.</p>
+      <div class="stats-row">
+        <div class="stat-card"><div class="stat-number">10+</div><div class="stat-label">Agents Built</div></div>
+        <div class="stat-card"><div class="stat-number">87+</div><div class="stat-label">Prospects in Pipeline</div></div>
+        <div class="stat-card"><div class="stat-number">3</div><div class="stat-label">Client Sites Live</div></div>
+        <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">Upwork JSS</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Experience</div>
+
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Founder & Automation Engineer</div>
+            <div class="exp-company">Pulseforge — Manchester, NH</div>
+          </div>
+          <div class="exp-date">2024 — Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built a 10-agent AI system (Scout, Emmett, Max, Paige, Sam, Vera, Link, Faye, Rex, Riley) running on Railway with Postgres, Brevo, Twilio, and Telegram integration</li>
+          <li>Designed and deployed cold email infrastructure: Namecheap domain, Google Workspace, SPF/DKIM/DMARC, Brevo — achieving high deliverability rates</li>
+          <li>Built a Node.js lead generation engine with SerpAPI + Hunter.io scoring pipeline, deployed to Railway with a live dashboard</li>
+          <li>Delivered client automation projects including Toast loyalty webhook → promo code → Gmail SMTP pipeline for a pizza franchise (OTTO Bedford)</li>
+          <li>Built and deployed 3 client websites (Whittaker Home Services, Clean Conscience Cleaners, Velvet Moon Apothecary) on GitHub Pages</li>
+          <li>Secured first Upwork client and maintained 100% Job Success Score</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Bartender & Floor Operations</div>
+            <div class="exp-company">Various Hospitality Venues — Manchester, NH</div>
+          </div>
+          <div class="exp-date">2020 — Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>High-volume bar and floor operations — building Pulseforge alongside a 4-night/week schedule</li>
+          <li>Direct exposure to the operational pain points of local restaurant owners used to inform Pulseforge's product positioning</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Owner & Operator</div>
+            <div class="exp-company">Cleaning Company — New England</div>
+          </div>
+          <div class="exp-date">Prior</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Founded and operated a residential and commercial cleaning business — managed scheduling, client acquisition, and team operations end-to-end</li>
+          <li>Direct experience with the lead generation and retention challenges Pulseforge now solves for cleaning vertical clients</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Restaurant Operator</div>
+            <div class="exp-company">Multiple Concepts — New England</div>
+          </div>
+          <div class="exp-date">Prior</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed full restaurant operations across multiple concepts — FOH/BOH coordination, vendor relationships, staff management, and P&L ownership</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="section">
+      <div class="section-title">Technical Skills</div>
+      <div class="skills-grid">
+        <div>
+          <div class="skill-group-title">Automation & AI</div>
+          <div class="skill-tags">
+            <span class="skill-tag">n8n</span>
+            <span class="skill-tag">Claude API</span>
+            <span class="skill-tag">Multi-agent systems</span>
+            <span class="skill-tag">Prompt engineering</span>
+            <span class="skill-tag">Zapier</span>
+            <span class="skill-tag">Puppeteer</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Development</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Node.js</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">HTML/CSS</span>
+            <span class="skill-tag">React (learning)</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">REST APIs</span>
+          </div>
+        </div>
+        <div>
+          <div class="skill-group-title">Infrastructure & Tools</div>
+          <div class="skill-tags">
+            <span class="skill-tag">Railway</span>
+            <span class="skill-tag">GitHub</span>
+            <span class="skill-tag">Brevo</span>
+            <span class="skill-tag">Twilio</span>
+            <span class="skill-tag">SerpAPI</span>
+            <span class="skill-tag">Hunter.io</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Projects</div>
+
+
+<div class="project-entry">
+        <div>
+          <div class="project-name">Whittaker Home Services</div>
+          <div class="project-desc">Commercial and residential cleaning company site — animated hero, quote modal with Formspree integration, SMS notifications via T-Mobile gateway, mobile responsive.</div>
+        </div>
+        <a href="https://pulseforgeatmns-ops.github.io/whittaker-home-services/" class="project-link" target="_blank">View Live →</a>
+      </div>
+
+      <div class="project-entry">
+        <div>
+          <div class="project-name">Clean Conscience Cleaners</div>
+          <div class="project-desc">Spec client site for a residential cleaning company in Manchester, NH. Full service listings, testimonials, and working contact form.</div>
+        </div>
+        <a href="https://pulseforgeatmns-ops.github.io/clean-conscience-cleaners/" class="project-link" target="_blank">View Live →</a>
+      </div>
+
+      <div class="project-entry">
+        <div>
+          <div class="project-name">Pulseforge Portfolio</div>
+          <div class="project-desc">Freelance-facing portfolio site for Pulseforge — showcasing automation services, live agent dashboard, and client work. Built with HTML/CSS/JS.</div>
+        </div>
+        <a href="https://gopulseforge.com" class="project-link" target="_blank">View Live →</a>
+      </div>
+
+    </div>
+
+    <div class="section">
+      <div class="section-title">Education & Training</div>
+
+      <div class="edu-entry">
+        <div>
+          <div class="edu-name">Frontend Simplified Bootcamp</div>
+          <div class="edu-detail">HTML · CSS · JavaScript · React — actively enrolled</div>
+        </div>
+        <div class="edu-date">2024 — Present</div>
+      </div>
+
+      <div class="edu-entry">
+        <div>
+          <div class="edu-name">Self-Directed: Cold Email & Marketing Automation</div>
+          <div class="edu-detail">DNS infrastructure, n8n, deliverability, B2B lead generation, AI prompt engineering</div>
+        </div>
+        <div class="edu-date">2023 — Present</div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <span>JACOB MAYNARD · RESUME · 2026</span>
+    <a href="https://gopulseforge.com" target="_blank">gopulseforge.com</a>
+  </footer>
+
+</div>
+</body>
+</html>
