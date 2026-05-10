@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Automation — Pulseforge</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --purple: #6030b1;
+    --purple-light: #8a5fd4;
+    --purple-dim: #3d1f73;
+    --dark: #242424;
+    --darker: #161616;
+    --off-white: #f0ece6;
+    --muted: #9a9189;
+    --border: rgba(255,255,255,0.08);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--darker);
+    color: var(--off-white);
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 20px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(22,22,22,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-brand {
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    text-decoration: none;
+  }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--off-white);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+
+  .nav-cta:hover { border-color: var(--purple-light); color: var(--purple-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 140px 48px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse 60% 50% at 70% 40%, rgba(96,48,177,0.15) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 28px;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(42px, 6vw, 76px);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--off-white);
+    max-width: 780px;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--purple-light);
+  }
+
+  .hero-sub {
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--muted);
+    max-width: 520px;
+    margin-bottom: 52px;
+    line-height: 1.8;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    background: var(--purple);
+    color: #fff;
+    font-family: 'Lato', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 18px 40px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .hero-cta:hover { background: var(--purple-light); transform: translateY(-1px); }
+
+  .hero-note {
+    margin-top: 20px;
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 48px;
+  }
+
+  /* SECTION */
+  section {
+    padding: 100px 48px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--off-white);
+    max-width: 640px;
+    margin-bottom: 24px;
+  }
+
+  .section-body {
+    font-size: 17px;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.85;
+  }
+
+  /* WHAT WAS BUILT */
+  .built-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 64px;
+  }
+
+  .built-card {
+    background: var(--dark);
+    padding: 40px 36px;
+    position: relative;
+  }
+
+  .built-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 40px;
+    background: var(--purple);
+  }
+
+  .built-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--purple-light);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  .built-card h3 {
+    font-family: 'Lato', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--off-white);
+    margin-bottom: 12px;
+    letter-spacing: 0.3px;
+  }
+
+  .built-card p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .built-card .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    background: rgba(96,48,177,0.15);
+    padding: 4px 10px;
+    margin-bottom: 14px;
+  }
+
+  /* SEQUENCE TIMELINE */
+  .sequence-wrap {
+    margin-top: 64px;
+    position: relative;
+  }
+
+  .sequence-line {
+    position: absolute;
+    left: 20px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--purple), transparent);
+  }
+
+  .seq-step {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 0;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .seq-step:last-child { border-bottom: none; }
+
+  .seq-dot {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: var(--dark);
+    border: 1px solid var(--purple);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    color: var(--purple-light);
+    position: relative;
+    z-index: 1;
+  }
+
+  .seq-content { padding-top: 8px; }
+
+  .seq-day {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 6px;
+  }
+
+  .seq-content h4 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--off-white);
+    margin-bottom: 6px;
+  }
+
+  .seq-content p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* TECH STACK */
+  .stack-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
+  }
+
+  .stack-pill {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--off-white);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px 20px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .stack-pill:hover { border-color: var(--purple-light); color: var(--purple-light); }
+
+  /* QUOTE */
+  .quote-block {
+    border-left: 3px solid var(--purple);
+    padding: 28px 40px;
+    background: var(--dark);
+    margin-top: 64px;
+  }
+
+  .quote-text {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(18px, 2.5vw, 24px);
+    font-weight: 400;
+    font-style: italic;
+    color: var(--off-white);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .quote-attr {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    text-align: center;
+    padding: 100px 48px;
+  }
+
+  .cta-section .section-title {
+    max-width: 100%;
+    margin: 0 auto 20px;
+  }
+
+  .cta-section .section-body {
+    max-width: 480px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .cta-email {
+    display: block;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 20px;
+    text-decoration: none;
+  }
+
+  .cta-email:hover { color: var(--purple-light); }
+
+  /* FOOTER */
+  footer {
+    padding: 32px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  footer a {
+    font-size: 12px;
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  footer a:hover { color: var(--purple-light); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-up {
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards;
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 120px 24px 60px; }
+    section { padding: 64px 24px; }
+    .divider { margin: 0 24px; }
+    .built-grid { grid-template-columns: 1fr; }
+    footer { padding: 24px; flex-direction: column; gap: 12px; text-align: center; }
+    .cta-section { padding: 64px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://gopulseforge.com" class="nav-brand">Pulseforge</a>
+  <a href="mailto:jacob@gopulseforge.com" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow fade-up delay-1">Restaurant Automation Build</p>
+  <h1 class="fade-up delay-2">Your restaurant keeps running.<br><em>So does your marketing.</em></h1>
+  <p class="hero-sub fade-up delay-3">A complete done-for-you automation built for a Manchester restaurant group. Triggered by your POS. Running in the background while you run the floor.</p>
+  <div class="fade-up delay-4">
+    <a href="mailto:jacob@gopulseforge.com?subject=I saw the restaurant automation build" class="hero-cta">Get this built for your restaurant</a>
+    <p class="hero-note">No retainer required to start. Free mockup for your location.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHAT WAS BUILT -->
+<section>
+  <p class="section-label">The build</p>
+  <h2 class="section-title">Everything that was built, and how it works</h2>
+  <p class="section-body">This is not a template or a concept. Every component below was built, tested, and is ready to deploy for a restaurant using Toast POS. No ongoing work required on your end after setup.</p>
+
+  <div class="built-grid">
+    <div class="built-card">
+      <div class="tag">Trigger</div>
+      <h3>Toast POS webhook integration</h3>
+      <p>The system activates automatically the moment a new customer completes their first transaction. No manual exports, no CSV uploads. The trigger fires from Toast directly.</p>
+    </div>
+    <div class="built-card">
+      <div class="tag">Sequence</div>
+      <h3>5-email loyalty welcome sequence</h3>
+      <p>A fully written, timed email sequence delivered over the first 30 days. Each email has a specific purpose: welcome, soften, offer, remind, retain. Copy written for a local restaurant voice.</p>
+    </div>
+    <div class="built-card">
+      <div class="tag">Incentive</div>
+      <h3>Unique promo code generation</h3>
+      <p>Each new customer receives a unique, trackable promo code on Day 1. No duplicate codes, no manual creation. Generated automatically at the moment the sequence begins.</p>
+    </div>
+    <div class="built-card">
+      <div class="tag">Data</div>
+      <h3>Google Sheets CRM logging</h3>
+      <p>Every contact, send, and promo code is logged automatically to a Google Sheet you own and can view anytime. Full visibility into who entered the sequence and when.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EMAIL SEQUENCE -->
+<section>
+  <p class="section-label">The sequence</p>
+  <h2 class="section-title">30 days. 5 emails. Fully automated.</h2>
+  <p class="section-body">Here is what goes out after a new customer visits your restaurant for the first time.</p>
+
+  <div class="sequence-wrap">
+    <div class="sequence-line"></div>
+
+    <div class="seq-step">
+      <div class="seq-dot">1</div>
+      <div class="seq-content">
+        <p class="seq-day">Day 1 — Welcome</p>
+        <h4>Thank you and a reason to come back</h4>
+        <p>Sent within hours of the first visit. Thanks them by name, delivers their unique promo code, and sets the tone for the relationship. Feels personal, sends automatically.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-dot">2</div>
+      <div class="seq-content">
+        <p class="seq-day">Day 4 — Soft touch</p>
+        <h4>A reminder without the pressure</h4>
+        <p>A short, conversational follow-up that mentions their promo is still waiting. Low-pressure tone. Keeps your name visible without feeling like a newsletter.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-dot">3</div>
+      <div class="seq-content">
+        <p class="seq-day">Day 8 — Social proof</p>
+        <h4>What other customers are saying</h4>
+        <p>Builds confidence in the decision to return. Can include a specific dish, a seasonal offer, or a community moment. Customized per restaurant.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-dot">4</div>
+      <div class="seq-content">
+        <p class="seq-day">Day 13 — Urgency</p>
+        <h4>Promo code expiration notice</h4>
+        <p>Lets the customer know their promo is expiring soon. Creates a genuine reason to act. Drives the second visit, which is the most important conversion in restaurant retention.</p>
+      </div>
+    </div>
+
+    <div class="seq-step">
+      <div class="seq-dot">5</div>
+      <div class="seq-content">
+        <p class="seq-day">Day 30 — Close the loop</p>
+        <h4>One last note, no pressure</h4>
+        <p>A final short email that leaves the relationship open. No hard sell. Ends the sequence on a human note that a surprising number of customers respond to.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TECH STACK -->
+<section>
+  <p class="section-label">Under the hood</p>
+  <h2 class="section-title">Built on tools that work without you watching</h2>
+  <p class="section-body">Every piece of this stack was chosen because it is reliable, affordable, and does not require a developer to maintain it once it is running.</p>
+
+  <div class="stack-row">
+    <span class="stack-pill">n8n automation</span>
+    <span class="stack-pill">Toast POS webhook</span>
+    <span class="stack-pill">Gmail SMTP</span>
+    <span class="stack-pill">Google Sheets CRM</span>
+    <span class="stack-pill">Promo code engine</span>
+    <span class="stack-pill">Brevo email delivery</span>
+  </div>
+
+  <div class="quote-block">
+    <p class="quote-text">The hardest part of running a restaurant is not the food or the service. It is staying visible to customers when you are too busy running the floor to think about marketing. This system runs in the background so you do not have to.</p>
+    <p class="quote-attr">Jacob Maynard, Pulseforge — Manchester, NH</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <p class="section-label" style="text-align:center;">Ready to see it for your restaurant?</p>
+  <h2 class="section-title">Free mockup. No commitment required.</h2>
+  <p class="section-body">Send a reply and I will put together a free mockup showing exactly what this looks like for your restaurant. Takes me one day. Costs you nothing to see it.</p>
+  <a href="mailto:jacob@gopulseforge.com?subject=Restaurant automation mockup" class="hero-cta">Reply to get your free mockup</a>
+  <a href="mailto:jacob@gopulseforge.com" class="cta-email">jacob@gopulseforge.com</a>
+</div>
+
+<footer>
+  <p>Pulseforge &copy; 2026. Manchester, NH.</p>
+  <a href="https://gopulseforge.com">gopulseforge.com</a>
+</footer>
+
+</body>
+</html>
