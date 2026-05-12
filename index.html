@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Jacob Maynard | AI Marketing & Automation — Manchester NH</title>
-  <meta name="description" content="Pulseforge helps restaurants and service businesses in Manchester, NH get found online and keep customers coming back. AI-powered email marketing, automation, and web design. Starting at $399.">
+  <meta name="description" content="AI-powered marketing and automation for local service businesses in Southern NH. 90-day free trial.">
   <link rel="stylesheet" href="./freelance.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -178,6 +178,116 @@
   .lc-row { grid-template-columns: 1fr; }
   .lc-title { font-size: 22px; }
 }
+
+/* SINGLE OFFER CARD */
+.single-offer-wrap {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0 60px;
+}
+.single-offer-card {
+  background: #0d1424;
+  border: 1px solid rgba(168,85,247,0.25);
+  border-top: 3px solid #a855f7;
+  border-radius: 16px;
+  padding: 40px 44px;
+  max-width: 560px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 0 40px rgba(168,85,247,0.08);
+}
+.offer-badge {
+  display: inline-block;
+  background: rgba(168,85,247,0.15);
+  border: 1px solid rgba(168,85,247,0.35);
+  color: #a855f7;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 100px;
+  margin-bottom: 20px;
+}
+.single-offer-card h3 {
+  font-family: 'Syne', sans-serif;
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+.offer-price {
+  font-family: 'Syne', sans-serif;
+  font-size: 52px;
+  font-weight: 800;
+  color: #a855f7;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+.offer-price span {
+  font-size: 20px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.5);
+}
+.offer-trial {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #06d6a0;
+  margin-bottom: 28px;
+  letter-spacing: 0.02em;
+}
+.single-offer-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+.single-offer-card ul li {
+  font-size: 15px;
+  color: rgba(255,255,255,0.8);
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.4;
+}
+.single-offer-card ul li::before {
+  content: '✓';
+  color: #06d6a0;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.single-offer-card .cta-btn {
+  display: block;
+  text-align: center;
+  background: linear-gradient(135deg, #7c3aed, #a855f7);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 10px;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  transition: opacity 0.2s, box-shadow 0.2s;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 20px rgba(124,58,237,0.35);
+}
+.single-offer-card .cta-btn:hover { opacity: 0.9; box-shadow: 0 6px 28px rgba(124,58,237,0.5); }
+.offer-note {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  font-family: 'JetBrains Mono', monospace;
+  line-height: 1.5;
+}
+@media (max-width: 600px) {
+  .single-offer-card { padding: 28px 22px; }
+  .offer-price { font-size: 42px; }
+}
 </style>
 <script type="application/ld+json">
 {
@@ -306,13 +416,13 @@
   <div class="fl-hero__orb fl-hero__orb--2"></div>
   <div class="fl-hero__badge">Based in Manchester, NH</div>
   <h1 class="fl-hero__headline" id="heroHeadline" aria-label="More customers. Less manual work. Guaranteed."></h1>
-  <p class="fl-hero__sub">I build websites and automated marketing systems for local Manchester businesses — so customers can find you, and keep coming back. Starting at $399.</p>
+  <p class="fl-hero__sub">I build websites and automated marketing systems for local Manchester businesses — so customers can find you, and keep coming back. 90-day free trial.</p>
   <div class="fl-hero__ctas">
     <button class="fl-btn fl-btn--primary fl-btn--large open-lc">Book a free strategy call</button>
     <a href="#work" class="fl-btn fl-btn--ghost fl-btn--large">See my work</a>
   </div>
   <div class="fl-hero__trust">
-    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Websites from $399</span>
+    <span class="fl-trust__item"><i class="fa-solid fa-check"></i> 90-day free trial</span>
     <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Marketing on autopilot</span>
     <span class="fl-trust__item"><i class="fa-solid fa-check"></i> Looks great on phones</span>
   </div>
@@ -361,7 +471,7 @@
         <div class="fl-terminal__status">
           <div class="term-status-item"><div class="term-status-dot"></div> Railway connected</div>
           <div class="term-status-item"><div class="term-status-dot"></div> Brevo active</div>
-          <div class="term-status-item"><div class="term-status-dot amber"></div> 10 agents live</div>
+          <div class="term-status-item"><div class="term-status-dot amber"></div> 15 agents live</div>
         </div>
       </div>
     </div>
@@ -459,7 +569,7 @@
           <h3 class="fl-project__title">Pulseforge Agent Dashboard</h3>
           <p class="fl-project__desc">A live multi-agent control center — 7 AI agents running in real time, managing leads, outreach, content, and daily briefings from a single dashboard.</p>
           <div class="fl-project__meta">
-            <span><i class="fa-solid fa-robot"></i> 10 agents live</span>
+            <span><i class="fa-solid fa-robot"></i> 15 agents live</span>
             <span><i class="fa-solid fa-database"></i> Real-time data</span>
           </div>
         </div>
@@ -480,7 +590,7 @@
     <div class="fl-live-stats__grid">
       <div class="fl-stat-card reveal"><div class="fl-stat-number teal" id="stat-prospects">—</div><div class="fl-stat-label">Prospects tracked</div></div>
       <div class="fl-stat-card reveal reveal-delay-1"><div class="fl-stat-number purple" id="stat-emails">—</div><div class="fl-stat-label">Emails sent</div></div>
-      <div class="fl-stat-card reveal reveal-delay-2"><div class="fl-stat-number teal" id="stat-agents">10</div><div class="fl-stat-label">AI agents live</div></div>
+      <div class="fl-stat-card reveal reveal-delay-2"><div class="fl-stat-number teal" id="stat-agents">15</div><div class="fl-stat-label">AI agents live</div></div>
       <div class="fl-stat-card reveal reveal-delay-3"><div class="fl-stat-number purple" id="stat-actions">—</div><div class="fl-stat-label">Actions this week</div></div>
     </div>
   </div>
@@ -534,53 +644,31 @@
 </section>
 
 <!-- RETAINER -->
-<section class="fl-retainer">
+<section class="fl-retainer" id="retainer">
   <div class="fl-container">
-    <div class="fl-retainer__divider"><span class="fl-retainer__divider-text">Or let us handle your marketing every month</span></div>
+    <div class="fl-retainer__divider"><span class="fl-retainer__divider-text">Full-stack AI marketing — one flat price</span></div>
     <div class="fl-section-header reveal">
       <div class="fl-section-eyebrow">Monthly Plans</div>
-      <h2 class="fl-section-title">Monthly <span class="fl-accent">marketing plans</span></h2>
-      <p class="fl-section-sub">No contracts. Cancel anytime. We handle the marketing — you run your business.</p>
+      <h2 class="fl-section-title">Simple <span class="fl-accent">pricing</span></h2>
+      <p class="fl-section-sub">Everything running on day one. No contracts. No setup fees.</p>
     </div>
-    <div class="fl-retainer__grid">
-      <div class="fl-retainer__card reveal">
-        <div class="fl-retainer__name">Starter</div>
-        <div class="fl-retainer__price">$299<span>/mo</span></div>
-        <p class="fl-retainer__tagline">Stay visible online without lifting a finger.</p>
-        <ul class="fl-retainer__list">
-          <li><i class="fa-solid fa-check"></i> 8 social posts/month</li>
-          <li><i class="fa-solid fa-check"></i> Monthly website content updates</li>
-          <li><i class="fa-solid fa-check"></i> Monthly performance report</li>
-          <li><i class="fa-solid fa-check"></i> Minor site fixes and tweaks</li>
+    <div class="single-offer-wrap">
+      <div class="single-offer-card reveal">
+        <div class="offer-badge">Most popular</div>
+        <h3>Full-Stack AI Marketing</h3>
+        <div class="offer-price">$250<span>/month</span></div>
+        <div class="offer-trial">90 days free — no credit card required</div>
+        <ul>
+          <li>Automated lead generation — Scout finds local prospects daily</li>
+          <li>Cold email outreach sequences — Emmett handles follow-up automatically</li>
+          <li>Social content published weekly — Google Business, Facebook, LinkedIn</li>
+          <li>Inbound triage — warm replies flagged and prioritized</li>
+          <li>CIA — Content Intelligence Analysis — weekly performance reporting</li>
+          <li>Live dashboard showing everything in real time</li>
+          <li>No contracts. Cancel anytime.</li>
         </ul>
-        <button class="fl-btn fl-btn--ghost fl-btn--full open-lc">Get started</button>
-      </div>
-      <div class="fl-retainer__card fl-retainer__card--featured reveal reveal-delay-1">
-        <div class="fl-retainer__badge">Most popular</div>
-        <div class="fl-retainer__name">Growth</div>
-        <div class="fl-retainer__price">$499<span>/mo</span></div>
-        <p class="fl-retainer__tagline">Actively bring in new customers every month.</p>
-        <ul class="fl-retainer__list">
-          <li><i class="fa-solid fa-check"></i> Everything in Starter</li>
-          <li><i class="fa-solid fa-check"></i> Cold email outreach to 20+ local prospects</li>
-          <li><i class="fa-solid fa-check"></i> Monthly targeted lead list</li>
-          <li><i class="fa-solid fa-check"></i> Inbox triage — warm leads flagged for you</li>
-          <li><i class="fa-solid fa-check"></i> Quarterly site refresh</li>
-        </ul>
-        <button class="fl-btn fl-btn--primary fl-btn--full open-lc">Get started</button>
-      </div>
-      <div class="fl-retainer__card reveal reveal-delay-2">
-        <div class="fl-retainer__name">Agency</div>
-        <div class="fl-retainer__price">$999<span>/mo</span></div>
-        <p class="fl-retainer__tagline">Full-stack marketing for businesses ready to scale.</p>
-        <ul class="fl-retainer__list">
-          <li><i class="fa-solid fa-check"></i> Everything in Growth</li>
-          <li><i class="fa-solid fa-check"></i> Full email automation setup</li>
-          <li><i class="fa-solid fa-check"></i> Google Business Profile optimization</li>
-          <li><i class="fa-solid fa-check"></i> Facebook + Google ad management</li>
-          <li><i class="fa-solid fa-check"></i> Weekly strategy call</li>
-        </ul>
-        <button class="fl-btn fl-btn--ghost fl-btn--full open-lc">Get started</button>
+        <a href="javascript:void(0)" class="cta-btn open-lc">Start your free 90 days &rarr;</a>
+        <p class="offer-note">After 90 days, continue at $250/month. Walk away with no obligation.</p>
       </div>
     </div>
   </div>
