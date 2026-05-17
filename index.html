@@ -230,6 +230,19 @@
   font-weight: 500;
   color: rgba(255,255,255,0.5);
 }
+.offer-subheadline {
+  font-size: 17px;
+  color: #a855f7;
+  font-weight: 700;
+  line-height: 1.45;
+  margin-bottom: 16px;
+}
+.offer-body {
+  font-size: 16px;
+  color: rgba(255,255,255,0.78);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
 .single-offer-card ul {
   list-style: none;
   padding: 0;
@@ -551,6 +564,25 @@
 
       <article class="fl-project">
         <div class="fl-project__img-wrap">
+          <img src="./assets/mshi-scrnsht.png" alt="Mountain State Home Innovations" class="fl-project__img">
+          <div class="fl-project__overlay">
+            <a href="https://pulseforgeatmns-ops.github.io/mountain-state-home-innovations" class="fl-project__live-btn" target="_blank">View live site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="fl-project__info">
+          <span class="fl-project__tag">Local Business</span>
+          <h3 class="fl-project__title">Mountain State Home Innovations</h3>
+          <p class="fl-project__desc">A WV-based residential and commercial contractor. High-impact site built around their owner-operated brand — decks, siding, windows, and emergency repairs across the Kanawha Valley.</p>
+          <div class="fl-project__meta">
+            <span><i class="fa-regular fa-clock"></i> Delivered in 1 day</span>
+            <span><i class="fa-solid fa-bolt"></i> Magnetic UI</span>
+            <span><i class="fa-solid fa-message"></i> Contact modal</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="fl-project">
+        <div class="fl-project__img-wrap">
           <img src="./assets/dashboard-scrnsht.png" alt="Pulseforge Agent Dashboard" class="fl-project__img">
           <div class="fl-project__overlay">
             <a href="https://pulseforge-leadgen-production.up.railway.app/dashboard" class="fl-project__live-btn" target="_blank">View live demo <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
@@ -648,18 +680,9 @@
       <div class="single-offer-card reveal">
         <div class="offer-badge">Most popular</div>
         <h3>Full-Stack AI Marketing</h3>
-        <div class="offer-price">$250<span>/month</span></div>
-        <ul>
-          <li>Automated lead generation — Scout finds local prospects daily</li>
-          <li>Cold email outreach sequences — Emmett handles follow-up automatically</li>
-          <li>Social content published weekly — Google Business, Facebook, LinkedIn</li>
-          <li>Inbound triage — warm replies flagged and prioritized</li>
-          <li>CIA — Content Intelligence Analysis — weekly performance reporting</li>
-          <li>Live dashboard showing everything in real time</li>
-          <li>No contracts. Cancel anytime.</li>
-        </ul>
-        <a href="javascript:void(0)" class="cta-btn open-lc">Get started for $250/month &rarr;</a>
-        <p class="offer-note">No contracts. Cancel anytime.</p>
+        <div class="offer-subheadline">Custom pricing based on your market and goals</div>
+        <p class="offer-body">Every Pulseforge client gets a system built around their business — lead gen, outreach, content, and reporting running 24/7. Starts with a free 90-day trial so you can see results before you spend a dollar.</p>
+        <a href="javascript:void(0)" class="cta-btn open-lc">Book a free discovery call &rarr;</a>
       </div>
     </div>
   </div>
@@ -930,4 +953,3 @@ fetchLiveStats();
 <script src="//code.tidio.co/a6flaainwyrncupyz0zemod7jb33tkep.js" async></script>
 </body>
 </html>
-
