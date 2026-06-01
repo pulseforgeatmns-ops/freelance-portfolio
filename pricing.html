@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pricing — Pulseforge</title>
+<meta name="description" content="Monthly recurring pricing for the full Pulseforge agent stack. Four tiers, no setup fees, cancel monthly.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,700,700i&f[]=switzer@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<style>
+  /* ── PRICING GRID ──────────────────────────────── */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 4rem;
+  }
+  @media (max-width: 1100px) {
+    .pricing-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+  }
+  @media (max-width: 640px) {
+    .pricing-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  .tier {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transition: border-color .25s ease;
+  }
+  .tier:hover { border-color: var(--line-2); }
+
+  .tier.featured {
+    border-color: var(--ember);
+    background: linear-gradient(180deg, rgba(255,122,26,0.04) 0%, var(--surface) 60%);
+  }
+  .tier.featured:hover { border-color: var(--ember-2); }
+
+  .tier-tag {
+    position: absolute;
+    top: -1px;
+    right: 1.5rem;
+    background: var(--ember);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: .65rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    padding: .35rem .75rem;
+    font-weight: 500;
+  }
+
+  .tier-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: 1.6rem;
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--text);
+    margin: 0 0 .5rem;
+  }
+
+  .tier-tagline {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    margin-bottom: 2.5rem;
+    line-height: 1.4;
+  }
+
+  .tier-price {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 1.8rem + 1.8vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -.035em;
+    color: var(--text);
+    margin: 0 0 .25rem;
+  }
+  .tier-price em { font-style: italic; }
+  .tier-price .currency {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-3);
+    vertical-align: super;
+    font-weight: 400;
+    letter-spacing: 0;
+    margin-right: .15rem;
+  }
+  .tier-price .per {
+    font-family: var(--font-body);
+    font-size: .85rem;
+    color: var(--text-3);
+    letter-spacing: 0;
+    font-weight: 400;
+  }
+  .tier-price.custom {
+    font-style: italic;
+    font-size: clamp(1.8rem, 1.4rem + 1vw, 2.5rem);
+  }
+
+  .tier-billing {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .tier-billing em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  .tier-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2.5rem;
+    flex-grow: 1;
+  }
+  .tier-features li {
+    padding: .75rem 0;
+    font-family: var(--font-body);
+    font-size: .9rem;
+    line-height: 1.45;
+    color: var(--text-2);
+    display: flex;
+    gap: .75rem;
+    align-items: baseline;
+  }
+  .tier-features li + li {
+    border-top: 1px solid var(--line);
+  }
+  .tier-features li::before {
+    content: "→";
+    color: var(--text-3);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .85rem;
+    flex-shrink: 0;
+  }
+  .tier.featured .tier-features li::before {
+    color: var(--ember);
+  }
+  .tier-features li em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+  .tier-features li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .tier-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-family: var(--font-body);
+    font-size: .9rem;
+    font-weight: 500;
+    padding: .85rem 1.25rem;
+    text-decoration: none;
+    transition: background .2s ease, border-color .2s ease;
+    text-align: center;
+  }
+  .tier-cta.primary {
+    background: var(--text);
+    color: var(--bg);
+    border: 1px solid var(--text);
+  }
+  .tier-cta.primary:hover { background: var(--link-hover); border-color: var(--link-hover); }
+  .tier-cta.ghost {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--line-2);
+  }
+  .tier-cta.ghost:hover { border-color: var(--text); }
+  .tier-cta.featured {
+    background: var(--ember);
+    color: var(--bg);
+    border: 1px solid var(--ember);
+  }
+  .tier-cta.featured:hover { background: var(--ember-2); border-color: var(--ember-2); }
+
+  /* ── FOUNDING CLIENTS NOTE ───────────────────── */
+  .pricing-note {
+    margin-top: 3.5rem;
+    padding: 2rem;
+    border: 1px dashed var(--line-2);
+    background: var(--surface);
+    max-width: 56ch;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .pricing-note .label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    margin-bottom: .75rem;
+  }
+  .pricing-note .label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .pricing-note p {
+    font-family: var(--font-body);
+    font-size: .95rem;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin: 0;
+  }
+  .pricing-note p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ── COMMITMENTS BAND ────────────────────────── */
+  .commits {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .commits .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .commits .head { margin-bottom: 4rem; }
+  .commits .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .commits .eyebrow em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .commits h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0;
+    max-width: 16ch;
+  }
+  .commits h2 em { font-style: italic; }
+  .commits-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2.5rem;
+  }
+  @media (max-width: 900px) {
+    .commits-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 540px) {
+    .commits-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .commit h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.3rem;
+    line-height: 1.2;
+    letter-spacing: -.015em;
+    color: var(--text);
+    margin: 0 0 .75rem;
+  }
+  .commit h3 em { font-style: italic; }
+  .commit p {
+    font-family: var(--font-body);
+    font-size: .92rem;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin: 0;
+  }
+  .commit p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ── FAQ ────────────────────────────────────── */
+  .faqs {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+  }
+  .faqs .wrap { max-width: 800px; margin: 0 auto; padding: 0 var(--gutter); }
+  .faqs .head { margin-bottom: 4rem; }
+  .faqs .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .faqs .eyebrow em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .faqs h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0;
+    max-width: 16ch;
+  }
+  .faqs h2 em { font-style: italic; }
+  .faq {
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--line);
+  }
+  .faq:last-child { border-bottom: 1px solid var(--line); }
+  .faq h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.4rem;
+    line-height: 1.2;
+    letter-spacing: -.015em;
+    color: var(--text);
+    margin: 0 0 1rem;
+  }
+  .faq h3 em { font-style: italic; }
+  .faq p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 1rem;
+  }
+  .faq p:last-child { margin-bottom: 0; }
+  .faq p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/">Pulse<em>forge</em></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+    <ul>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/case-studies.html">Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/pricing.html" class="active">Pricing</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="eyebrow"><em>Pricing</em> &nbsp;·&nbsp; monthly recurring, no setup fees</div>
+  <h1>Four tiers. <em>Cancel anytime.</em></h1>
+  <p class="deck">
+    Pulseforge bills monthly. No setup fees, no annual contracts, no
+    surprise charges. The system either earns its keep or you walk
+    away — same as you'd treat any other employee.
+  </p>
+</header>
+
+<!-- ── PRICING TIERS ───────────────────────────────── -->
+<section class="std">
+  <div class="wrap">
+
+    <div class="pricing-grid reveal">
+
+      <!-- STARTER -->
+      <div class="tier">
+        <div class="tier-name">Starter</div>
+        <div class="tier-tagline">For solo operators just getting started with outbound.</div>
+        <div class="tier-price"><span class="currency">$</span>500<span class="per"> / mo</span></div>
+        <div class="tier-billing">Billed monthly &nbsp;<em>·</em>&nbsp; cancel anytime</div>
+
+        <ul class="tier-features">
+          <li><strong><em>Lead generation</em></strong> &middot; one vertical, one region</li>
+          <li><strong><em>Outreach</em></strong> &middot; up to 200 emails per month</li>
+          <li><strong><em>Reply triage</em></strong> &middot; Riley reads and routes every reply</li>
+          <li><strong><em>Daily digest</em></strong> &middot; 7am morning brief</li>
+          <li><strong><em>Weekly content</em></strong> &middot; one blog post + one LinkedIn post</li>
+          <li><strong><em>Support</em></strong> &middot; email, 24-hour response</li>
+        </ul>
+
+        <a class="tier-cta ghost" href="/contact.html">Book a call</a>
+      </div>
+
+      <!-- GROWTH (FEATURED) -->
+      <div class="tier featured">
+        <div class="tier-tag">Most popular</div>
+        <div class="tier-name">Growth</div>
+        <div class="tier-tagline">For established service businesses ready to scale outbound.</div>
+        <div class="tier-price"><span class="currency">$</span>1<em>,</em>000<span class="per"> / mo</span></div>
+        <div class="tier-billing">Billed monthly &nbsp;<em>·</em>&nbsp; cancel anytime</div>
+
+        <ul class="tier-features">
+          <li><strong>Everything in <em>Starter</em></strong></li>
+          <li><strong><em>Lead generation</em></strong> &middot; up to three verticals, two regions</li>
+          <li><strong><em>Outreach</em></strong> &middot; up to 600 emails per month</li>
+          <li><strong><em>Voice setter calls</em></strong> &middot; Cal calls warm leads within an hour</li>
+          <li><strong><em>Google review monitoring</em></strong> &middot; Vera flags new reviews same-day</li>
+          <li><strong><em>Full content schedule</em></strong> &middot; blog, LinkedIn, Facebook, GBP weekly</li>
+          <li><strong><em>Support</em></strong> &middot; email and Slack channel</li>
+        </ul>
+
+        <a class="tier-cta featured" href="/contact.html">Book a call</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="tier">
+        <div class="tier-name">Pro</div>
+        <div class="tier-tagline">For service businesses scaling across multiple markets.</div>
+        <div class="tier-price"><span class="currency">$</span>2<em>,</em>000<span class="per"> / mo</span></div>
+        <div class="tier-billing">Billed monthly &nbsp;<em>·</em>&nbsp; cancel anytime</div>
+
+        <ul class="tier-features">
+          <li><strong>Everything in <em>Growth</em></strong></li>
+          <li><strong><em>Lead generation</em></strong> &middot; up to six verticals, multi-region</li>
+          <li><strong><em>Outreach</em></strong> &middot; up to 1,500 emails per month</li>
+          <li><strong><em>Custom website</em></strong> &middot; designed, built, hosted, included</li>
+          <li><strong><em>Custom visuals</em></strong> &middot; Sketch generates per-post creative</li>
+          <li><strong><em>Setter management</em></strong> &middot; we hire and train your appointment setter</li>
+          <li><strong><em>Support</em></strong> &middot; email, Slack, monthly strategy call</li>
+        </ul>
+
+        <a class="tier-cta primary" href="/contact.html">Book a call</a>
+      </div>
+
+      <!-- ENTERPRISE -->
+      <div class="tier">
+        <div class="tier-name">Enterprise</div>
+        <div class="tier-tagline">For multi-location operators and multi-brand portfolios.</div>
+        <div class="tier-price custom"><em>Let's talk.</em></div>
+        <div class="tier-billing">Custom engagement &nbsp;<em>·</em>&nbsp; quarterly billing available</div>
+
+        <ul class="tier-features">
+          <li><strong>Everything in <em>Pro</em></strong></li>
+          <li><strong><em>Bespoke agent customization</em></strong> &middot; tuned to your specific operations</li>
+          <li><strong><em>Multi-account provisioning</em></strong> &middot; one engagement, multiple brands or locations</li>
+          <li><strong><em>Custom integrations</em></strong> &middot; we build to your existing stack</li>
+          <li><strong><em>Dedicated account lead</em></strong> &middot; founder-level engagement</li>
+          <li><strong><em>White-label option</em></strong> &middot; if you want to brand the system as yours</li>
+        </ul>
+
+        <a class="tier-cta ghost" href="/contact.html">Get a quote</a>
+      </div>
+
+    </div>
+
+    <div class="pricing-note reveal">
+      <div class="label"><em>A note on</em> founding clients</div>
+      <p>
+        Pulseforge is taking on a small number of <em>founding
+        clients</em> at preferred pricing for the duration of the
+        initial term. If you're an early-adopter operator who wants
+        a partnership over a vendor relationship, mention it on the
+        strategy call and we'll see if there's a fit.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── COMMITMENTS ─────────────────────────────────── -->
+<section class="commits reveal">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><em>What's true</em> for every tier</div>
+      <h2>The same <em>commitments.</em></h2>
+    </div>
+    <div class="commits-grid">
+
+      <div class="commit">
+        <h3><em>No</em> setup fees.</h3>
+        <p>
+          Onboarding is part of the engagement. You pay your first
+          month, we build your account, the system goes live within
+          a week.
+        </p>
+      </div>
+
+      <div class="commit">
+        <h3>Cancel <em>anytime.</em></h3>
+        <p>
+          Monthly billing, seven-day notice to non-renew. No annual
+          lock-ins. If the work isn't producing, you walk.
+        </p>
+      </div>
+
+      <div class="commit">
+        <h3>Founder <em>access.</em></h3>
+        <p>
+          Every client gets a direct line to Jacob. Email, Slack,
+          sometimes a call. Not a ticketing system, not a junior rep.
+        </p>
+      </div>
+
+      <div class="commit">
+        <h3>Daily <em>transparency.</em></h3>
+        <p>
+          You get a 7am digest every weekday showing what the agents
+          did, what came back, and what needs you. Nothing hidden,
+          nothing inflated.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ─────────────────────────────────────────── -->
+<section class="faqs reveal">
+  <div class="wrap">
+    <div class="head">
+      <div class="eyebrow"><em>Common</em> questions</div>
+      <h2>Things people <em>ask.</em></h2>
+    </div>
+
+    <div class="faq">
+      <h3>What if I'm not sure which tier <em>fits?</em></h3>
+      <p>
+        Book the strategy call. Fifteen minutes, free, no pitch deck.
+        We'll look at your business, your offer, and your goals, and
+        recommend the right tier. Sometimes we'll recommend starting
+        at Starter and moving up. Sometimes we'll tell you Pulseforge
+        isn't the right fit at all. Either is fair.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Are there <em>setup fees</em> or annual commitments?</h3>
+      <p>
+        No on both. Onboarding is included in your first month.
+        Billing is monthly, and you can cancel with seven days' notice
+        before the next billing cycle. We've structured it this way
+        because the system either earns its keep or you walk.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Do you offer <em>free trials?</em></h3>
+      <p>
+        Not as a published policy, but yes in specific cases. If
+        you're an early-adopter operator in a vertical or market
+        we're trying to learn, mention it on the call. The current
+        founding-client cohort all started on trial structures.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>What if I'm an <em>agency</em> looking to white-label?</h3>
+      <p>
+        Talk to us about Enterprise. We've built Pulseforge to
+        operate cleanly across multiple brand identities, and the
+        white-label option exists for that reason. Margins and
+        terms are quoted per engagement.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>What guarantees can you make about <em>results?</em></h3>
+      <p>
+        None. No agency that's being honest can guarantee specific
+        results — too much depends on your offer, your market, and
+        the quality of your follow-up. What we can promise is the
+        <em>work itself</em>: agents running, sends going out,
+        replies being routed, content being published, and a daily
+        digest showing all of it. The work happens whether or not
+        the leads close.
+      </p>
+    </div>
+
+    <div class="faq">
+      <h3>Where does my <em>data</em> go?</h3>
+      <p>
+        Into our hosted database, with strict separation per client.
+        It's used exclusively to deliver your services and never
+        sold, never used to train anything, never combined with other
+        clients' data. The full handling rules are in our
+        <a href="/privacy.html">Privacy Policy</a>.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── CLOSING ─────────────────────────────────────── -->
+<section class="std reveal">
+  <div class="wrap closing">
+    <h2 class="closing-h2">Pick the <em>tier</em> — or talk first.</h2>
+    <p>
+      If you know what you want, click the button on the right tier
+      and book the call. If you don't, click any of them and we'll
+      figure it out together.
+    </p>
+    <a class="btn" href="/contact.html">Book a strategy call</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a class="brand" href="/">Pulse<em>forge</em></a>
+      <p>An AI agency for local service businesses. Built in Manchester, New Hampshire.</p>
+    </div>
+    <div class="foot-col">
+      <h4><em>Agency</em></h4>
+      <ul>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/case-studies.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Contact</em></h4>
+      <ul>
+        <li><a href="/contact.html">Book a call</a></li>
+        <li><a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jacob-maynard">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Legal</em></h4>
+      <ul>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 &nbsp;·&nbsp; Pulseforge LLC &nbsp;·&nbsp; <em>Manchester, NH</em></div>
+    <div><em>System</em> v0.6 &nbsp;·&nbsp; 15 agents</div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

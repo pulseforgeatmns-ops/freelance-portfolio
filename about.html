@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>About — Pulseforge</title>
+<meta name="description" content="Pulseforge is an AI agency for local service businesses, built in Manchester, New Hampshire. Founded by Jacob Maynard.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,700,700i&f[]=switzer@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<style>
+  /* ── ABOUT PAGE ────────────────────────────────── */
+  .intro {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+  }
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  @media (max-width: 900px) {
+    .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .intro-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+  .intro-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .intro-body {
+    font-family: var(--font-body);
+    font-size: var(--t-lead);
+    line-height: 1.55;
+    color: var(--text);
+    max-width: 56ch;
+  }
+  .intro-body p { margin: 0 0 1.5rem; }
+  .intro-body p:last-child { margin-bottom: 0; }
+  .intro-body em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ── FOUNDER BLOCK ─────────────────────────────── */
+  .founder {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+  }
+  .founder-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 5rem;
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  @media (max-width: 900px) {
+    .founder-grid { grid-template-columns: 1fr; gap: 2rem; }
+  }
+  .founder h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 1rem;
+  }
+  .founder h2 em { font-style: italic; }
+  .founder .role {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+  .founder .role em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .founder-bio {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    max-width: 60ch;
+  }
+  .founder-bio p { margin: 0 0 1.25rem; }
+  .founder-bio p:last-child { margin-bottom: 0; }
+  .founder-bio em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+  .founder-bio strong { color: var(--text); font-weight: 500; }
+  .founder-meta {
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    display: flex;
+    gap: 3rem;
+    flex-wrap: wrap;
+    font-family: var(--font-body);
+    font-size: var(--t-small);
+    color: var(--text-2);
+  }
+  .founder-meta strong {
+    display: block;
+    color: var(--text-3);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    margin-bottom: .35rem;
+    letter-spacing: .02em;
+  }
+  .founder-meta strong em {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+  }
+
+  /* ── TEAM (the agents) ─────────────────────────── */
+  .team-head {
+    padding: var(--section-y) 0 4rem;
+    border-top: 1px solid var(--line);
+  }
+  .team-head .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .team-head .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: .02em;
+    margin-bottom: 1.5rem;
+  }
+  .team-head .eyebrow em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .team-head h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 1.5rem;
+    max-width: 18ch;
+  }
+  .team-head h2 em { font-style: italic; }
+  .team-head .deck {
+    font-family: var(--font-body);
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    color: var(--text-2);
+    max-width: 60ch;
+    margin: 0;
+  }
+  .team-head .deck em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* roster table */
+  .roster {
+    padding-bottom: var(--section-y);
+  }
+  .roster .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .roster-row {
+    display: grid;
+    grid-template-columns: 100px 200px 1fr auto;
+    gap: 2.5rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+    transition: padding .2s ease;
+  }
+  .roster-row:last-child { border-bottom: 1px solid var(--line); }
+  .roster-row:hover { padding-left: 1rem; padding-right: 1rem; }
+  @media (max-width: 820px) {
+    .roster-row {
+      grid-template-columns: 1fr;
+      gap: .5rem;
+      padding: 1.5rem 0;
+    }
+  }
+  .roster-num {
+    font-family: var(--font-mono);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+  .roster-name {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.1;
+    letter-spacing: -.02em;
+    color: var(--text);
+  }
+  .roster-name em { font-style: italic; }
+  .roster-role {
+    font-family: var(--font-body);
+    font-size: .98rem;
+    line-height: 1.5;
+    color: var(--text-2);
+    max-width: 50ch;
+  }
+  .roster-status {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--text-3);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .roster-status.live { color: var(--ember); }
+  .roster-status.live::before {
+    content: "";
+    display: inline-block;
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--ember);
+    box-shadow: 0 0 8px var(--ember);
+    margin-right: .5rem;
+    vertical-align: middle;
+  }
+  @media (max-width: 820px) { .roster-status { margin-top: .25rem; } }
+
+  /* ── PRINCIPLES BAND ───────────────────────────── */
+  .principles {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .principles .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .principles-head {
+    margin-bottom: 4rem;
+  }
+  .principles-head .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: .02em;
+    margin-bottom: 1.5rem;
+  }
+  .principles-head .eyebrow em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .principles-head h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0;
+    max-width: 18ch;
+  }
+  .principles-head h2 em { font-style: italic; }
+  .principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  @media (max-width: 900px) {
+    .principles-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+  .principle .num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--text-3);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .principle h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+  .principle h3 em { font-style: italic; }
+  .principle p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin: 0;
+  }
+  .principle p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* ── LOCATION BAND ─────────────────────────────── */
+  .location {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+  }
+  .location .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); text-align: center; }
+  .location .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    font-weight: 500;
+    color: var(--text-3);
+    letter-spacing: .02em;
+    margin-bottom: 2rem;
+  }
+  .location .eyebrow em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .location h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-l);
+    line-height: 1;
+    letter-spacing: -.04em;
+    margin: 0 auto 2.5rem;
+    max-width: 16ch;
+  }
+  .location h2 em { font-style: italic; }
+  .location p {
+    font-family: var(--font-body);
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    color: var(--text-2);
+    max-width: 56ch;
+    margin: 0 auto;
+  }
+  .location p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/">Pulse<em>forge</em></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+    <ul>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/case-studies.html">Work</a></li>
+      <li><a href="/about.html" class="active">About</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="eyebrow"><em>About</em> &nbsp;·&nbsp; the agency, the founder, the team</div>
+  <h1>An agency built around <em>agents.</em></h1>
+  <p class="deck">
+    Pulseforge is fifteen named software agents, one founder, and a
+    handful of small businesses we work for. We're based in Manchester,
+    New Hampshire — and we hire ourselves out by the month.
+  </p>
+</header>
+
+<!-- ── INTRO ───────────────────────────────────────── -->
+<section class="intro reveal">
+  <div class="intro-grid">
+    <div>
+      <div class="intro-label"><em>01</em> &nbsp;·&nbsp; What we do</div>
+    </div>
+    <div class="intro-body">
+      <p>
+        Pulseforge is an AI marketing agency for local service businesses —
+        contractors, cleaners, restaurants, auto shops, med spas, fitness
+        studios. The kind of operators who don't have a marketing department,
+        don't want to learn five new tools, and need a system that runs
+        without being managed.
+      </p>
+      <p>
+        We do the work most agencies promise but few deliver:
+        finding prospects, sending the right outreach, monitoring the
+        replies, posting the content, watching the reviews, and reporting
+        back every morning. The difference is how we do it. Fifteen
+        specialized agents — each named, each with a defined role,
+        each accountable to a daily log — handle the work that two or
+        three human employees would otherwise do.
+      </p>
+      <p>
+        We aren't a tool you use. We're a <em>team</em> you hire.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOUNDER ─────────────────────────────────────── -->
+<section class="founder reveal">
+  <div class="founder-grid">
+    <div>
+      <div class="role"><em>02</em> &nbsp;·&nbsp; Founder</div>
+      <h2>Jacob <em>Maynard.</em></h2>
+    </div>
+    <div class="founder-bio">
+      <p>
+        I spent more than a decade running restaurants and a small
+        cleaning company before I built Pulseforge. That experience is
+        the entire reason this agency exists.
+      </p>
+      <p>
+        Local service operators don't need another piece of software.
+        They need someone who's been the one rotating the floor on a
+        Saturday night, the one calling a no-show employee at 7am, the
+        one who has to make payroll work with a two-week-out invoice.
+        Most marketing agencies I encountered as an operator either
+        didn't understand the work, didn't understand the margins, or
+        sold us packages built for businesses ten times our size.
+      </p>
+      <p>
+        Pulseforge is the agency I would have hired. We <em>only</em>
+        work with local service businesses. We charge by the month,
+        not the campaign. We deliver one digest a day with what the
+        agents did, what came back, and what needs you. And we
+        do the work — not the slide deck about the work.
+      </p>
+      <p>
+        I'm still based in Manchester, NH. I still bartend a few shifts
+        a week. I built every agent that runs this agency, by hand,
+        from scratch. That's not a brag — it's the model. The agency
+        is the system, and the system is built by someone who actually
+        knows what it's like to be the client.
+      </p>
+
+      <div class="founder-meta">
+        <div>
+          <strong><em>Based</em></strong>
+          Manchester, NH
+        </div>
+        <div>
+          <strong><em>Background</em></strong>
+          Restaurants, cleaning, hospitality
+        </div>
+        <div>
+          <strong><em>Built</em></strong>
+          15 agents, in production
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── TEAM HEAD ───────────────────────────────────── -->
+<section class="team-head reveal">
+  <div class="wrap">
+    <div class="eyebrow"><em>03</em> &nbsp;·&nbsp; The team</div>
+    <h2>Meet the <em>agents.</em></h2>
+    <p class="deck">
+      Every agent has a name, a job, and a logged record of what they
+      did today. They report to each other through a shared database
+      and to you through a daily morning digest. Below: the full
+      roster currently in production.
+    </p>
+  </div>
+</section>
+
+<!-- ── ROSTER ──────────────────────────────────────── -->
+<section class="roster reveal">
+  <div class="wrap">
+
+    <div class="roster-row">
+      <div class="roster-num">01</div>
+      <div class="roster-name">Scout</div>
+      <div class="roster-role">Finds prospects matching the Ideal Customer Profile by combing search results, business directories, and verified contact databases nightly.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">02</div>
+      <div class="roster-name">Emmett</div>
+      <div class="roster-role">Sends four-step cold email sequences vertical by vertical, pacing one business day apart and enforcing the send window.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">03</div>
+      <div class="roster-name">Riley</div>
+      <div class="roster-role">Reads inbound email replies, classifies them as warm, objection, unsubscribe, or other, and routes each to the right next step.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">04</div>
+      <div class="roster-name">Max</div>
+      <div class="roster-role">Coordinates execution across the other agents — the supervisor that keeps the system honest and keeps work moving.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">05</div>
+      <div class="roster-name">Vera</div>
+      <div class="roster-role">Monitors Google Business Profile reviews and surfaces new ones with sentiment context for the client to respond.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">06</div>
+      <div class="roster-name">Paige</div>
+      <div class="roster-role">Publishes weekly content across LinkedIn, Facebook, the company blog, and Google Business Profile posts.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">07</div>
+      <div class="roster-name">Cal</div>
+      <div class="roster-role">Places follow-up voice calls to warm leads within the hour, using a natural-sounding setter voice tuned per vertical.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">08</div>
+      <div class="roster-name">Sam</div>
+      <div class="roster-role">Manages the client CRM, syncing prospect data, status changes, and engagement history across the platform.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">09</div>
+      <div class="roster-name">Link</div>
+      <div class="roster-role">Builds and maintains the lead pipeline by joining and deduplicating data across sources nightly.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">10</div>
+      <div class="roster-name">Faye</div>
+      <div class="roster-role">Validates prospect data — checking emails, filtering junk, rejecting invalid records before they enter the pipeline.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">11</div>
+      <div class="roster-name">Ivy</div>
+      <div class="roster-role">Watches operational signals — opens, clicks, replies — to flag warm prospects for setter follow-up.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">12</div>
+      <div class="roster-name">Penny</div>
+      <div class="roster-role">Handles billing, invoicing, and Stripe sync across all active clients on the platform.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">13</div>
+      <div class="roster-name">Sketch</div>
+      <div class="roster-role">Generates visual content — social images, blog graphics, ad creative — as needed by the publishing schedule.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">14</div>
+      <div class="roster-name">Pulse</div>
+      <div class="roster-role">Monitors the system three times daily, classifies the health of every agent, and alerts only when it's earned.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+    <div class="roster-row">
+      <div class="roster-num">15</div>
+      <div class="roster-name">Rex</div>
+      <div class="roster-role">Compiles the weekly digest — the agency's recap of what happened across all clients over the past seven days.</div>
+      <div class="roster-status live">Live</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── PRINCIPLES ──────────────────────────────────── -->
+<section class="principles reveal">
+  <div class="wrap">
+    <div class="principles-head">
+      <div class="eyebrow"><em>04</em> &nbsp;·&nbsp; How we work</div>
+      <h2>Four <em>principles.</em></h2>
+    </div>
+    <div class="principles-grid">
+
+      <div class="principle">
+        <span class="num"><em>i.</em></span>
+        <h3>Do the <em>work.</em></h3>
+        <p>
+          We don't pitch decks, we ship systems. Every engagement
+          starts with us building, not strategizing. Strategy without
+          execution is what most agencies sell. We sell <em>execution
+          that already happened.</em>
+        </p>
+      </div>
+
+      <div class="principle">
+        <span class="num"><em>ii.</em></span>
+        <h3>Report <em>honestly.</em></h3>
+        <p>
+          Every morning at seven, every client gets a digest of what
+          happened the day before — what worked, what didn't, and
+          what needs their attention. Nothing inflated, nothing
+          buried. If a week is slow, the digest says so.
+        </p>
+      </div>
+
+      <div class="principle">
+        <span class="num"><em>iii.</em></span>
+        <h3>Own the <em>stack.</em></h3>
+        <p>
+          The agents are ours, the database is ours, the deployment
+          is ours. We don't resell another platform with a markup.
+          When something needs to change, we change it — that night,
+          if it matters.
+        </p>
+      </div>
+
+      <div class="principle">
+        <span class="num"><em>iv.</em></span>
+        <h3>Stay <em>local.</em></h3>
+        <p>
+          We work with local service businesses because we understand
+          them. We're based in Manchester. We bartend. We've run
+          floors and managed crews. The <em>operator</em> background
+          is the moat.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── LOCATION ────────────────────────────────────── -->
+<section class="location reveal">
+  <div class="wrap">
+    <div class="eyebrow"><em>05</em> &nbsp;·&nbsp; Where we are</div>
+    <h2>Built in <em>Manchester, NH.</em></h2>
+    <p>
+      The Queen City. New Hampshire's largest, home of more diners
+      and contractors per capita than most state capitals, and the
+      city where Pulseforge was founded. <em>Service businesses
+      built this town</em> — we're proud to work for them.
+    </p>
+  </div>
+</section>
+
+<!-- ── CLOSING ─────────────────────────────────────── -->
+<section class="std reveal">
+  <div class="wrap closing">
+    <h2 class="closing-h2 closing">
+      <em style="font-style: italic;">Now you know us.</em>
+    </h2>
+    <p>
+      Fifteen minutes on a call and we'll know enough about your
+      business to tell you, honestly, whether Pulseforge can help.
+    </p>
+    <a class="btn" href="/contact.html">Book a strategy call</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a class="brand" href="/">Pulse<em>forge</em></a>
+      <p>An AI agency for local service businesses. Built in Manchester, New Hampshire.</p>
+    </div>
+    <div class="foot-col">
+      <h4><em>Agency</em></h4>
+      <ul>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/case-studies.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Contact</em></h4>
+      <ul>
+        <li><a href="/contact.html">Book a call</a></li>
+        <li><a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jacob-maynard">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Legal</em></h4>
+      <ul>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 &nbsp;·&nbsp; Pulseforge LLC &nbsp;·&nbsp; <em>Manchester, NH</em></div>
+    <div><em>System</em> v0.6 &nbsp;·&nbsp; 15 agents</div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

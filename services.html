@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Services — Pulseforge</title>
+<meta name="description" content="What Pulseforge does, agent by agent: lead generation, outreach, operations, and content for local service businesses.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,700,700i&f[]=switzer@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<style>
+  /* ── SERVICES PAGE ───────────────────────────────── */
+
+  /* alternate cap layout — image on right by default, left when .flipped */
+  .cap.flipped > div:first-child { order: 2; }
+  .cap.flipped > div:last-child  { order: 1; }
+  @media (max-width: 900px) {
+    .cap.flipped > div:first-child,
+    .cap.flipped > div:last-child { order: initial; }
+  }
+
+  /* deliverables list (replaces the simple ul on services) */
+  .deliverables {
+    list-style: none;
+    padding: 0;
+    margin: 2.5rem 0 0;
+  }
+  .deliverables li {
+    padding: 1rem 0;
+    border-top: 1px solid var(--line);
+    font-family: var(--font-body);
+    font-size: .95rem;
+    color: var(--text-2);
+    line-height: 1.5;
+    display: flex;
+    gap: 1.25rem;
+  }
+  .deliverables li:last-child { border-bottom: 1px solid var(--line); }
+  .deliverables li::before {
+    content: "→";
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--ember);
+    flex-shrink: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  .deliverables li em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* agents-in-band badges */
+  .agents-in {
+    display: flex;
+    gap: .75rem;
+    flex-wrap: wrap;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .agents-in .badge {
+    font-family: var(--font-mono);
+    font-size: .7rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    padding: .35rem .75rem;
+    border: 1px solid var(--line-2);
+    background: transparent;
+    border-radius: 0;
+  }
+  .agents-in .label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    margin-right: .5rem;
+    align-self: center;
+  }
+  .agents-in .label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+
+  /* engagement model strip */
+  .model {
+    padding: var(--section-y) 0;
+    border-top: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .model .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .model-head { margin-bottom: 4rem; }
+  .model-head .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .model-head .eyebrow em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .model-head h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0;
+    max-width: 18ch;
+  }
+  .model-head h2 em { font-style: italic; }
+  .model-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+  }
+  @media (max-width: 900px) {
+    .model-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  }
+  .model-item .step {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--text-3);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    display: block;
+  }
+  .model-item h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.6rem;
+    line-height: 1.2;
+    letter-spacing: -.02em;
+    margin: 0 0 1rem;
+    color: var(--text);
+  }
+  .model-item h3 em { font-style: italic; }
+  .model-item p {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text-2);
+    margin: 0 0 1rem;
+  }
+  .model-item p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+  .model-item .timing {
+    font-family: var(--font-mono);
+    font-size: .72rem;
+    color: var(--ember);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/">Pulse<em>forge</em></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+    <ul>
+      <li><a href="/services.html" class="active">Services</a></li>
+      <li><a href="/case-studies.html">Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="eyebrow"><em>Services</em> &nbsp;·&nbsp; what the agency actually does</div>
+  <h1>Four capabilities. <em>One team.</em></h1>
+  <p class="deck">
+    Lead generation, outreach, operations, and content — handled by
+    fifteen agents, reporting to one founder, working twenty-four hours
+    a day. Here's what each part of the system does, and what you get.
+  </p>
+</header>
+
+<!-- ── 01 · LEAD GENERATION ─────────────────────────── -->
+<section class="std">
+  <div class="wrap cap reveal">
+    <div>
+      <div class="cap-label"><em>01</em> &nbsp;·&nbsp; Lead generation</div>
+      <h2>Pipeline that <em>finds itself.</em></h2>
+      <p>
+        Every night, Scout combs search engine results, business
+        directories, and Google Places for prospects matching your
+        Ideal Customer Profile. Faye and Link enrich those with
+        verified business emails, dedupe against your existing pipeline,
+        and reject the junk before it ever reaches your CRM.
+      </p>
+      <p>
+        The result lands in your dashboard scored, sorted, and
+        contactable — no spreadsheets, no manual research, no list-
+        buying.
+      </p>
+
+      <ul class="deliverables">
+        <li><strong><em>Nightly prospect sweeps</em></strong> &nbsp;·&nbsp; up to six verticals, two regions, twenty to seventy prospects per run</li>
+        <li><strong><em>Verified emails</em></strong> &nbsp;·&nbsp; sourced via Hunter and Prospeo, validated, deliverable</li>
+        <li><strong><em>ICP scoring</em></strong> &nbsp;·&nbsp; every prospect rated 0–100 against your defined target</li>
+        <li><strong><em>Junk rejection</em></strong> &nbsp;·&nbsp; an aggressive validator filters out roughly forty percent of raw results</li>
+        <li><strong><em>CSV + dashboard delivery</em></strong> &nbsp;·&nbsp; or piped straight into your CRM</li>
+      </ul>
+
+      <div class="agents-in">
+        <span class="label"><em>Agents</em></span>
+        <span class="badge">Scout</span>
+        <span class="badge">Faye</span>
+        <span class="badge">Link</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-top">
+        <span class="title"><em>scout</em> · live</span>
+        <span>last_run 12:54 UTC</span>
+      </div>
+      <div class="row"><span>Restaurant · Nashua NH</span><span class="num">9</span></div>
+      <div class="row"><span>Cleaning · Manchester NH</span><span class="num">14</span></div>
+      <div class="row"><span>Auto repair · Concord NH</span><span class="num">7</span></div>
+      <div class="row"><span>Salon · Bedford NH</span><span class="num">11</span></div>
+      <div class="row"><span>Contractor · Charleston WV</span><span class="num">6</span></div>
+      <div class="row"><span>Med spa · Nashville TN</span><span class="num">12</span></div>
+      <div class="row"><span class="rule">─────────────────────</span><span></span></div>
+      <div class="row"><span>prospects saved</span><span class="num">59</span></div>
+      <div class="row"><span>rejected as junk</span><span class="num">23</span></div>
+      <div class="row"><span>duplicates skipped</span><span class="num">21</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 02 · OUTREACH ────────────────────────────────── -->
+<section class="std">
+  <div class="wrap cap flipped reveal">
+    <div>
+      <div class="cap-label"><em>02</em> &nbsp;·&nbsp; Outreach</div>
+      <h2>Outreach that <em>answers itself.</em></h2>
+      <p>
+        Emmett runs a four-step cold email sequence pacing one
+        business day apart, throttled to send only during the
+        established window — Tuesday through Thursday, 9am to 2pm.
+        Every send is human-paced, vertical-tuned, and capped per
+        client to protect deliverability.
+      </p>
+      <p>
+        Riley reads every reply and routes it — warm leads to your
+        setter calendar, objections to a response queue, unsubscribes
+        to suppression. Nothing waits for a human until it matters.
+        Cal places a follow-up voice call to warm replies within the
+        hour, using a natural-sounding setter voice tuned to the
+        vertical.
+      </p>
+
+      <ul class="deliverables">
+        <li><strong><em>Four-step sequences</em></strong> &nbsp;·&nbsp; Day 0, Day 4, Day 8, Day 13, tested cadence</li>
+        <li><strong><em>Reply classification</em></strong> &nbsp;·&nbsp; warm, objection, unsubscribe, out-of-office, routed automatically</li>
+        <li><strong><em>Warm-signal flagging</em></strong> &nbsp;·&nbsp; two opens in seven days promotes a prospect to setter follow-up</li>
+        <li><strong><em>Voice setter calls</em></strong> &nbsp;·&nbsp; placed within an hour of a warm reply, fully logged</li>
+        <li><strong><em>Per-client send caps</em></strong> &nbsp;·&nbsp; 40 sends per day per client, protecting your sender reputation</li>
+      </ul>
+
+      <div class="agents-in">
+        <span class="label"><em>Agents</em></span>
+        <span class="badge">Emmett</span>
+        <span class="badge">Riley</span>
+        <span class="badge">Cal</span>
+        <span class="badge">Ivy</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-top">
+        <span class="title"><em>emmett</em> + <em>riley</em></span>
+        <span>this week</span>
+      </div>
+      <div class="row"><span>step_0 sends</span><span class="num">186</span></div>
+      <div class="row"><span>step_1 follow-ups</span><span class="num">94</span></div>
+      <div class="row"><span>step_2 follow-ups</span><span class="num">51</span></div>
+      <div class="row"><span>step_3 closers</span><span class="num">23</span></div>
+      <div class="row"><span class="rule">─────────────────────</span><span></span></div>
+      <div class="row"><span>replies received</span><span class="num">31</span></div>
+      <div class="row"><span>warm classified</span><span class="num">12</span></div>
+      <div class="row"><span>discovery booked</span><span class="num">4</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 03 · OPERATIONS ──────────────────────────────── -->
+<section class="std">
+  <div class="wrap cap reveal">
+    <div>
+      <div class="cap-label"><em>03</em> &nbsp;·&nbsp; Operations</div>
+      <h2>Reporting that <em>briefs itself.</em></h2>
+      <p>
+        Max coordinates execution across the agency — making sure every
+        agent runs when it should, escalating anomalies, keeping work
+        moving across all clients. The agency's chief of staff, but
+        software.
+      </p>
+      <p>
+        Pulse monitors the system three times daily — 9am, noon, 3pm —
+        classifies the health of every agent as critical, warn, or
+        ok, and only alerts when it's earned. Sam keeps the CRM in
+        sync. Penny handles billing. Rex compiles a weekly recap of
+        what happened across all clients. The system reports on itself.
+      </p>
+
+      <ul class="deliverables">
+        <li><strong><em>Execution coordination</em></strong> &nbsp;·&nbsp; Max keeps every agent on schedule, escalates anomalies, prevents work from falling through</li>
+        <li><strong><em>Three health checks daily</em></strong> &nbsp;·&nbsp; system-wide monitoring with alert classification</li>
+        <li><strong><em>Weekly digest</em></strong> &nbsp;·&nbsp; Rex compiles a Sunday recap of the week's activity across every client</li>
+        <li><strong><em>CRM sync</em></strong> &nbsp;·&nbsp; prospect status, engagement history, agent activity, all in one view</li>
+        <li><strong><em>Stripe-native billing</em></strong> &nbsp;·&nbsp; transparent monthly invoicing, no surprise fees</li>
+      </ul>
+
+      <div class="agents-in">
+        <span class="label"><em>Agents</em></span>
+        <span class="badge">Max</span>
+        <span class="badge">Pulse</span>
+        <span class="badge">Sam</span>
+        <span class="badge">Penny</span>
+        <span class="badge">Rex</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-top">
+        <span class="title"><em>max</em> · coordination</span>
+        <span>2026-05-31 · live</span>
+      </div>
+      <div class="row"><span>Mountain State Home Innovations</span><span class="num">on schedule</span></div>
+      <div class="row"><span>Whittaker Home Services</span><span class="num">on schedule</span></div>
+      <div class="row"><span>Pulseforge Manchester</span><span class="num">on schedule</span></div>
+      <div class="row"><span>Pulseforge Nashville</span><span class="num">on schedule</span></div>
+      <div class="row"><span class="rule">─────────────────────</span><span></span></div>
+      <div class="row"><span>agents active</span><span class="num">15</span></div>
+      <div class="row"><span>runs orchestrated today</span><span class="num">47</span></div>
+      <div class="row"><span>pulse alert level</span><span class="num">ok</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 04 · CONTENT ─────────────────────────────────── -->
+<section class="std">
+  <div class="wrap cap flipped reveal">
+    <div>
+      <div class="cap-label"><em>04</em> &nbsp;·&nbsp; Content</div>
+      <h2>Content that <em>compounds.</em></h2>
+      <p>
+        Paige publishes weekly across LinkedIn, Facebook, your company
+        blog, and Google Business Profile — vertical-tuned content
+        that reinforces your authority and feeds your SEO. Sketch
+        generates the visuals. Vera monitors your Google reviews and
+        surfaces new ones with context for response.
+      </p>
+      <p>
+        Every post is reviewed before publishing — you stay in the
+        loop without writing the drafts. Over months, this is what
+        compounds your local search ranking, your social proof, and
+        your inbound flow.
+      </p>
+
+      <ul class="deliverables">
+        <li><strong><em>Weekly blog post</em></strong> &nbsp;·&nbsp; researched, drafted, and published to your site</li>
+        <li><strong><em>LinkedIn + Facebook posts</em></strong> &nbsp;·&nbsp; scheduled across the week through Buffer</li>
+        <li><strong><em>Google Business Profile posts</em></strong> &nbsp;·&nbsp; weekly, with photos when supplied</li>
+        <li><strong><em>Custom visuals</em></strong> &nbsp;·&nbsp; generated per post, matched to your brand</li>
+        <li><strong><em>Review monitoring</em></strong> &nbsp;·&nbsp; new Google reviews surfaced with sentiment and response suggestion</li>
+      </ul>
+
+      <div class="agents-in">
+        <span class="label"><em>Agents</em></span>
+        <span class="badge">Paige</span>
+        <span class="badge">Sketch</span>
+        <span class="badge">Vera</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-top">
+        <span class="title"><em>paige</em> · this week</span>
+        <span>publishing log</span>
+      </div>
+      <div class="row"><span>Blog post · Auto repair</span><span class="num">live</span></div>
+      <div class="row"><span>LinkedIn personal · founder</span><span class="num">live</span></div>
+      <div class="row"><span>LinkedIn company page</span><span class="num">live</span></div>
+      <div class="row"><span>Facebook page</span><span class="num">live</span></div>
+      <div class="row"><span>GBP post · MSHI</span><span class="num">queued</span></div>
+      <div class="row"><span class="rule">─────────────────────</span><span></span></div>
+      <div class="row"><span>posts this week</span><span class="num">11</span></div>
+      <div class="row"><span>visuals generated</span><span class="num">8</span></div>
+      <div class="row"><span>reviews flagged</span><span class="num">2</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ENGAGEMENT MODEL ─────────────────────────────── -->
+<section class="model reveal">
+  <div class="wrap">
+    <div class="model-head">
+      <div class="eyebrow"><em>05</em> &nbsp;·&nbsp; How we engage</div>
+      <h2>From <em>call</em> to <em>live.</em></h2>
+    </div>
+
+    <div class="model-grid">
+      <div class="model-item">
+        <span class="step"><em>i.</em></span>
+        <h3>Strategy <em>call.</em></h3>
+        <p>
+          Fifteen minutes. No pitch deck. We look at your existing
+          marketing, your ICP, and your offer. We tell you,
+          honestly, whether Pulseforge can help.
+        </p>
+        <span class="timing">Day 1</span>
+      </div>
+
+      <div class="model-item">
+        <span class="step"><em>ii.</em></span>
+        <h3>Setup &amp; <em>onboarding.</em></h3>
+        <p>
+          You sign a Letter of Authorization. We provision your
+          account, configure your ICP, authenticate the third-party
+          integrations, and kick off the first agent run.
+        </p>
+        <span class="timing">Days 2 – 7</span>
+      </div>
+
+      <div class="model-item">
+        <span class="step"><em>iii.</em></span>
+        <h3>Live <em>operation.</em></h3>
+        <p>
+          Agents run nightly. Digests arrive at 7am. We review
+          performance weekly and adjust. Your only ongoing job is to
+          handle the warm leads we surface.
+        </p>
+        <span class="timing">Ongoing</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING ──────────────────────────────────────── -->
+<section class="std reveal">
+  <div class="wrap closing">
+    <h2 class="closing-h2">See if there's a <em>fit.</em></h2>
+    <p>
+      Fifteen minutes on a call. We'll look at your offer and your
+      market and tell you, honestly, whether the system can help.
+    </p>
+    <a class="btn" href="/contact.html">Book a strategy call</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a class="brand" href="/">Pulse<em>forge</em></a>
+      <p>An AI agency for local service businesses. Built in Manchester, New Hampshire.</p>
+    </div>
+    <div class="foot-col">
+      <h4><em>Agency</em></h4>
+      <ul>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/case-studies.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Contact</em></h4>
+      <ul>
+        <li><a href="/contact.html">Book a call</a></li>
+        <li><a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jacob-maynard">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Legal</em></h4>
+      <ul>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 &nbsp;·&nbsp; Pulseforge LLC &nbsp;·&nbsp; <em>Manchester, NH</em></div>
+    <div><em>System</em> v0.6 &nbsp;·&nbsp; 15 agents</div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

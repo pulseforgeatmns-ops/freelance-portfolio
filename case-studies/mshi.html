@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mountain State Home Innovations — Pulseforge</title>
+<meta name="description" content="How Pulseforge deployed a full 15-agent system for a West Virginia residential and commercial contractor.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,700,700i&f[]=switzer@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<style>
+  /* ── CASE STUDY PAGE ────────────────────────────── */
+  .cs-hero {
+    padding: 12rem var(--gutter) 6rem;
+    border-bottom: 1px solid var(--line);
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .cs-meta {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .cs-meta em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .cs-meta .item strong {
+    display: block;
+    color: var(--text-3);
+    font-size: var(--t-micro);
+    margin-bottom: .3rem;
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+  .cs-meta .item span {
+    color: var(--text);
+    font-size: .95rem;
+  }
+  .cs-meta .item span em {
+    color: var(--text);
+  }
+  .cs-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-l);
+    line-height: .96;
+    letter-spacing: -.04em;
+    margin: 0 0 2rem;
+    max-width: 22ch;
+  }
+  .cs-hero h1 em { font-style: italic; }
+  .cs-hero .deck {
+    font-family: var(--font-body);
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    color: var(--text-2);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .cs-hero .deck em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* big stat band */
+  .stat-band {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .stat-band .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+  @media (max-width: 720px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+  }
+  .big-stat .num {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -.035em;
+    color: var(--text);
+    margin: 0 0 .75rem;
+    display: block;
+  }
+  .big-stat .num em { font-style: italic; }
+  .big-stat .lbl {
+    font-family: var(--font-body);
+    font-size: .82rem;
+    color: var(--text-2);
+    max-width: 20ch;
+    line-height: 1.4;
+  }
+
+  /* narrative section */
+  .narrative {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .narrative .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .narrative .section-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .narrative .section-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .narrative h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 3rem;
+    max-width: 18ch;
+  }
+  .narrative h2 em { font-style: italic; }
+  .narrative-body {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .narrative-body p { margin: 0 0 1.5rem; color: var(--text-2); }
+  .narrative-body p strong { color: var(--text); font-weight: 500; }
+  .narrative-body p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+  .narrative-body p:last-child { margin-bottom: 0; }
+  .narrative-body blockquote {
+    border-left: 2px solid var(--ember);
+    padding: .5rem 0 .5rem 2rem;
+    margin: 2.5rem 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--text);
+    line-height: 1.4;
+    max-width: 50ch;
+  }
+  .narrative-body blockquote cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: .85rem;
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+
+  /* stack used */
+  .stack {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .stack .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .stack h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 1rem;
+  }
+  .stack h2 em { font-style: italic; }
+  .stack .section-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .stack .section-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .stack-list {
+    margin-top: 4rem;
+  }
+  .stack-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .stack-row:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 720px) {
+    .stack-row { grid-template-columns: 1fr; gap: .5rem; }
+  }
+  .stack-row .agent {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .stack-row .role {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text-2);
+  }
+  .stack-row .role em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* what's next */
+  .whats-next {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .whats-next .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .whats-next .section-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .whats-next .section-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .whats-next h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 2rem;
+  }
+  .whats-next h2 em { font-style: italic; }
+  .whats-next p {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 1.25rem;
+  }
+  .whats-next p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  /* nav to next case */
+  .case-nav {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .case-nav .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .case-nav .label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+  .case-nav .label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .case-nav a.next {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-s);
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--text);
+    border: none;
+    transition: color .2s ease, gap .25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .case-nav a.next:hover { color: var(--ember); gap: 1.5rem; }
+  .case-nav a.next em { font-style: italic; }
+  .case-nav a.next::after { content: "→"; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/">Pulse<em>forge</em></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+    <ul>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/case-studies.html" class="active">Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HERO ─────────────────────────────────────────── -->
+<header class="cs-hero">
+  <div class="cs-meta">
+    <div class="item">
+      <strong><em>Client</em></strong>
+      <span>Mountain State Home Innovations</span>
+    </div>
+    <div class="item">
+      <strong><em>Industry</em></strong>
+      <span>Residential &amp; commercial contracting</span>
+    </div>
+    <div class="item">
+      <strong><em>Location</em></strong>
+      <span>Charleston, WV</span>
+    </div>
+    <div class="item">
+      <strong><em>Engagement</em></strong>
+      <span>90-day trial → ongoing</span>
+    </div>
+    <div class="item">
+      <strong><em>Status</em></strong>
+      <span><em>Live</em></span>
+    </div>
+  </div>
+
+  <h1>The contractor who chose agents over <em>a marketing hire.</em></h1>
+  <p class="deck">
+    Brad Hudson and Dustin Allison run Mountain State Home Innovations
+    in West Virginia. When they decided to invest in marketing, they
+    had two options: hire a dedicated person, or hire Pulseforge.
+    They chose Pulseforge.
+  </p>
+</header>
+
+<!-- ── BIG STATS ────────────────────────────────────── -->
+<section class="stat-band reveal">
+  <div class="wrap">
+    <div class="stat-grid">
+      <div class="big-stat">
+        <span class="num">1<em>28</em></span>
+        <span class="lbl">Prospects in the active pipeline</span>
+      </div>
+      <div class="big-stat">
+        <span class="num"><em>31</em></span>
+        <span class="lbl">Touchpoints delivered to date</span>
+      </div>
+      <div class="big-stat">
+        <span class="num"><em>7</em></span>
+        <span class="lbl">Agents working their account</span>
+      </div>
+      <div class="big-stat">
+        <span class="num">90<em>d</em></span>
+        <span class="lbl">Free trial, then $250 / month</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE BUSINESS ─────────────────────────────────── -->
+<section class="narrative reveal">
+  <div class="wrap">
+    <div class="section-label"><em>01</em> &nbsp;·&nbsp; The business</div>
+    <h2>A real <em>operator</em> in the Kanawha Valley.</h2>
+    <div class="narrative-body">
+      <p>
+        Mountain State Home Innovations is the kind of business Pulseforge
+        was built for. Brad and Dustin handle <strong>decks, siding,
+        windows, roofing, emergency repairs</strong> — the work that
+        keeps a West Virginia home livable through hurricane season and
+        Appalachian winters. They're known in their market. Their reviews
+        are strong. Their reputation is local.
+      </p>
+      <p>
+        What they didn't have was a system. Leads came in from referrals
+        and Google Business Profile. Follow-up depended on whichever of
+        them remembered. Months would pass between intentional marketing
+        pushes. Like most service-business operators, they were busy
+        running the work — not building the funnel that brings more
+        of it in.
+      </p>
+      <p>
+        When they evaluated marketing options, the math made sense:
+        a part-time marketing hire would cost $3,000–$5,000 per month
+        and require management. Pulseforge would cost a fraction of
+        that, run itself, and report back every morning. They signed
+        a 90-day free trial.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT WE BUILT ────────────────────────────────── -->
+<section class="narrative reveal">
+  <div class="wrap">
+    <div class="section-label"><em>02</em> &nbsp;·&nbsp; What we built</div>
+    <h2>A seven-agent stack for the <em>Kanawha Valley.</em></h2>
+    <div class="narrative-body">
+      <p>
+        Onboarding started with a Letter of Authorization, an intake
+        form covering their Ideal Customer Profile, and OAuth-based
+        integrations for Gmail and Google Business Profile. From there,
+        Pulseforge deployed seven agents against their account.
+      </p>
+      <p>
+        <strong>Scout</strong> sweeps the Charleston, Huntington, and
+        broader Kanawha Valley markets nightly for homeowners and
+        commercial property managers matching their target profile.
+        <strong>Emmett</strong> sends a four-step cold sequence into
+        warm-up, then maintains the pipeline. <strong>Riley</strong>
+        reads every reply and routes the warm ones to Brad and Dustin
+        the same day. <strong>Vera</strong> watches their Google
+        Business Profile reviews. <strong>Max</strong> compiles a
+        morning digest that hits their inbox at 7am every day — what
+        ran, what came back, what needs them.
+      </p>
+      <p>
+        On top of that, <strong>Paige</strong> publishes weekly content
+        across their channels, and <strong>Rex</strong> coordinates
+        the whole stack. Seven agents, one client, fully live.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE STACK ────────────────────────────────────── -->
+<section class="stack reveal">
+  <div class="wrap">
+    <div class="section-label"><em>03</em> &nbsp;·&nbsp; Stack deployed</div>
+    <h2>Seven agents, <em>working their account.</em></h2>
+
+    <div class="stack-list">
+      <div class="stack-row">
+        <div class="agent">Scout</div>
+        <div class="role">Nightly prospect sweeps across Charleston, Huntington, and the Kanawha Valley — residential and small commercial.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Emmett</div>
+        <div class="role">Four-step cold email sequences pacing one business day apart, capped at 40 sends per day, tuned to the contracting vertical.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Riley</div>
+        <div class="role">Reads every reply, classifies it as warm, objection, or unsubscribe, and routes warm leads to Brad and Dustin the same day.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Vera</div>
+        <div class="role">Monitors their Google Business Profile reviews, surfaces new ones with sentiment context for a same-day response.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Paige</div>
+        <div class="role">Publishes a weekly blog post and social content reinforcing their authority on storm damage repair, deck refresh, and emergency services.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Max</div>
+        <div class="role">Compiles the 7am morning digest — what Scout found, what Emmett sent, what Riley caught, what needs their attention today.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Rex</div>
+        <div class="role">Coordinates the stack — keeps the agents in sync, escalates anomalies, makes sure nothing falls through the cracks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT'S NEXT ──────────────────────────────────── -->
+<section class="whats-next reveal">
+  <div class="wrap">
+    <div class="section-label"><em>04</em> &nbsp;·&nbsp; What's next</div>
+    <h2>From <em>pipeline</em> to <em>closed work.</em></h2>
+    <p>
+      MSHI's trial converts to a $250/month founding-client engagement
+      at the 90-day mark. We're adding Google Business Profile post
+      publishing once API access is granted, expanding Scout into
+      adjacent markets (Beckley, Princeton, southern Ohio), and
+      tightening the Emmett sequence based on response patterns from
+      the first 30 days.
+    </p>
+    <p>
+      The longer goal: replace the cost and management overhead of a
+      part-time marketing hire entirely. By month six, MSHI should
+      have a fully self-sustaining outbound and content engine —
+      one they never have to manage.
+    </p>
+  </div>
+</section>
+
+<!-- ── CASE NAV ─────────────────────────────────────── -->
+<section class="case-nav reveal">
+  <div class="wrap">
+    <div>
+      <div class="label"><em>Next case</em> &nbsp;·&nbsp; 2026</div>
+      <a class="next" href="/case-studies/whittaker.html">Whittaker Home Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING ──────────────────────────────────────── -->
+<section class="std reveal">
+  <div class="wrap closing">
+    <h2 class="closing-h2">Could be <em>your</em> story.</h2>
+    <p>
+      Fifteen minutes. We'll look at your market and tell you,
+      honestly, whether the system can do for you what it's doing
+      for Brad and Dustin.
+    </p>
+    <a class="btn" href="/contact.html">Book a strategy call</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a class="brand" href="/">Pulse<em>forge</em></a>
+      <p>An AI agency for local service businesses. Built in Manchester, New Hampshire.</p>
+    </div>
+    <div class="foot-col">
+      <h4><em>Agency</em></h4>
+      <ul>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/case-studies.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Contact</em></h4>
+      <ul>
+        <li><a href="/contact.html">Book a call</a></li>
+        <li><a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jacob-maynard">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Legal</em></h4>
+      <ul>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 &nbsp;·&nbsp; Pulseforge LLC &nbsp;·&nbsp; <em>Manchester, NH</em></div>
+    <div><em>System</em> v0.6 &nbsp;·&nbsp; 15 agents</div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>

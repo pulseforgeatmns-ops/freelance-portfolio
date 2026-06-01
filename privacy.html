@@ -1,107 +1,367 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy | Pulseforge</title>
-  <meta name="description" content="Pulseforge privacy policy for business contact information, email outreach, and SMS communications.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #242424;
-      --purple: #6030b1;
-      --text: #f5f2ff;
-      --muted: rgba(245, 242, 255, 0.72);
-      --line: rgba(255, 255, 255, 0.12);
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: 'Lato', Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.65;
-    }
-    .page {
-      width: min(860px, calc(100% - 40px));
-      margin: 0 auto;
-      padding: 56px 0 72px;
-    }
-    .brand {
-      color: var(--purple);
-      font-size: 0.82rem;
-      font-weight: 900;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
-    .panel {
-      border: 1px solid var(--line);
-      border-top: 4px solid var(--purple);
-      border-radius: 10px;
-      padding: clamp(28px, 5vw, 48px);
-      background: rgba(255, 255, 255, 0.035);
-    }
-    h1 {
-      margin: 0 0 12px;
-      font-size: clamp(2rem, 5vw, 3.3rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-    }
-    .updated {
-      color: var(--muted);
-      margin-bottom: 34px;
-    }
-    h2 {
-      color: var(--text);
-      font-size: 1.05rem;
-      margin: 30px 0 10px;
-    }
-    p, li { color: var(--muted); }
-    ul { padding-left: 1.2rem; }
-    a { color: var(--text); text-decoration-color: var(--purple); text-underline-offset: 4px; }
-    .footer {
-      border-top: 1px solid var(--line);
-      margin-top: 36px;
-      padding-top: 20px;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Privacy Policy — Pulseforge</title>
+<meta name="description" content="How Pulseforge collects, uses, and protects information, including data accessed through the Google Business Profile API on behalf of clients.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,700,700i&f[]=switzer@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
 </head>
 <body>
-  <main class="page">
-    <div class="brand">Pulseforge</div>
-    <section class="panel">
-      <h1>Privacy Policy</h1>
-      <p class="updated">Last updated: May 24, 2026</p>
 
-      <p>Pulseforge provides AI-powered marketing and outreach services for small businesses. You can contact us at <a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a>.</p>
+<div class="cursor" id="cursor"></div>
 
-      <h2>Information We Collect</h2>
-      <p>We collect business contact information from public directories and business sources for business-to-business outreach. This may include names, company names, job titles, business email addresses, business phone numbers, websites, and publicly available business details.</p>
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/">Pulse<em>forge</em></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+    <ul>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/case-studies.html">Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
 
-      <h2>How We Use Information</h2>
-      <p>We use business contact information to conduct B2B outreach, follow up with business contacts, provide services to clients, maintain internal records, and improve campaign performance.</p>
+<header class="page-header">
+  <div class="eyebrow"><em>Legal</em> &nbsp;·&nbsp; gopulseforge.com/privacy</div>
+  <h1>Privacy <em>Policy.</em></h1>
+  <p class="deck">
+    How we collect, use, and protect information — including data accessed
+    through third-party APIs on behalf of our clients.
+  </p>
+</header>
 
-      <h2>Phone Numbers and SMS</h2>
+<section class="std">
+  <div class="wrap">
+
+    <div class="toc reveal">
+      <div class="toc-label"><em>Sections</em></div>
+      <ol>
+        <li><a href="#who-we-are">Who we are</a></li>
+        <li><a href="#what-we-collect">Information we collect</a></li>
+        <li><a href="#how-we-use">How we use information</a></li>
+        <li><a href="#google-api">Google API data handling</a></li>
+        <li><a href="#third-parties">Third-party services</a></li>
+        <li><a href="#data-sharing">When we share data</a></li>
+        <li><a href="#retention">Data retention</a></li>
+        <li><a href="#security">Security</a></li>
+        <li><a href="#your-rights">Your rights</a></li>
+        <li><a href="#cookies">Cookies and tracking</a></li>
+        <li><a href="#children">Children's privacy</a></li>
+        <li><a href="#changes">Changes to this policy</a></li>
+        <li><a href="#contact-privacy">Contact us</a></li>
+      </ol>
+    </div>
+
+    <article class="prose reveal">
+
+      <div class="updated">
+        <em>Last updated:</em> May 31, 2026 &nbsp;·&nbsp;
+        <em>Effective:</em> May 31, 2026
+      </div>
+
+      <h2 id="who-we-are">Who <em>we are.</em></h2>
+      <p>
+        Pulseforge LLC ("Pulseforge," "we," "us," or "our") is an AI-driven
+        marketing agency based in Manchester, New Hampshire. We provide lead
+        generation, outreach, content publishing, voice setting, and reporting
+        services to local service businesses through a system of fifteen
+        named software agents.
+      </p>
+      <p>
+        This Privacy Policy explains how we handle information across three
+        contexts: (a) visitors to our website at <strong>gopulseforge.com</strong>,
+        (b) prospective customers we identify through public business directories
+        on behalf of our clients, and (c) data accessed through third-party
+        APIs — most notably Google APIs — when our clients have authorized us
+        to manage their accounts.
+      </p>
+
+      <h2 id="what-we-collect">Information <em>we collect.</em></h2>
+
+      <h3>From <em>website visitors</em></h3>
+      <p>
+        When you visit gopulseforge.com, we collect standard analytics data:
+        IP address (anonymized after thirty days), browser type, referring URL,
+        pages viewed, and time on site. If you submit our contact form, we
+        also collect the name, email address, business name, and message you
+        provide.
+      </p>
+
+      <h3>From <em>clients</em></h3>
+      <p>
+        When you engage Pulseforge as a client, we collect business information
+        (legal name, address, billing contact, payment method), authentication
+        credentials necessary to operate the services you've authorized
+        (OAuth tokens, API keys), and operational data generated by your account
+        within our platform.
+      </p>
+
+      <h3>From <em>prospects</em></h3>
+      <p>
+        On behalf of our clients, our Scout agent identifies businesses
+        matching the client's Ideal Customer Profile using publicly available
+        sources — search engine results (SerpAPI), business directories
+        (Google Places), and professional networks. Information collected is
+        limited to: business name, address, phone, website URL, publicly
+        listed employees, and verified business email addresses (sourced via
+        Hunter.io and Prospeo). We do not collect personal information from
+        private accounts, scrape social profiles, or attempt to identify
+        individuals beyond their professional business role.
+      </p>
+
+      <h2 id="how-we-use">How we <em>use information.</em></h2>
+      <p>We use the information described above for the following purposes:</p>
       <ul>
-        <li>We do not sell or share mobile phone numbers with third parties.</li>
-        <li>SMS message frequency varies, typically 1-3 messages per business contact.</li>
-        <li>Message and data rates may apply.</li>
-        <li>To opt out of SMS, reply STOP at any time.</li>
+        <li>To deliver the agency services our clients have engaged us for</li>
+        <li>To send transactional and operational communications to clients (reporting digests, billing, support)</li>
+        <li>To conduct outreach to prospects on behalf of clients, in compliance with applicable email and communication regulations</li>
+        <li>To maintain the security and integrity of our platform</li>
+        <li>To improve our services through aggregated, anonymized analytics</li>
+        <li>To comply with legal obligations</li>
+      </ul>
+      <p>
+        We do not sell information. We do not use information for advertising
+        targeting outside the specific outreach services our clients have
+        authorized.
+      </p>
+
+      <hr>
+
+      <h2 id="google-api">Google API <em>data handling.</em></h2>
+      <p>
+        Several Pulseforge agents access Google APIs on behalf of our clients.
+        This section describes exactly how that access works and what limits
+        apply.
+      </p>
+
+      <h3>Which <em>APIs we use</em></h3>
+      <ul>
+        <li><strong>Google Business Profile API</strong> (Account Management, Business Information, Reviews) — used by our Vera agent to monitor reviews and by our Paige agent to publish posts to client business profiles</li>
+        <li><strong>Gmail API</strong> — used by our Riley agent to read and classify replies to outbound emails sent on behalf of clients</li>
+        <li><strong>Google Sheets API</strong> — used to export lead lists when a client prefers Sheets over CSV</li>
+        <li><strong>Google Places API</strong> — used by our Scout agent for prospect discovery</li>
       </ul>
 
-      <h2>Email Opt Out</h2>
-      <p>To opt out of email outreach, reply UNSUBSCRIBE to any email you receive from us or contact <a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a>.</p>
+      <h3>Authorization <em>and consent</em></h3>
+      <p>
+        We only access Google account data when the account owner has
+        explicitly authorized us via Google's OAuth consent flow. Each client
+        grants access individually, and access is scoped to the minimum
+        permissions necessary to deliver the services they've requested.
+        Clients can revoke our access at any time through their Google
+        account settings, after which we stop accessing the account and delete
+        cached credentials within 24 hours.
+      </p>
 
-      <h2>Contact</h2>
-      <p>For privacy questions or opt-out requests, contact Pulseforge at <a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a>.</p>
+      <h3>What we <em>do with the data</em></h3>
+      <blockquote>
+        Pulseforge uses Google user data solely to provide the specific
+        services authorized by the account owner. We do not transfer, sell,
+        license, or share Google user data with third parties for advertising,
+        analytics, marketing, or any purpose unrelated to delivering the
+        authorized services.
+      </blockquote>
+      <p>
+        Specifically:
+      </p>
+      <ul>
+        <li><strong>Reviews data</strong> accessed through the Google Business Profile API is used only to monitor for new reviews and surface them in client-facing reports. We do not store full review content beyond ninety days unless the client requests longer retention.</li>
+        <li><strong>Email data</strong> accessed through the Gmail API is read only for replies matching outbound campaigns we sent on behalf of the client. We classify the reply (warm, objection, unsubscribe, etc.) and store the classification, sender, subject, and timestamp. Full message bodies are not retained beyond the classification step.</li>
+        <li><strong>Business profile data</strong> (location, hours, posts, photos) is read only to deliver authorized monitoring and publishing services. Changes to a profile are made only when explicitly directed by the client.</li>
+      </ul>
 
-      <div class="footer">Pulseforge · <a href="/">Home</a> · <a href="/terms.html">Terms</a></div>
-    </section>
-  </main>
+      <h3>What we <em>do not do</em></h3>
+      <p>We affirm the following limits without exception:</p>
+      <ul>
+        <li>We do not use Google user data to train machine learning models</li>
+        <li>We do not allow humans to read Google user data, except (a) when a client explicitly authorizes us to review specific content, (b) when necessary to investigate a security incident or fix a bug affecting a small number of accounts, or (c) when legally required</li>
+        <li>We do not retain Google user data after a client offboards from our platform — all stored data is deleted within thirty days of termination</li>
+        <li>We do not combine Google user data with data from other sources to build profiles or enable third-party advertising</li>
+      </ul>
+
+      <h3>Compliance with <em>Google's Limited Use requirements</em></h3>
+      <p>
+        Pulseforge's use of information received from Google APIs adheres to
+        the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>,
+        including the Limited Use requirements. Our handling of Google
+        Business Profile data additionally adheres to Google's
+        <a href="https://developers.google.com/my-business/content/policy">Business Profile API policy</a>.
+      </p>
+
+      <hr>
+
+      <h2 id="third-parties">Third-party <em>services.</em></h2>
+      <p>
+        We rely on the following service providers to operate our platform.
+        Each receives only the data necessary for its function, governed by
+        a data processing agreement where applicable:
+      </p>
+      <ul>
+        <li><strong>Brevo</strong> — transactional and outbound email delivery</li>
+        <li><strong>Twilio</strong> — SMS notifications</li>
+        <li><strong>Bland.ai</strong> — voice outreach calls to consenting prospects</li>
+        <li><strong>Hunter.io</strong> and <strong>Prospeo</strong> — verified business email enrichment</li>
+        <li><strong>SerpAPI</strong> — search result data for prospect discovery</li>
+        <li><strong>Railway</strong> and <strong>PostgreSQL</strong> — application hosting and database</li>
+        <li><strong>Stripe</strong> — payment processing</li>
+        <li><strong>Buffer</strong> — social media scheduling on behalf of clients</li>
+        <li><strong>GitHub</strong> — code hosting and version control</li>
+        <li><strong>Anthropic Claude API</strong> — language model inference for agent reasoning</li>
+      </ul>
+
+      <h2 id="data-sharing">When we <em>share data.</em></h2>
+      <p>
+        We do not sell personal information. We share data only in the
+        following circumstances:
+      </p>
+      <ul>
+        <li><strong>With service providers</strong>, as listed above, only as necessary to deliver our services</li>
+        <li><strong>With clients</strong>, for the prospects and operational data within their own account</li>
+        <li><strong>For legal compliance</strong>, when required by court order, subpoena, or other legal process</li>
+        <li><strong>In a business transaction</strong>, in the event Pulseforge is acquired or merges with another entity, with notice to clients before any data transfer</li>
+      </ul>
+
+      <h2 id="retention">Data <em>retention.</em></h2>
+      <p>
+        We retain different categories of data for different periods:
+      </p>
+      <ul>
+        <li><strong>Website analytics</strong>: thirteen months</li>
+        <li><strong>Contact form submissions</strong>: two years, or until you request deletion</li>
+        <li><strong>Client account data</strong>: for the duration of the engagement plus thirty days</li>
+        <li><strong>Prospect data</strong>: for the duration of the client engagement; deleted at offboarding</li>
+        <li><strong>Google API access tokens</strong>: deleted within twenty-four hours of revocation</li>
+        <li><strong>Operational logs</strong>: ninety days for detailed logs, two years for aggregated metrics</li>
+      </ul>
+
+      <h2 id="security">Security.</h2>
+      <p>
+        We use industry-standard security practices: encrypted database
+        connections, encrypted credentials storage, environment-isolated API
+        keys, and access control limited to authorized personnel. We are not
+        a security-cleared organization and do not handle classified or
+        regulated health information (HIPAA), payment card industry data
+        (PCI), or any data category for which we lack appropriate compliance
+        framework. Clients in industries requiring such handling should not
+        provide that data through Pulseforge.
+      </p>
+
+      <h2 id="your-rights">Your <em>rights.</em></h2>
+      <p>
+        Depending on where you live, you may have the following rights
+        regarding your personal information:
+      </p>
+      <ul>
+        <li><strong>Access</strong> — request a copy of the personal information we hold about you</li>
+        <li><strong>Correction</strong> — request that we correct inaccurate information</li>
+        <li><strong>Deletion</strong> — request that we delete your personal information, subject to legal retention obligations</li>
+        <li><strong>Opt-out</strong> — unsubscribe from any outreach we sent (every outreach email includes an unsubscribe link)</li>
+        <li><strong>Data portability</strong> — receive your data in a portable format</li>
+      </ul>
+      <p>
+        To exercise any of these rights, email
+        <strong>jacob@gopulseforge.com</strong>. We will respond within thirty
+        days.
+      </p>
+
+      <h2 id="cookies">Cookies and <em>tracking.</em></h2>
+      <p>
+        gopulseforge.com uses minimal cookies: a session cookie for site
+        functionality and a privacy-respecting analytics cookie. We do not
+        use cross-site tracking pixels, third-party advertising cookies, or
+        social media tracking beacons. You can disable cookies in your browser
+        without breaking site functionality.
+      </p>
+
+      <h2 id="children">Children's <em>privacy.</em></h2>
+      <p>
+        Pulseforge services are intended for business use by adults aged
+        eighteen or older. We do not knowingly collect information from
+        children under thirteen. If you believe a child has provided
+        information to us, contact jacob@gopulseforge.com and we will delete
+        it promptly.
+      </p>
+
+      <h2 id="changes">Changes to <em>this policy.</em></h2>
+      <p>
+        We may update this Privacy Policy from time to time. When we do,
+        we'll revise the "Last updated" date at the top of this page.
+        Material changes will be communicated to active clients via email at
+        least thirty days before they take effect.
+      </p>
+
+      <h2 id="contact-privacy">Contact <em>us.</em></h2>
+      <p>
+        Questions about this policy, our practices, or your data?
+        Get in touch:
+      </p>
+      <p>
+        <strong>Pulseforge LLC</strong><br>
+        Manchester, New Hampshire<br>
+        <strong>jacob@gopulseforge.com</strong>
+      </p>
+
+    </article>
+
+  </div>
+</section>
+
+<section class="std">
+  <div class="wrap closing reveal">
+    <h2>Have a <em>question?</em></h2>
+    <p>
+      We're a small team and we read everything. Email goes to the
+      founder.
+    </p>
+    <a class="btn" href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a class="brand" href="/">Pulse<em>forge</em></a>
+      <p>An AI agency for local service businesses. Built in Manchester, New Hampshire.</p>
+    </div>
+    <div class="foot-col">
+      <h4><em>Agency</em></h4>
+      <ul>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/case-studies.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Contact</em></h4>
+      <ul>
+        <li><a href="/contact.html">Book a call</a></li>
+        <li><a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jacob-maynard">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Legal</em></h4>
+      <ul>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 &nbsp;·&nbsp; Pulseforge LLC &nbsp;·&nbsp; <em>Manchester, NH</em></div>
+    <div><em>System</em> v0.6 &nbsp;·&nbsp; 15 agents</div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
 </body>
 </html>

@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Whittaker Home Services — Pulseforge</title>
+<meta name="description" content="How Pulseforge's first client engagement became both a deployment and a sales partnership.">
+<meta name="robots" content="index, follow">
+
+<link rel="preconnect" href="https://api.fontshare.com">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=boska@400,400i,500,500i,700,700i&f[]=switzer@300,400,500,600,700&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css">
+
+<style>
+  /* ── CASE STUDY (same as mshi.html) ────────────────── */
+  .cs-hero {
+    padding: 12rem var(--gutter) 6rem;
+    border-bottom: 1px solid var(--line);
+    max-width: var(--container);
+    margin: 0 auto;
+  }
+  .cs-meta {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .cs-meta em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .cs-meta .item strong {
+    display: block;
+    color: var(--text-3);
+    font-size: var(--t-micro);
+    margin-bottom: .3rem;
+    font-weight: 500;
+    letter-spacing: .02em;
+  }
+  .cs-meta .item span {
+    color: var(--text);
+    font-size: .95rem;
+  }
+  .cs-meta .item span em {
+    color: var(--text);
+  }
+  .cs-hero h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-l);
+    line-height: .96;
+    letter-spacing: -.04em;
+    margin: 0 0 2rem;
+    max-width: 22ch;
+  }
+  .cs-hero h1 em { font-style: italic; }
+  .cs-hero .deck {
+    font-family: var(--font-body);
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    color: var(--text-2);
+    max-width: 62ch;
+    margin: 0;
+  }
+  .cs-hero .deck em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .stat-band {
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .stat-band .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+  @media (max-width: 720px) {
+    .stat-grid { grid-template-columns: repeat(2, 1fr); gap: 2.5rem; }
+  }
+  .big-stat .num {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.5rem, 1.5rem + 3vw, 4.5rem);
+    line-height: 1;
+    letter-spacing: -.035em;
+    color: var(--text);
+    margin: 0 0 .75rem;
+    display: block;
+  }
+  .big-stat .num em { font-style: italic; }
+  .big-stat .lbl {
+    font-family: var(--font-body);
+    font-size: .82rem;
+    color: var(--text-2);
+    max-width: 20ch;
+    line-height: 1.4;
+  }
+
+  .narrative {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .narrative .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .narrative .section-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .narrative .section-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .narrative h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 3rem;
+    max-width: 18ch;
+  }
+  .narrative h2 em { font-style: italic; }
+  .narrative-body {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    line-height: 1.65;
+    color: var(--text);
+  }
+  .narrative-body p { margin: 0 0 1.5rem; color: var(--text-2); }
+  .narrative-body p strong { color: var(--text); font-weight: 500; }
+  .narrative-body p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+  .narrative-body p:last-child { margin-bottom: 0; }
+  .narrative-body blockquote {
+    border-left: 2px solid var(--ember);
+    padding: .5rem 0 .5rem 2rem;
+    margin: 2.5rem 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--text);
+    line-height: 1.4;
+    max-width: 50ch;
+  }
+  .narrative-body blockquote cite {
+    display: block;
+    margin-top: 1rem;
+    font-family: var(--font-body);
+    font-style: normal;
+    font-size: .85rem;
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+
+  .stack {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .stack .wrap { max-width: var(--container); margin: 0 auto; padding: 0 var(--gutter); }
+  .stack h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 1rem;
+  }
+  .stack h2 em { font-style: italic; }
+  .stack .section-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .stack .section-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .stack-list { margin-top: 4rem; }
+  .stack-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .stack-row:last-child { border-bottom: 1px solid var(--line); }
+  @media (max-width: 720px) {
+    .stack-row { grid-template-columns: 1fr; gap: .5rem; }
+  }
+  .stack-row .agent {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.4rem;
+    color: var(--text);
+    font-weight: 500;
+  }
+  .stack-row .role {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--text-2);
+  }
+  .stack-row .role em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .whats-next {
+    padding: var(--section-y) 0;
+    border-bottom: 1px solid var(--line);
+    background: var(--surface);
+  }
+  .whats-next .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+  .whats-next .section-label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+  }
+  .whats-next .section-label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .whats-next h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-m);
+    line-height: 1;
+    letter-spacing: -.035em;
+    margin: 0 0 2rem;
+  }
+  .whats-next h2 em { font-style: italic; }
+  .whats-next p {
+    font-family: var(--font-body);
+    font-size: 1.08rem;
+    line-height: 1.6;
+    color: var(--text-2);
+    margin: 0 0 1.25rem;
+  }
+  .whats-next p em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text);
+  }
+
+  .case-nav {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .case-nav .wrap {
+    max-width: var(--container);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .case-nav .label {
+    font-family: var(--font-body);
+    font-size: var(--t-micro);
+    color: var(--text-3);
+    letter-spacing: .02em;
+  }
+  .case-nav .label em {
+    font-family: var(--font-display);
+    font-style: italic;
+    color: var(--text-2);
+    font-weight: 500;
+  }
+  .case-nav a.next {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: var(--t-display-s);
+    line-height: 1;
+    letter-spacing: -.02em;
+    color: var(--text);
+    border: none;
+    transition: color .2s ease, gap .25s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: .75rem;
+  }
+  .case-nav a.next:hover { color: var(--ember); gap: 1.5rem; }
+  .case-nav a.next em { font-style: italic; }
+  .case-nav a.next::before { content: "←"; }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav class="top">
+  <div class="inner">
+    <a class="brand" href="/">Pulse<em>forge</em></a>
+    <button class="nav-toggle" aria-label="Toggle menu"><span></span><span></span></button>
+    <ul>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/case-studies.html" class="active">Work</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/pricing.html">Pricing</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="cs-hero">
+  <div class="cs-meta">
+    <div class="item">
+      <strong><em>Client</em></strong>
+      <span>Whittaker Home Services</span>
+    </div>
+    <div class="item">
+      <strong><em>Industry</em></strong>
+      <span>Cleaning &amp; home services</span>
+    </div>
+    <div class="item">
+      <strong><em>Location</em></strong>
+      <span>Manchester, NH</span>
+    </div>
+    <div class="item">
+      <strong><em>Engagement</em></strong>
+      <span>Client + 1099 sales partner</span>
+    </div>
+    <div class="item">
+      <strong><em>Status</em></strong>
+      <span><em>Live</em></span>
+    </div>
+  </div>
+
+  <h1>The first client who became <em>part of the agency.</em></h1>
+  <p class="deck">
+    Todd Whittaker owns Whittaker Home Services in Manchester, NH —
+    cleaning, junk removal, light repair, the kind of multi-vertical
+    operation that thrives on local trust. He was Pulseforge's first
+    real client. Then he became part of the team.
+  </p>
+</header>
+
+<section class="stat-band reveal">
+  <div class="wrap">
+    <div class="stat-grid">
+      <div class="big-stat">
+        <span class="num">1,0<em>42</em></span>
+        <span class="lbl">Prospects identified across 5 verticals</span>
+      </div>
+      <div class="big-stat">
+        <span class="num">1<em>86</em></span>
+        <span class="lbl">Cold outreach sends to date</span>
+      </div>
+      <div class="big-stat">
+        <span class="num"><em>5</em></span>
+        <span class="lbl">Verticals running in parallel</span>
+      </div>
+      <div class="big-stat">
+        <span class="num"><em>1099</em></span>
+        <span class="lbl">Dual role: client + sales partner</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE BUSINESS ─────────────────────────────────── -->
+<section class="narrative reveal">
+  <div class="wrap">
+    <div class="section-label"><em>01</em> &nbsp;·&nbsp; The business</div>
+    <h2>A multi-vertical operator in <em>downtown Manchester.</em></h2>
+    <div class="narrative-body">
+      <p>
+        Whittaker Home Services isn't just a cleaning company. Todd runs
+        a five-vertical operation — <strong>residential cleaning, junk
+        removal, pressure washing, light repair, and seasonal yard
+        cleanup</strong>. The model is built around making one phone
+        call solve as many home problems as possible.
+      </p>
+      <p>
+        That breadth is also why traditional marketing doesn't work for
+        Whittaker. A cleaning ad won't sell junk removal. A junk removal
+        ad won't sell pressure washing. Each service has its own
+        seasonality, its own customer profile, its own price point.
+        Single-channel marketing leaves four of the five verticals
+        starved at any given time.
+      </p>
+      <p>
+        Todd needed a system that could run all five engines in
+        parallel without him managing it. That's what Pulseforge
+        deployed — but the engagement quickly became something more.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE TWIST ────────────────────────────────────── -->
+<section class="narrative reveal">
+  <div class="wrap">
+    <div class="section-label"><em>02</em> &nbsp;·&nbsp; The twist</div>
+    <h2>From client to <em>sales partner.</em></h2>
+    <div class="narrative-body">
+      <p>
+        About a month into the engagement, Todd asked an interesting
+        question: if Pulseforge could find leads for his business,
+        could he find leads for Pulseforge?
+      </p>
+      <p>
+        He'd been running into local business owners every week who
+        complained about the same things he used to — no time for
+        marketing, no idea where to start, no budget for a full-time
+        hire. He had relationships, credibility, and a hard-to-fake
+        understanding of how Pulseforge actually delivers.
+      </p>
+      <p>
+        We structured a <strong>1099 commission arrangement</strong>:
+        $50 for any qualified discovery call he books, 10% of the
+        first-year monthly recurring revenue if his lead becomes a
+        client. He's still a client of Pulseforge — and a sales
+        partner. Two contracts, one relationship, real alignment.
+      </p>
+      <blockquote>
+        The cleanest distribution channel for an agency is a happy
+        client who understands the work well enough to <em>sell</em> it.
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- ── THE STACK ────────────────────────────────────── -->
+<section class="stack reveal">
+  <div class="wrap">
+    <div class="section-label"><em>03</em> &nbsp;·&nbsp; Stack deployed</div>
+    <h2>The full stack — <em>five verticals deep.</em></h2>
+
+    <div class="stack-list">
+      <div class="stack-row">
+        <div class="agent">Scout</div>
+        <div class="role">Five parallel ICP sweeps — cleaning prospects, junk removal prospects, pressure washing, light repair, yard cleanup. Each vertical tuned to its own seasonality.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Emmett</div>
+        <div class="role">Vertical-tuned outreach sequences — cleaning vs junk removal vs pressure washing each have distinct opener language and offer framing.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Riley</div>
+        <div class="role">Reply classification routed to Todd's inbox with vertical context, so warm leads come pre-tagged as which service they're interested in.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Paige</div>
+        <div class="role">Weekly content across LinkedIn, Facebook, and the company blog — covering each vertical in rotation, building local search authority.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Sam</div>
+        <div class="role">CRM sync keeping prospect status, engagement, and vertical interest aligned across the platform and Todd's existing tools.</div>
+      </div>
+      <div class="stack-row">
+        <div class="agent">Max</div>
+        <div class="role">Morning digest covering all five verticals — what ran, what came back, which vertical needs Todd's attention today.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHAT'S NEXT ──────────────────────────────────── -->
+<section class="whats-next reveal">
+  <div class="wrap">
+    <div class="section-label"><em>04</em> &nbsp;·&nbsp; What's next</div>
+    <h2>Two engines, <em>running parallel.</em></h2>
+    <p>
+      Whittaker's client engagement keeps expanding — adding voice
+      setter calls through Cal, deepening the content schedule, and
+      tuning the cold sequences against the data from the first
+      thousand prospects. The custom branded website is in production.
+    </p>
+    <p>
+      The 1099 partnership is just getting started. Todd has been
+      booking discovery calls with local operators he runs into in
+      the field — bartenders, restaurant managers, contractors. We've
+      structured the sales partnership to scale: more setters, more
+      verticals, more local-operator distribution. The cleanest
+      growth channel an agency could ask for.
+    </p>
+  </div>
+</section>
+
+<!-- ── CASE NAV ─────────────────────────────────────── -->
+<section class="case-nav reveal">
+  <div class="wrap">
+    <div>
+      <div class="label"><em>Previous case</em> &nbsp;·&nbsp; 2026</div>
+      <a class="next" href="/case-studies/mshi.html">Mountain State Home Innovations</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLOSING ──────────────────────────────────────── -->
+<section class="std reveal">
+  <div class="wrap closing">
+    <h2 class="closing-h2">Could be <em>your</em> story.</h2>
+    <p>
+      Fifteen minutes. We'll look at your business and tell you,
+      honestly, whether Pulseforge fits the way it fit for Todd.
+    </p>
+    <a class="btn" href="/contact.html">Book a strategy call</a>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-top">
+    <div class="foot-brand">
+      <a class="brand" href="/">Pulse<em>forge</em></a>
+      <p>An AI agency for local service businesses. Built in Manchester, New Hampshire.</p>
+    </div>
+    <div class="foot-col">
+      <h4><em>Agency</em></h4>
+      <ul>
+        <li><a href="/services.html">Services</a></li>
+        <li><a href="/case-studies.html">Work</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Contact</em></h4>
+      <ul>
+        <li><a href="/contact.html">Book a call</a></li>
+        <li><a href="mailto:jacob@gopulseforge.com">jacob@gopulseforge.com</a></li>
+        <li><a href="https://www.linkedin.com/in/jacob-maynard">LinkedIn</a></li>
+      </ul>
+    </div>
+    <div class="foot-col">
+      <h4><em>Legal</em></h4>
+      <ul>
+        <li><a href="/privacy.html">Privacy Policy</a></li>
+        <li><a href="/terms.html">Terms of Service</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <div>© 2026 &nbsp;·&nbsp; Pulseforge LLC &nbsp;·&nbsp; <em>Manchester, NH</em></div>
+    <div><em>System</em> v0.6 &nbsp;·&nbsp; 15 agents</div>
+  </div>
+</footer>
+
+<script src="/assets/js/site.js"></script>
+</body>
+</html>
