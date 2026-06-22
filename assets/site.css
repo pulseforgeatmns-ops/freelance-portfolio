@@ -197,16 +197,27 @@ nav.top ul a.active { color: var(--text); }
   font-size: var(--t-display-xl);
   line-height: .92;
   letter-spacing: -.045em;
-  margin: 0 0 3rem;
+  margin: 0 0 2.25rem;
   max-width: 14ch;
 }
 .hero h1 em { font-style: italic; font-weight: 500; color: var(--text); }
+.hero .orchestrator-line {
+  font-family: var(--font-display);
+  font-size: var(--t-display-s);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -.025em;
+  color: var(--text);
+  max-width: 24ch;
+  margin: 0 0 1.5rem;
+}
+.hero .orchestrator-line em { font-style: italic; font-weight: 500; }
 .hero .deck {
   font-family: var(--font-body);
   font-size: var(--t-lead);
   line-height: 1.5;
   color: var(--text-2);
-  max-width: 52ch;
+  max-width: 60ch;
   margin: 0 0 4rem;
 }
 .hero .cta-row { display: flex; gap: 2rem; align-items: center; flex-wrap: wrap; }
@@ -744,7 +755,8 @@ footer.foot {
 }
 .hero .system-label { opacity: 0; animation: fadeIn .8s .3s ease forwards; }
 .hero h1            { opacity: 0; animation: rise 1.2s .5s cubic-bezier(.2,.7,.2,1) forwards; }
-.hero .deck         { opacity: 0; animation: rise 1.2s .9s cubic-bezier(.2,.7,.2,1) forwards; }
+.hero .orchestrator-line { opacity: 0; animation: rise 1.2s .8s cubic-bezier(.2,.7,.2,1) forwards; }
+.hero .deck         { opacity: 0; animation: rise 1.2s 1s cubic-bezier(.2,.7,.2,1) forwards; }
 .hero .cta-row      { opacity: 0; animation: rise 1.2s 1.2s cubic-bezier(.2,.7,.2,1) forwards; }
 
 /* reduced motion */
@@ -760,6 +772,8 @@ footer.foot {
 /* ─── 17 · RESPONSIVE ─────────────────────────────────────── */
 @media (max-width: 900px) {
   :root { --section-y: 6rem; --gutter: 1.5rem; }
+  .hero-content { padding-top: 9rem; padding-bottom: 6rem; }
+  .system-label { margin-bottom: 3rem; }
   .cap { grid-template-columns: 1fr; gap: 3rem; }
   .foot-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
 }
@@ -800,4 +814,9 @@ footer.foot {
   .foot-top { grid-template-columns: 1fr; }
   .system-label { flex-direction: column; align-items: flex-start; gap: .4rem; }
   .system-label .dash { display: none; }
+  .hero-content { padding-top: 8rem; padding-bottom: 4.5rem; }
+  .system-label { margin-bottom: 2.5rem; }
+  .hero h1 { margin-bottom: 1.75rem; }
+  .hero .orchestrator-line { margin-bottom: 1.25rem; }
+  .hero .deck { margin-bottom: 3rem; }
 }
